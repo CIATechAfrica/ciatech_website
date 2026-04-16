@@ -1,0 +1,36 @@
+# CIATECH AFRICA: DESIGN & ARCHITECTURE REQUIREMENTS
+
+## 1. PROJECT OVERVIEW
+- **Project Name:** CIATECH Africa Corporate Platform
+- **Site Type:** Development-driven social enterprise / NGO website.
+- **Core Mission:** Designing scalable solutions for Africa's development challenges, operating at the intersection of technology, entrepreneurship, and systems change.
+
+## 2. DESIGN & UI/UX GUIDELINES
+- **Aesthetic:** Modern, premium, and clean. Emphasizes an optimistic, dynamic African context (youth collaborating in tech hubs, digital agriculture, green innovation).
+- **Brand Palette:** 
+  - Primary Base: Warm Browns & Earthy Tones (`#8E5516`).
+  - Secondary/Accent: Vibrant Gold (`#E2AD00`).
+  - Backgrounds: Clean whites (`#FFFFFF`) and structured grays (`gray-50`).
+- **Typography & Components:** Smooth, deeply rounded image corners (24px+), split-color typography for emphasis, heavy use of bold typography for metrics (Impact Stats), and micro-animations for interactivity (shadow lifting on hover).
+
+## 3. ARCHITECTURE STRATEGY
+- **Architecture Pattern:** "Hub & Spoke"
+  - **The Hub (Homepage):** Exists strictly as a teaser funnel. Displays high-level summaries of core pillars and top solutions with clear "View All" or "Partner With Us" call-to-actions.
+  - **The Spokes (Interior Pages):** Detailed, isolated content routes (`/solutions`, `/research`, `/opportunities`, `/impact`, `/about`).
+- **Data Layer (The "Mock CMS"):** Strict separation of content from UI components. Content is managed in isolated typescript files (`content/home.ts`, `content/solutions.ts`) acting as JSON API responses.
+
+## 4. DEVELOPMENT PHASES
+- **Phase 1: Static Architecture & Atomic Components (Current)**
+  - Establish Next.js App Router and Tailwind v4.
+  - Create the Mock CMS layer and UI component library.
+  - Implement Hub & Spoke routing based on the provided copy document.
+- **Phase 2: Dynamic Systems Integration (Upcoming)**
+  - Transition the Mock CMS data into a fully integrated Headless CMS.
+  - Dynamic routing and content hydration.
+- **Phase 3+: Further Integrations & SEO Optimization (TBD)**
+
+## 5. TECH STACK
+- Next.js (App Router, v15+)
+- TypeScript
+- Tailwind CSS (v4)
+- React Icons

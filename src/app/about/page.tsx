@@ -1,0 +1,133 @@
+import { aboutData } from "../../../content/about";
+import Image from "next/image";
+import { Target, Lightbulb, Search, PenTool, Rocket, BarChart3 } from "lucide-react";
+
+export default function AboutPage() {
+  const approachIcons = [Search, PenTool, Rocket, BarChart3];
+
+  return (
+    <div className="bg-white">
+      
+      {/* 1. HERO HEADER */}
+      <div className="bg-primary/5 py-24 pt-32 border-b border-primary/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-5xl md:text-7xl font-black text-gray-900 tracking-tight mb-6">
+            {aboutData.header.title}
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            {aboutData.header.subtitle}
+          </p>
+        </div>
+      </div>
+
+      {/* 2. WHO WE ARE */}
+      <div className="py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+           <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-8">{aboutData.ourStory.heading}</h2>
+           <p className="text-2xl font-light text-gray-600 leading-[1.8] relative z-10">
+              {aboutData.ourStory.content}
+           </p>
+        </div>
+      </div>
+
+      {/* 3. MISSION & VISION SPLIT */}
+      <div className="bg-primary py-24 relative overflow-hidden flex items-center justify-center">
+        {/* Subtle decorative background stripe matrix */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid md:grid-cols-2 gap-12">
+            
+            {/* Vision */}
+            <div className="bg-white/10 backdrop-blur-md rounded-[2.5rem] p-10 sm:p-14 border border-white/20 transform transition-all hover:bg-white/15">
+              <div className="w-16 h-16 rounded-2xl bg-secondary flex items-center justify-center mb-8 shadow-inner">
+                <Lightbulb className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-3xl font-black text-white mb-6">{aboutData.missionVision.vision.title}</h3>
+              <p className="text-xl text-gray-200 font-light leading-relaxed">
+                {aboutData.missionVision.vision.content}
+              </p>
+            </div>
+
+            {/* Mission */}
+            <div className="bg-white/10 backdrop-blur-md rounded-[2.5rem] p-10 sm:p-14 border border-white/20 transform transition-all hover:bg-white/15">
+              <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-8 shadow-inner">
+                <Target className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-3xl font-black text-white mb-6">{aboutData.missionVision.mission.title}</h3>
+              <p className="text-xl text-gray-200 font-light leading-relaxed">
+                {aboutData.missionVision.mission.content}
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* 4. THE APPROACH */}
+      <div className="py-32 bg-gray-50 border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <h3 className="text-4xl font-black text-gray-900 mb-6">{aboutData.approach.heading}</h3>
+            <p className="text-xl text-gray-500 font-light">{aboutData.approach.subtext}</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            <div className="hidden lg:block absolute top-12 left-[10%] right-[10%] h-[2px] bg-gray-200 -z-10" />
+            
+            {aboutData.approach.steps.map((step, idx) => {
+              const Icon = approachIcons[idx % 4];
+              return (
+                <div key={step.id} className="relative group">
+                  <div className="w-24 h-24 mx-auto bg-white rounded-full border-8 border-gray-50 shadow-md flex items-center justify-center mb-6 group-hover:border-secondary transition-colors duration-500">
+                    <Icon className="w-8 h-8 text-primary group-hover:text-secondary transition-colors duration-500" />
+                  </div>
+                  <div className="text-center px-4">
+                    <span className="text-xs font-bold text-secondary uppercase tracking-widest mb-3 block">Phase 0{idx + 1}</span>
+                    <h4 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h4>
+                    <p className="text-gray-600 font-medium leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* 5. TEAM DIRECTORY */}
+      <div className="py-32 bg-gray-50 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <h3 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight mb-6">{aboutData.team.heading}</h3>
+            <p className="text-xl text-gray-500 font-light leading-relaxed">{aboutData.team.subtext}</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {aboutData.team.members.map((member) => (
+              <div key={member.id} className="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 flex flex-col">
+                <div className="relative w-full aspect-square overflow-hidden bg-gray-100">
+                  <Image src={member.imageRef} alt={member.name} fill className="object-cover group-hover:scale-105 transition-transform duration-1000" />
+                  
+                  {/* LinkedIn Gradient Reveal */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8 pointer-events-none group-hover:pointer-events-auto">
+                     <a href={member.linkedin} className="text-white hover:text-secondary opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 transform inline-flex items-center gap-3 font-bold">
+                       <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
+                       Connect
+                     </a>
+                  </div>
+                </div>
+                <div className="p-8 sm:p-10 border-t border-gray-100">
+                  <h4 className="text-2xl font-black text-gray-900 mb-2">{member.name}</h4>
+                  <p className="text-primary font-bold uppercase tracking-widest text-xs">{member.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  );
+}
