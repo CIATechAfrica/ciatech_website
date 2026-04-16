@@ -29,7 +29,7 @@ export default function PartnershipsPage() {
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight mb-8 break-words hyphens-auto">
             {partnershipsData.hero.heading}
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">

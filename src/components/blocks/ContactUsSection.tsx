@@ -1,3 +1,5 @@
+"use client";
+
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { HomeData } from "@/types";
 
@@ -53,30 +55,46 @@ export default function ContactUsSection({ data }: ContactProps) {
             
             {/* Right: The Form Block */}
             <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
-              <form className="flex flex-col gap-6">
-                <div className="grid grid-cols-2 gap-6">
-                   <div className="col-span-2 sm:col-span-1">
-                     <label className="block text-sm font-semibold text-gray-700 mb-2">First Name</label>
-                     <input type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="Jane" />
+              <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                   <div className="space-y-px">
+                     <label className="block text-sm font-semibold text-gray-700 mb-1">Representative Name</label>
+                     <input type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900" placeholder="Jane Doe" required />
                    </div>
-                   <div className="col-span-2 sm:col-span-1">
-                     <label className="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
-                     <input type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="Doe" />
+                   <div className="space-y-px">
+                     <label className="block text-sm font-semibold text-gray-700 mb-1">Professional Email</label>
+                     <input type="email" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900" placeholder="jane@organization.com" required />
+                   </div>
+                </div>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                   <div className="space-y-px">
+                     <label className="block text-sm font-semibold text-gray-700 mb-1">Organization / Entity</label>
+                     <input type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900" placeholder="Organization Name" required />
+                   </div>
+                   <div className="space-y-px relative">
+                     <label className="block text-sm font-semibold text-gray-700 mb-1">Select Routing</label>
+                     <div className="relative">
+                       <select className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 appearance-none cursor-pointer" required>
+                         <option value="policy">Government & Policy</option>
+                         <option value="capital">Investor Inquiry</option>
+                         <option value="press">Press & Media</option>
+                         <option value="general">General Support</option>
+                       </select>
+                       <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
+                         <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                       </div>
+                     </div>
                    </div>
                 </div>
                 
                 <div>
-                   <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                   <input type="email" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="jane@example.com" />
+                   <label className="block text-sm font-semibold text-gray-700 mb-1">Proposition Details</label>
+                   <textarea rows={4} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none text-gray-900" placeholder="Outline your objectives or partnership scope here..." required></textarea>
                 </div>
                 
-                <div>
-                   <label className="block text-sm font-semibold text-gray-700 mb-2">Message</label>
-                   <textarea rows={4} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none" placeholder="How can we collaborate?"></textarea>
-                </div>
-                
-                <button type="button" className="group flex items-center justify-center w-full bg-primary text-white font-bold py-4 rounded-xl hover:bg-[#7a4812] hover:shadow-lg transition-all mt-2">
-                  Send Message
+                <button type="submit" className="group flex items-center justify-center w-full bg-primary text-white font-bold py-4 rounded-xl hover:bg-[#7a4812] hover:shadow-[0_4px_14px_0_rgba(142,85,22,0.4)] transition-all mt-2">
+                  Transmit Proposal
                   <Send className="w-4 h-4 ml-2 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </button>
               </form>

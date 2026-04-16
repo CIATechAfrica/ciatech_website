@@ -3,6 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 import { LinkRef } from "@/types";
 
 interface HeaderProps {
@@ -12,6 +14,7 @@ interface HeaderProps {
 
 export default function Header({ navLinks, primaryCTA }: HeaderProps) {
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <header className="fixed top-6 w-full z-50 px-4 sm:px-6 lg:px-8 transition-all duration-500">
@@ -25,8 +28,8 @@ export default function Header({ navLinks, primaryCTA }: HeaderProps) {
             </div>
           </Link>
           
-          {/* Navigation Links */}
-          <nav className="hidden md:flex items-center space-x-1 pl-4">
+          {/* Top-Level Navigation Links (Desktop) */}
+          <nav className="hidden xl:flex items-center space-x-1 pl-4">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -42,18 +45,57 @@ export default function Header({ navLinks, primaryCTA }: HeaderProps) {
             })}
           </nav>
           
-          {/* Action Button */}
-          <div className="hidden md:flex items-center ml-4">
+          {/* Action Button & Hamburger */}
+          <div className="flex items-center justify-end flex-grow sm:flex-grow-0 ml-4 gap-4">
             <Link 
               href={primaryCTA.href}
-              className="px-7 py-3 rounded-full bg-primary text-white font-bold text-sm hover:bg-[#7a4812] hover:shadow-xl hover:shadow-primary/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 border border-transparent hover:border-secondary/20"
+              className="hidden md:flex px-7 py-3 rounded-full bg-primary text-white font-bold text-sm hover:bg-[#7a4812] hover:shadow-xl hover:shadow-primary/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 border border-transparent hover:border-secondary/20"
             >
               {primaryCTA.label}
             </Link>
+            
+            {/* Mobile Nav Toggle */}
+            <button 
+              className="xl:hidden flex items-center justify-center p-2 rounded-full hover:bg-gray-100 transition-colors text-gray-700" 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle Mobile Menu"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
           
         </div>
       </div>
+
+      {/* Mobile/Tablet Vertical Dropdown Panel */}
+      {isMobileMenuOpen && (
+        <div className="absolute top-[80px] left-0 w-full px-4 sm:px-6 lg:px-8 xl:hidden">
+          <div className="bg-white/95 backdrop-blur-xl border border-gray-100/50 shadow-2xl rounded-[2rem] p-4 flex flex-col gap-2 animate-in fade-in slide-in-from-top-4 duration-300 max-h-[calc(100vh-120px)] overflow-y-auto">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link 
+                  key={link.label} 
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`text-base font-bold px-4 py-2.5 rounded-xl transition-colors shrink-0 ${isActive ? "bg-primary/10 text-primary" : "text-gray-700 hover:bg-gray-50"}`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+            <div className="pt-3 mt-1 border-t border-gray-100 md:hidden flex justify-center shrink-0">
+              <Link 
+                href={primaryCTA.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full text-center px-7 py-3 rounded-xl bg-primary text-white font-bold text-base hover:bg-[#7a4812] transition-colors shadow-md"
+              >
+                {primaryCTA.label}
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

@@ -11,7 +11,7 @@ export default function AboutPage() {
       {/* 1. HERO HEADER */}
       <div className="bg-primary/5 py-24 pt-32 border-b border-primary/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl md:text-7xl font-black text-gray-900 tracking-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-gray-900 tracking-tight mb-6 break-words hyphens-auto">
             {aboutData.header.title}
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -110,9 +110,9 @@ export default function AboutPage() {
                 <div className="relative w-full aspect-square overflow-hidden bg-gray-100">
                   <Image src={member.imageRef} alt={member.name} fill className="object-cover group-hover:scale-105 transition-transform duration-1000" />
                   
-                  {/* LinkedIn Gradient Reveal */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8 pointer-events-none group-hover:pointer-events-auto">
-                     <a href={member.linkedin} className="text-white hover:text-secondary opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 transform inline-flex items-center gap-3 font-bold">
+                  {/* LinkedIn Gradient Reveal (Permanent on Mobile) */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/10 to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8 pointer-events-none group-hover:pointer-events-auto">
+                     <a href={member.linkedin} className="text-white hover:text-secondary opacity-100 lg:opacity-0 translate-y-0 lg:translate-y-4 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-500 transform inline-flex items-center gap-3 font-bold pointer-events-auto">
                        <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
                        Connect
                      </a>

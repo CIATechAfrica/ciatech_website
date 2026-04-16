@@ -92,7 +92,7 @@ export default function OpportunitiesPage() {
             </h3>
             <span className="w-12 h-px bg-secondary opacity-50" />
           </div>
-          <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-8 leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight mb-8 leading-tight break-words hyphens-auto">
             {opportunitiesData.hero.heading}
           </h1>
           <p className="text-xl md:text-2xl text-white/80 font-light leading-relaxed">

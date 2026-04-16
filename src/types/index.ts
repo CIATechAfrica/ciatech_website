@@ -322,3 +322,46 @@ export interface ContactPageData {
   endpointsTitle: string;
   endpoints: ContactEndpoint[];
 }
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  location: string;
+  date: string;
+  imageRef: string;
+  span?: string;
+}
+
+export interface GalleryPageData {
+  seo: { title: string; description: string; };
+  hero: {
+    heading: string;
+    subtext: string;
+    imageRef: string;
+  };
+  gridTitle: string;
+  images: GalleryItem[];
+}
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  snippet: string;
+  content: string; // The full article body
+  author: string;
+  date: string;
+  readTime: string;
+  thumbnailRef: string;
+}
+
+export interface BlogPageData {
+  seo: { title: string; description: string; };
+  hero: {
+    heading: string;
+    subtext: string;
+    imageRef: string;
+  };
+  feedTitle: string;
+  featuredPost: BlogPost;
+  posts: BlogPost[];
+}

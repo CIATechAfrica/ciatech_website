@@ -133,26 +133,14 @@ export const homeData: HomeData = {
     {
       id: "women-in-business",
       title: "Women in Business Program",
-      description: "Empowering women entrepreneurs across Northeast Nigeria and the Lake Chad region through:",
-      items: [
-        "Access to skills, mentorship, and market opportunities",
-        "Support in business planning, financing, and scaling",
-        "Networks to increase visibility and influence in local and regional markets"
-      ],
-      footerText: "This initiative transforms women-led enterprises into sustainable engines of economic growth, aligning with CIATECH’s mission of inclusive economic participation.",
+      description: "Empowering women entrepreneurs across Northeast Nigeria and the Lake Chad region by transforming women-led enterprises into sustainable engines of inclusive economic growth.",
       iconName: "users",
       href: "/opportunities"
     },
     {
       id: "stem-champ",
       title: "STEM Champ Initiative",
-      description: "Developing the next generation of African innovators by:",
-      items: [
-        "Nurturing youth talent in Science, Technology, Engineering, and Mathematics (STEM)",
-        "Providing hands-on training, mentorship, and access to innovation labs",
-        "Linking participants to internships, research projects, and startup opportunities"
-      ],
-      footerText: "STEM Champ is designed to close the skills gap, promote gender equity in STEM, and create a talent pipeline for Africa’s innovation ecosystem.",
+      description: "Developing the next generation of African innovators by closing the skills gap, promoting gender equity in STEM, and creating a robust talent pipeline for the innovation ecosystem.",
       iconName: "microscope",
       href: "/solutions"
     }
@@ -195,11 +183,11 @@ export const homeData: HomeData = {
     subtext: "A visual journey through our diverse innovation clusters, agricultural incubators, and dynamic tech hubs across the continent.",
     link: { label: "Explore Our Full Gallery", href: "/gallery" },
     images: [
-      { id: "img-1", imageRef: "/images/hero.png", title: "Tech Hub Labs", description: "Students collaborating on open-source hardware solutions at our flagship hub.", className: "col-span-1 md:col-span-2 row-span-2 min-h-[300px]" },
-      { id: "img-2", imageRef: "/images/new_hero.png", title: "AgriTech Scaleups", description: "Deploying IoT sensors to drastically increase rural crop yields.", className: "col-span-1 min-h-[220px]" },
-      { id: "img-3", imageRef: "/images/about.png", title: "Policy Summits", description: "Bridging the gap between active innovators and key policymakers.", className: "col-span-1 min-h-[220px]" },
-      { id: "img-4", imageRef: "/images/hero.png", title: "Mentorship", description: "Intensive 1-on-1 coaching sessions with global tech veterans.", className: "col-span-1 min-h-[220px]" },
-      { id: "img-5", imageRef: "/images/new_hero.png", title: "Green Energy", description: "Deploying solar-powered microgrids to sustain rural tech economies.", className: "col-span-1 min-h-[220px]" }
+      { id: "img-1", imageRef: "/images/hero.png", title: "Tech Hub Labs", location: "Kano, Nigeria", date: "April 2026", span: "col-span-1 md:col-span-2 row-span-2 min-h-[300px]" as "col-span-1" | "col-span-2" },
+      { id: "img-2", imageRef: "/images/new_hero.png", title: "AgriTech Scaleups", location: "Lake Chad", date: "March 2026", span: "col-span-1" },
+      { id: "img-3", imageRef: "/images/about.png", title: "Policy Summits", location: "Abuja HQ", date: "Feb 2026", span: "col-span-1" },
+      { id: "img-4", imageRef: "/images/hero.png", title: "Mentorship", location: "Nairobi", date: "Jan 2026", span: "col-span-1" },
+      { id: "img-5", imageRef: "/images/new_hero.png", title: "Green Energy", location: "Maiduguri", date: "Dec 2025", span: "col-span-1" }
     ]
   },
   contactTeaser: {
@@ -207,7 +195,7 @@ export const homeData: HomeData = {
     description: "Whether you're looking to invest in scalable startups, partner on policy frameworks, or join our community of innovators, our team is ready to connect.",
     email: "partnerships@ciatech.africa",
     phone: "+234 800 CIATECH",
-    address: "Kano Tech Corridor, Kano State, Nigeria"
+    address: "Maiduguri, Borno State, Nigeria"
   },
   cta: {
     heading: "Let’s Build the Future—Together",
@@ -217,7 +205,7 @@ export const homeData: HomeData = {
   },
   footer: {
     mission: "Creating sustainable pathways for digital inclusion and youth innovation across Africa.",
-    address: "123 Innovation Drive, Tech Center, Africa",
+    address: "Maiduguri, Borno State, Nigeria",
     email: "contact@ciatech.africa",
     phone: "+234 123 456 7890",
     links: [
@@ -226,6 +214,8 @@ export const homeData: HomeData = {
       { label: "Impact", href: "/impact" },
       { label: "Research", href: "/research" },
       { label: "Opportunities", href: "/opportunities" },
+      { label: "Gallery", href: "/gallery" },
+      { label: "Newsroom", href: "/blog" },
       { label: "Contact", href: "/contact" }
     ],
     socials: [

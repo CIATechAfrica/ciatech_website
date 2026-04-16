@@ -10,21 +10,14 @@ export const contactData: ContactPageData = {
     subtext: "Submit rigorous deployment propositions, request data architectures, or contact our regional operations hubs directly.",
     imageRef: "/images/hero.png" // Fallback hero
   },
-  basesTitle: "Global Operations Hubs",
+  basesTitle: "Global Operations Hub",
   bases: [
     {
-      id: "hq-abuja",
-      city: "Abuja",
-      country: "Nigeria",
-      address: "14 Tech Drive, Central Business District, Abuja",
-      type: "Global Headquarters"
-    },
-    {
-      id: "hub-maiduguri",
+      id: "hq-maiduguri",
       city: "Maiduguri",
       country: "Nigeria",
-      address: "Borno Innovation Hub, Lake Chad Region",
-      type: "Field Deployment Center"
+      address: "Maiduguri, Borno State, Nigeria",
+      type: "Global Headquarters"
     }
   ],
   endpointsTitle: "Direct Endpoints",

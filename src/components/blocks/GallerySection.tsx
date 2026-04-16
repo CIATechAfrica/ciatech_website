@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin, Calendar } from "lucide-react";
 import { HomeData } from "@/types";
 
 interface GalleryProps {
@@ -37,7 +37,7 @@ export default function GallerySection({ data }: GalleryProps) {
           {data.images.map((img) => (
             <div 
               key={img.id} 
-              className={`relative rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-500 bg-gray-100 ${img.className || "col-span-1 h-64"}`}
+              className={`relative rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-500 bg-gray-100 min-h-[300px] ${img.span || "col-span-1 h-64"}`}
             >
               <Image 
                 src={img.imageRef} 
@@ -46,13 +46,18 @@ export default function GallerySection({ data }: GalleryProps) {
                 className="object-cover transform group-hover:scale-105 transition-transform duration-700" 
               />
               
-              {/* Detailed Data-Overlay on Hover */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6 md:p-8 pointer-events-none">
-                <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="text-white font-bold text-xl md:text-2xl mb-2">{img.title}</h3>
-                  <p className="text-white/80 text-sm md:text-base leading-relaxed line-clamp-2 md:line-clamp-3">
-                    {img.description}
-                  </p>
+              {/* Detailed Data-Overlay permanent on mobile, hover on desktop */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6 md:p-8 pointer-events-none">
+                <div className="transform translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="flex flex-wrap items-center gap-3 mb-2">
+                    <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-primary bg-white/10 px-2.5 py-1 rounded-full backdrop-blur-md border border-white/20">
+                      <MapPin className="w-3 h-3 mr-1" /> {img.location}
+                    </span>
+                    <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-gray-300">
+                      <Calendar className="w-3 h-3 mr-1" /> {img.date}
+                    </span>
+                  </div>
+                  <h3 className="text-white font-bold text-xl md:text-2xl mt-1 line-clamp-2">{img.title}</h3>
                 </div>
               </div>
               
