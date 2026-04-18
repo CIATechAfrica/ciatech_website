@@ -16,7 +16,7 @@ export const generateAndDownloadPDF = async (item: ResearchItem) => {
   doc.setFont("helvetica", "bold");
   doc.setTextColor(142, 85, 22); // Primary Brand Color (#8E5516)
   doc.setFontSize(10);
-  doc.text(`${item.category.toUpperCase()} • ${item.date.toUpperCase()}`, marginX, currentY);
+  doc.text(`${item.category?.toUpperCase() || 'RESEARCH'} • ${item.date?.toUpperCase() || '2026'}`, marginX, currentY);
   currentY += 12;
 
   // 2. ADD MAIN TITLE
@@ -38,7 +38,7 @@ export const generateAndDownloadPDF = async (item: ResearchItem) => {
   doc.setFont("helvetica", "normal");
   doc.setTextColor(40, 40, 40);
   doc.setFontSize(11);
-  const summaryLines = doc.splitTextToSize(item.summary, 170);
+  const summaryLines = doc.splitTextToSize(item.summary || '', 170);
   doc.text(summaryLines, marginX, currentY);
   currentY += (summaryLines.length * 6) + 10;
   

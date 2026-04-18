@@ -16,6 +16,7 @@ export interface SolutionInfo {
   description: string;
   iconName?: string;
   items?: string[];
+  focusAreas?: string[];
 }
 
 export interface Initiative {
