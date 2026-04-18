@@ -1,6 +1,6 @@
-import { HomeData } from "@/types";
+// import { HomeData } from "@/types";
 
-export const homeData: HomeData = {
+export const homeData = {
   seo: {
     title: "CIATECH Africa - Innovating for Inclusion",
     description: "Building Systems. Scaling Impact.",
