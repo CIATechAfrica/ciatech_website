@@ -101,7 +101,7 @@ export interface HomeData {
     link: LinkRef;
     imageRef: string;
   };
-  about?: {
+  about: {
     heading: string;
     subHeading?: string;
     mission?: string;
@@ -114,7 +114,7 @@ export interface HomeData {
     description: string;
     items: CorePillar[];
   };
-  corePillarsTeaser?: {
+  corePillarsTeaser: {
     heading: string;
     subtext: string;
     pillars: CorePillar[];
@@ -146,24 +146,24 @@ export interface HomeData {
     logos?: PartnerLogo[];
     types?: any[];
   };
-  researchTeaser?: {
+  researchTeaser: {
     heading: string;
     description: string;
     items: string[];
     link: LinkRef;
   };
-  opportunitiesTeaser?: {
+  opportunitiesTeaser: {
     heading: string;
     items: string[];
     link: LinkRef;
   };
-  galleryTeaser?: {
+  galleryTeaser: {
     heading: string;
     subtext: string;
     link: LinkRef;
     images: GalleryItem[];
   };
-  contactTeaser?: ContactDataProps;
+  contactTeaser: ContactDataProps;
   cta: {
     heading: string;
     subtext: string;
