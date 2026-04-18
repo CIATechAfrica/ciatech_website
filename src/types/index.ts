@@ -14,7 +14,8 @@ export interface SolutionInfo {
   id: string;
   title: string;
   description: string;
-  items: string[];
+  iconName?: string;
+  items?: string[];
 }
 
 export interface Initiative {
@@ -40,12 +41,7 @@ export interface Partnership {
   iconName?: string;
 }
 
-export interface ResearchItem {
-//... (keeping the rest intact, I will do two separate replaces to be safe)
-  id: string;
-  title: string;
-  description: string;
-}
+// Merged with global ResearchItem below
 
 export interface OpportunityItem {
   id: string;
@@ -54,13 +50,7 @@ export interface OpportunityItem {
   href: string;
 }
 
-export interface GalleryItem {
-  id: string;
-  imageRef: string;
-  title: string;
-  description: string;
-  className?: string; // For masonry sizing
-}
+// Merged with global GalleryItem below
 
 export interface ContactDataProps {
   heading: string;
@@ -95,32 +85,59 @@ export interface PartnerLogo {
 export interface HomeData {
   seo: { title: string; description: string; };
   hero: {
-    headline: string;
-    subtext: string;
+    badge?: string;
+    title?: string;
+    headline?: string;
+    highlightWords?: string[];
+    description?: string;
+    subtext?: string;
     ctas: LinkRef[];
     imageRef: string;
   };
-  aboutTeaser: {
+  aboutTeaser?: {
     heading: string;
+    mission?: string;
     description: string;
     link: LinkRef;
     imageRef: string;
   };
-  pillarsTeaser: {
+  about?: {
+    heading?: string;
+    subHeading?: string;
+    mission?: string;
+    description?: string;
+    link?: LinkRef;
+    imageRef?: string;
+  };
+  pillarsTeaser?: {
     heading: string;
     description: string;
     items: CorePillar[];
   };
+  corePillarsTeaser?: {
+    heading?: string;
+    subtext?: string;
+    description?: string;
+    items?: CorePillar[];
+    pillars?: CorePillar[];
+  };
   solutionsTeaser: {
     heading: string;
+    subtext?: string;
     items: SolutionInfo[];
     viewAllLink: LinkRef;
   };
   initiatives: Initiative[];
-  impactStats: {
+  impactStats?: {
     heading: string;
     subtext?: string;
     stats: ImpactStat[];
+    viewReportLink?: LinkRef;
+  };
+  impact?: {
+    heading?: string;
+    subtext?: string;
+    stats?: ImpactStat[];
     viewReportLink?: LinkRef;
   };
   partnerships: {
@@ -128,30 +145,32 @@ export interface HomeData {
     subHeading?: string;
     description: string;
     link?: LinkRef;
-    logos: PartnerLogo[];
+    logos?: PartnerLogo[];
+    types?: any[];
   };
-  researchTeaser: {
+  researchTeaser?: {
     heading: string;
     description: string;
     items: string[];
     link: LinkRef;
   };
-  opportunitiesTeaser: {
+  opportunitiesTeaser?: {
     heading: string;
     items: string[];
     link: LinkRef;
   };
-  galleryTeaser: {
+  galleryTeaser?: {
     heading: string;
     subtext: string;
     link: LinkRef;
     images: GalleryItem[];
   };
-  contactTeaser: ContactDataProps;
+  contactTeaser?: ContactDataProps;
   cta: {
     heading: string;
     subtext: string;
     primaryCTA: LinkRef;
+    secondaryCTA?: LinkRef;
   };
   footer: {
     mission: string;
@@ -252,10 +271,11 @@ export interface ImpactPageData {
 export interface ResearchItem {
   id: string;
   title: string;
-  summary: string;
-  category: string;
-  date: string;
-  imageRef: string;
+  summary?: string;
+  description?: string;
+  category?: string;
+  date?: string;
+  imageRef?: string;
   pdfUrl?: string;
 }
 
@@ -326,10 +346,12 @@ export interface ContactPageData {
 export interface GalleryItem {
   id: string;
   title: string;
-  location: string;
-  date: string;
   imageRef: string;
+  location?: string;
+  date?: string;
   span?: string;
+  description?: string;
+  className?: string;
 }
 
 export interface GalleryPageData {
