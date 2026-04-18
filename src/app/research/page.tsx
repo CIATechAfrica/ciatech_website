@@ -98,7 +98,7 @@ export default function ResearchPage() {
 
             <div className="relative h-[400px] lg:h-[500px] w-full rounded-[2rem] overflow-hidden shadow-xl border border-white/50 group-hover:shadow-2xl transition-all duration-700">
               <Image 
-                src={featured.imageRef}
+                src={featured.imageRef || "/images/hero.png"}
                 alt={featured.title}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700"

@@ -155,7 +155,7 @@ export default function BlogPage() {
           {/* Cinematic Blur Backdrop */}
           <div 
             className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity" 
-            onClick={() => setActiveArticle(null)}
+            onClick={() => setActiveIndex(null)}
           />
 
           <div className="relative bg-white w-full max-w-4xl rounded-[2rem] shadow-2xl border border-gray-100 overflow-hidden my-auto translate-y-0 transform transition-all h-auto max-h-[90vh] flex flex-col">
