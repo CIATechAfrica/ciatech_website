@@ -92,7 +92,7 @@ export interface PartnerLogo {
   imageRef: string;
 }
 
-export interface HomeDataProps {
+export interface HomeData {
   seo: { title: string; description: string; };
   hero: {
     headline: string;
