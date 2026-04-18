@@ -126,7 +126,7 @@ export interface HomeData {
     viewAllLink: LinkRef;
   };
   initiatives: Initiative[];
-  impactStats?: {
+  impactStats: {
     heading: string;
     subtext?: string;
     stats: ImpactStat[];
