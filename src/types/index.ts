@@ -116,10 +116,8 @@ export interface HomeData {
   };
   corePillarsTeaser?: {
     heading: string;
-    subtext?: string;
-    description: string;
-    items?: CorePillar[];
-    pillars?: CorePillar[];
+    subtext: string;
+    pillars: CorePillar[];
   };
   solutionsTeaser: {
     heading: string;
