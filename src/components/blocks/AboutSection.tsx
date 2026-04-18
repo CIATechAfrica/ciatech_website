@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { HomeData } from "@/types";
 
 interface AboutSectionProps {
-  data: HomeData["aboutTeaser"];
+  data: HomeData["about"];
 }
 
 export default function AboutSection({ data }: AboutSectionProps) {
