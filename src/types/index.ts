@@ -102,12 +102,12 @@ export interface HomeData {
     imageRef: string;
   };
   about?: {
-    heading?: string;
+    heading: string;
     subHeading?: string;
     mission?: string;
-    description?: string;
-    link?: LinkRef;
-    imageRef?: string;
+    description: string;
+    link: LinkRef;
+    imageRef: string;
   };
   pillarsTeaser?: {
     heading: string;
@@ -115,9 +115,9 @@ export interface HomeData {
     items: CorePillar[];
   };
   corePillarsTeaser?: {
-    heading?: string;
+    heading: string;
     subtext?: string;
-    description?: string;
+    description: string;
     items?: CorePillar[];
     pillars?: CorePillar[];
   };
