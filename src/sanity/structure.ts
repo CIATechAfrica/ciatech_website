@@ -1,10 +1,46 @@
 import type {StructureResolver} from 'sanity/structure'
 
-// https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title('CIATECH Africa Content')
+    .title('CIATECH Africa')
     .items([
-      // Add items here later
-      ...S.documentTypeListItems(),
+      S.listItem()
+        .title('Site Pages')
+        .child(
+          S.list()
+            .title('Site Pages')
+            .items([
+              S.documentTypeListItem('homePage').title('Homepage'),
+              S.documentTypeListItem('aboutSection').title('About Section'),
+              S.documentTypeListItem('contactInformation').title('Contact Info'),
+              S.documentTypeListItem('callToAction').title('Call To Action'),
+            ])
+        ),
+      S.divider(),
+      S.listItem()
+        .title('Collections & Hubs')
+        .child(
+          S.list()
+            .title('Collections')
+            .items([
+              S.documentTypeListItem('corePillar').title('Core Pillars'),
+              S.documentTypeListItem('solution').title('Solutions'),
+              S.documentTypeListItem('initiative').title('Initiatives'),
+              S.documentTypeListItem('impactStat').title('Impact Stats'),
+              S.documentTypeListItem('partnerLogo').title('Partner Logos'),
+            ])
+        ),
+      S.divider(),
+      S.listItem()
+        .title('Publications & Opportunities')
+        .child(
+          S.list()
+            .title('Publications')
+            .items([
+              S.documentTypeListItem('blogPost').title('Blog Posts'),
+              S.documentTypeListItem('researchPublication').title('Research Publications'),
+              S.documentTypeListItem('openRole').title('Job Opportunities'),
+              S.documentTypeListItem('galleryImage').title('Gallery Images'),
+            ])
+        ),
     ])
