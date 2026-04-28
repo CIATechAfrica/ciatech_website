@@ -24,9 +24,11 @@
   - Establish Next.js App Router and Tailwind v4.
   - Create the Mock CMS layer and UI component library.
   - Implement Hub & Spoke routing based on the provided copy document.
+  
 - **Phase 2: Dynamic Systems Integration (Upcoming)**
   - Transition the Mock CMS data into a fully integrated Headless CMS.
   - Dynamic routing and content hydration.
+
 - **Phase 3+: Further Integrations & SEO Optimization (TBD)**
 
 ## 5. TECH STACK
