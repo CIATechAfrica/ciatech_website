@@ -52,7 +52,7 @@ export default async function Home() {
     },
     corePillarsTeaser: {
       ...homeData.corePillarsTeaser,
-      items: sanityData?.corePillars?.length > 0 ? sanityData.corePillars : homeData.corePillarsTeaser?.items || [],
+      pillars: sanityData?.corePillars?.length > 0 ? sanityData.corePillars : homeData.corePillarsTeaser?.pillars || [],
     },
     solutionsTeaser: {
       ...homeData.solutionsTeaser,
