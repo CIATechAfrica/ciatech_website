@@ -12,29 +12,58 @@ import PartnershipsTeaser from "@/components/blocks/PartnershipsTeaser";
 import ContactUsSection from "@/components/blocks/ContactUsSection";
 import CTASection from "@/components/blocks/CTASection";
 
+export const revalidate = 0;
+
 async function getSanityHomeData() {
   try {
-    const data = await client.fetch(`*[_type == "homePage"][0]`);
+    const data = await client.fetch(`{
+      "homePage": *[_type == "homePage"][0],
+      "aboutSection": *[_type == "aboutSection"][0],
+      "corePillars": *[_type == "corePillar"],
+      "solutions": *[_type == "solution"],
+      "initiatives": *[_type == "initiative"],
+      "impactStats": *[_type == "impactStat"]
+    }`);
     return data;
   } catch (error) {
+    console.error("Sanity fetch failed:", error);
     return null;
   }
 }
 
 export default async function Home() {
-  // 1. Attempt to fetch from Sanity Database
   const sanityData = await getSanityHomeData();
 
-  // 2. Map Sanity data to our strict Component Props, or fallback to Static Data
-  const data = sanityData ? {
+  // Deep merge Sanity Data over Static Fallback Data
+  const data = {
     ...homeData,
     hero: {
       ...homeData.hero,
-      badge: sanityData.heroBadge || homeData.hero.badge,
-      headline: sanityData.heroHeadline || homeData.hero.headline,
-      subtext: sanityData.heroSubtext || homeData.hero.subtext,
+      badge: sanityData?.homePage?.heroBadge || homeData.hero.badge,
+      headline: sanityData?.homePage?.heroHeadline || homeData.hero.headline,
+      subtext: sanityData?.homePage?.heroSubtext || homeData.hero.subtext,
+    },
+    about: {
+      ...homeData.about,
+      heading: sanityData?.aboutSection?.heading || homeData.about.heading,
+      subHeading: sanityData?.aboutSection?.subHeading || homeData.about.subHeading,
+      mission: sanityData?.aboutSection?.mission || homeData.about.mission,
+      description: sanityData?.aboutSection?.description || homeData.about.description,
+    },
+    corePillarsTeaser: {
+      ...homeData.corePillarsTeaser,
+      items: sanityData?.corePillars?.length > 0 ? sanityData.corePillars : homeData.corePillarsTeaser?.items || [],
+    },
+    solutionsTeaser: {
+      ...homeData.solutionsTeaser,
+      items: sanityData?.solutions?.length > 0 ? sanityData.solutions : homeData.solutionsTeaser?.items || [],
+    },
+    initiatives: sanityData?.initiatives?.length > 0 ? sanityData.initiatives : homeData.initiatives,
+    impactStats: {
+      ...homeData.impactStats,
+      stats: sanityData?.impactStats?.length > 0 ? sanityData.impactStats : homeData.impactStats?.stats || [],
     }
-  } : homeData;
+  };
 
   return (
     <>
