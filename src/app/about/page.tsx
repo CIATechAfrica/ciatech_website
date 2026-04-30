@@ -2,8 +2,82 @@ import { aboutData } from "../../../content/about";
 import Image from "next/image";
 import { Target, Lightbulb, Search, PenTool, Rocket, BarChart3 } from "lucide-react";
 
-export default function AboutPage() {
+import { Metadata } from "next";
+import { client } from "@/sanity/lib/client";
+import { urlForImage } from "@/sanity/lib/image";
+
+export const revalidate = 0;
+
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const seoData = await client.fetch(`*[_type == "aboutPage"][0]{ seoTitle, seoDescription }`);
+    return {
+      title: seoData?.seoTitle || aboutData.seo.title,
+      description: seoData?.seoDescription || aboutData.seo.description,
+    };
+  } catch (error) {
+    return {
+      title: aboutData.seo.title,
+      description: aboutData.seo.description,
+    };
+  }
+}
+
+async function getSanityAboutData() {
+  try {
+    const data = await client.fetch(`{
+      "aboutPage": *[_type == "aboutPage"][0],
+      "teamMembers": *[_type == "teamMember"] | order(orderRank asc)
+    }`);
+    return data;
+  } catch (error) {
+    console.error("Sanity fetch failed:", error);
+    return null;
+  }
+}
+
+export default async function AboutPage() {
+  const sanityData = await getSanityAboutData();
   const approachIcons = [Search, PenTool, Rocket, BarChart3];
+
+  const data = {
+    ...aboutData,
+    header: {
+      ...aboutData.header,
+      title: sanityData?.aboutPage?.heroTitle || aboutData.header.title,
+      subtitle: sanityData?.aboutPage?.heroSubtitle || aboutData.header.subtitle,
+    },
+    ourStory: {
+      ...aboutData.ourStory,
+      heading: sanityData?.aboutPage?.ourStoryHeading || aboutData.ourStory.heading,
+      content: sanityData?.aboutPage?.ourStoryContent || aboutData.ourStory.content,
+    },
+    missionVision: {
+      ...aboutData.missionVision,
+      vision: {
+        title: sanityData?.aboutPage?.visionTitle || aboutData.missionVision.vision.title,
+        content: sanityData?.aboutPage?.visionContent || aboutData.missionVision.vision.content,
+      },
+      mission: {
+        title: sanityData?.aboutPage?.missionTitle || aboutData.missionVision.mission.title,
+        content: sanityData?.aboutPage?.missionContent || aboutData.missionVision.mission.content,
+      }
+    },
+    team: {
+      ...aboutData.team,
+      heading: sanityData?.aboutPage?.teamHeading || aboutData.team.heading,
+      subtext: sanityData?.aboutPage?.teamSubtext || aboutData.team.subtext,
+      members: sanityData?.teamMembers?.length > 0 
+        ? sanityData.teamMembers.map((tm: any) => ({
+            id: tm._id,
+            name: tm.name,
+            role: tm.role,
+            linkedin: tm.linkedin || "#",
+            imageRef: tm.image ? urlForImage(tm.image)?.url() || aboutData.team.members[0]?.imageRef : aboutData.team.members[0]?.imageRef
+          }))
+        : aboutData.team.members
+    }
+  };
 
   return (
     <div className="bg-white">
@@ -12,10 +86,10 @@ export default function AboutPage() {
       <div className="bg-primary/5 py-24 pt-32 border-b border-primary/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-gray-900 tracking-tight mb-6 break-words hyphens-auto">
-            {aboutData.header.title}
+            {data.header.title}
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            {aboutData.header.subtitle}
+            {data.header.subtitle}
           </p>
         </div>
       </div>
@@ -23,9 +97,9 @@ export default function AboutPage() {
       {/* 2. WHO WE ARE */}
       <div className="py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-           <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-8">{aboutData.ourStory.heading}</h2>
+           <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-8">{data.ourStory.heading}</h2>
            <p className="text-2xl font-light text-gray-600 leading-[1.8] relative z-10">
-              {aboutData.ourStory.content}
+              {data.ourStory.content}
            </p>
         </div>
       </div>
@@ -43,9 +117,9 @@ export default function AboutPage() {
               <div className="w-16 h-16 rounded-2xl bg-secondary flex items-center justify-center mb-8 shadow-inner">
                 <Lightbulb className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-3xl font-black text-white mb-6">{aboutData.missionVision.vision.title}</h3>
+              <h3 className="text-3xl font-black text-white mb-6">{data.missionVision.vision.title}</h3>
               <p className="text-xl text-gray-200 font-light leading-relaxed">
-                {aboutData.missionVision.vision.content}
+                {data.missionVision.vision.content}
               </p>
             </div>
 
@@ -54,9 +128,9 @@ export default function AboutPage() {
               <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-8 shadow-inner">
                 <Target className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-3xl font-black text-white mb-6">{aboutData.missionVision.mission.title}</h3>
+              <h3 className="text-3xl font-black text-white mb-6">{data.missionVision.mission.title}</h3>
               <p className="text-xl text-gray-200 font-light leading-relaxed">
-                {aboutData.missionVision.mission.content}
+                {data.missionVision.mission.content}
               </p>
             </div>
 
@@ -64,18 +138,18 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* 4. THE APPROACH */}
+      {/* 4. THE APPROACH (Static/Hardcoded as requested) */}
       <div className="py-32 bg-gray-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h3 className="text-4xl font-black text-gray-900 mb-6">{aboutData.approach.heading}</h3>
-            <p className="text-xl text-gray-500 font-light">{aboutData.approach.subtext}</p>
+            <h3 className="text-4xl font-black text-gray-900 mb-6">{data.approach.heading}</h3>
+            <p className="text-xl text-gray-500 font-light">{data.approach.subtext}</p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
             <div className="hidden lg:block absolute top-12 left-[10%] right-[10%] h-[2px] bg-gray-200 -z-10" />
             
-            {aboutData.approach.steps.map((step, idx) => {
+            {data.approach.steps.map((step, idx) => {
               const Icon = approachIcons[idx % 4];
               return (
                 <div key={step.id} className="relative group">
@@ -100,12 +174,12 @@ export default function AboutPage() {
       <div className="py-32 bg-gray-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h3 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight mb-6">{aboutData.team.heading}</h3>
-            <p className="text-xl text-gray-500 font-light leading-relaxed">{aboutData.team.subtext}</p>
+            <h3 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight mb-6">{data.team.heading}</h3>
+            <p className="text-xl text-gray-500 font-light leading-relaxed">{data.team.subtext}</p>
           </div>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {aboutData.team.members.map((member) => (
+            {data.team.members.map((member) => (
               <div key={member.id} className="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 flex flex-col">
                 <div className="relative w-full aspect-square overflow-hidden bg-gray-100">
                   <Image src={member.imageRef} alt={member.name} fill className="object-cover group-hover:scale-105 transition-transform duration-1000" />

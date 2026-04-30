@@ -11,7 +11,8 @@ export const structure: StructureResolver = (S) =>
             .title('Site Pages')
             .items([
               S.documentTypeListItem('homePage').title('Homepage'),
-              S.documentTypeListItem('aboutSection').title('About Section'),
+              S.documentTypeListItem('aboutPage').title('About Page'),
+              S.documentTypeListItem('aboutSection').title('Homepage About Section'),
               S.documentTypeListItem('contactInformation').title('Contact Info'),
               S.documentTypeListItem('callToAction').title('Call To Action'),
             ])
@@ -28,6 +29,7 @@ export const structure: StructureResolver = (S) =>
               S.documentTypeListItem('initiative').title('Initiatives'),
               S.documentTypeListItem('impactStat').title('Impact Stats'),
               S.documentTypeListItem('partnerLogo').title('Partner Logos'),
+              S.documentTypeListItem('teamMember').title('Team Members'),
             ])
         ),
       S.divider(),

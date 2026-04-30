@@ -12,6 +12,8 @@ import { callToActionType } from './callToActionType'
 import { researchPublicationType } from './researchPublicationType'
 import { blogPostType } from './blogPostType'
 import { openRoleType } from './openRoleType'
+import { aboutPageType } from './aboutPageType'
+import { teamMemberType } from './teamMemberType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -27,6 +29,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     callToActionType,
     researchPublicationType,
     blogPostType,
-    openRoleType
+    openRoleType,
+    aboutPageType,
+    teamMemberType
   ],
 }
