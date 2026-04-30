@@ -6,7 +6,13 @@ export const aboutSectionType = defineType({
     defineField({ name: 'subHeading', title: 'Sub-Heading', type: 'string' }),
     defineField({ name: 'mission', title: 'Mission Statement', type: 'text' }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
-    defineField({ name: 'imageRef', title: 'Image Reference', type: 'string' }),
+    defineField({ name: 'imageRef', title: 'Legacy Image URL', type: 'string', hidden: true }),
+    defineField({ 
+      name: 'aboutImage', 
+      title: 'About Section Image', 
+      type: 'image', 
+      options: { hotspot: true } 
+    }),
     defineField({ name: 'linkLabel', title: 'Link Label', type: 'string' }),
     defineField({ name: 'linkHref', title: 'Link URL', type: 'string' }),
   ],
