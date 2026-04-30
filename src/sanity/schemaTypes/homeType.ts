@@ -30,5 +30,13 @@ export const homeType = defineType({
       title: 'Hero Subtext',
       type: 'text',
     }),
+    defineField({
+      name: 'heroImage',
+      title: 'Hero Background Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
   ],
 })

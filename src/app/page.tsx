@@ -1,5 +1,6 @@
 import { homeData } from "../../content/home";
 import { client } from "@/sanity/lib/client";
+import { urlForImage } from "@/sanity/lib/image";
 
 import HeroBanner from "@/components/blocks/HeroBanner";
 import AboutSection from "@/components/blocks/AboutSection";
@@ -40,8 +41,9 @@ export default async function Home() {
     hero: {
       ...homeData.hero,
       badge: sanityData?.homePage?.heroBadge || homeData.hero.badge,
-      headline: sanityData?.homePage?.heroHeadline || homeData.hero.headline,
-      subtext: sanityData?.homePage?.heroSubtext || homeData.hero.subtext,
+      title: sanityData?.homePage?.heroHeadline || homeData.hero.title,
+      description: sanityData?.homePage?.heroSubtext || homeData.hero.description,
+      imageRef: sanityData?.homePage?.heroImage ? urlForImage(sanityData.homePage.heroImage)?.url() || homeData.hero.imageRef : homeData.hero.imageRef,
     },
     about: {
       ...homeData.about,
