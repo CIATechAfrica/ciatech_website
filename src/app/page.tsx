@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { homeData } from "../../content/home";
 import { client } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
@@ -15,6 +16,20 @@ import CTASection from "@/components/blocks/CTASection";
 
 export const revalidate = 0;
 
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const seoData = await client.fetch(`*[_type == "homePage"][0]{ seoTitle, seoDescription }`);
+    return {
+      title: seoData?.seoTitle || homeData.seo.title,
+      description: seoData?.seoDescription || homeData.seo.description,
+    };
+  } catch (error) {
+    return {
+      title: homeData.seo.title,
+      description: homeData.seo.description,
+    };
+  }
+}
 async function getSanityHomeData() {
   try {
     const data = await client.fetch(`{
