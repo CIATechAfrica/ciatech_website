@@ -63,8 +63,6 @@ export default async function Home() {
     about: {
       ...homeData.about,
       heading: sanityData?.aboutSection?.heading || homeData.about.heading,
-      subHeading: sanityData?.aboutSection?.subHeading || homeData.about.subHeading,
-      mission: sanityData?.aboutSection?.mission || homeData.about.mission,
       description: sanityData?.aboutSection?.description || homeData.about.description,
       imageRef: sanityData?.aboutSection?.aboutImage ? urlForImage(sanityData.aboutSection.aboutImage)?.url() || homeData.about.imageRef : homeData.about.imageRef,
       link: {
