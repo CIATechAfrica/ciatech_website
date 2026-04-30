@@ -179,7 +179,7 @@ export default async function AboutPage() {
           </div>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {data.team.members.map((member) => (
+            {data.team.members.map((member: any) => (
               <div key={member.id} className="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 flex flex-col">
                 <div className="relative w-full aspect-square overflow-hidden bg-gray-100">
                   <Image src={member.imageRef} alt={member.name} fill className="object-cover group-hover:scale-105 transition-transform duration-1000" />
