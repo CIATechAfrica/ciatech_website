@@ -67,6 +67,10 @@ export default async function Home() {
       mission: sanityData?.aboutSection?.mission || homeData.about.mission,
       description: sanityData?.aboutSection?.description || homeData.about.description,
       imageRef: sanityData?.aboutSection?.aboutImage ? urlForImage(sanityData.aboutSection.aboutImage)?.url() || homeData.about.imageRef : homeData.about.imageRef,
+      link: {
+        label: sanityData?.aboutSection?.linkLabel || homeData.about.link.label,
+        href: sanityData?.aboutSection?.linkHref || homeData.about.link.href,
+      }
     },
     corePillarsTeaser: {
       ...homeData.corePillarsTeaser,
