@@ -292,7 +292,9 @@ export interface ResearchPageData {
 
 export interface OpenRole {
   id: string;
+  _id?: string;
   title: string;
+  category?: string;
   type: string;
   location: string;
   description: string;
