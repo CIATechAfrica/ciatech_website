@@ -8,7 +8,19 @@ export const researchPublicationType = defineType({
     defineField({ name: 'date', title: 'Date Published', type: 'string' }),
     defineField({ name: 'iconName', title: 'Icon Name (For Homepage Hub)', type: 'string' }),
     defineField({ name: 'isFeatured', title: 'Is Featured Paper?', type: 'boolean', initialValue: false }),
-    defineField({ name: 'pdfUrl', title: 'PDF URL (or File)', type: 'string' }),
-    defineField({ name: 'imageRef', title: 'Cover Image URL', type: 'string' }),
+    defineField({ 
+      name: 'pdfFile', 
+      title: 'Upload Full PDF Report', 
+      type: 'file',
+      options: { accept: '.pdf' },
+      description: 'Upload the actual PDF file for users to download.'
+    }),
+    defineField({ 
+      name: 'coverImage', 
+      title: 'Cover Image', 
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Upload the cover image for the Research Page.'
+    }),
   ],
 })

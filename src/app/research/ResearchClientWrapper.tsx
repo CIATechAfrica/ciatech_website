@@ -19,6 +19,14 @@ export default function ResearchClientWrapper({ featured, publications, publicat
   const handleDownload = async (e: React.MouseEvent, item: any) => {
     e.preventDefault();
     e.stopPropagation();
+    
+    // If a PDF was uploaded directly via Sanity CMS, just open/download it!
+    if (item.pdfDownloadUrl) {
+      window.open(item.pdfDownloadUrl, '_blank');
+      return;
+    }
+    
+    // Otherwise, generate the PDF dynamically on the client
     try {
       await generateAndDownloadPDF(item);
     } catch (err) {

@@ -1,6 +1,7 @@
 import { researchData } from "../../../content/research";
 import Image from "next/image";
 import { client } from "@/sanity/lib/client";
+import { urlForImage } from "@/sanity/lib/image";
 import { Metadata } from "next";
 import ResearchClientWrapper from "./ResearchClientWrapper";
 
@@ -25,8 +26,14 @@ async function getSanityResearchData() {
   try {
     const data = await client.fetch(`{
       "researchPage": *[_type == "researchPage"][0],
-      "featuredPublication": *[_type == "researchPublication" && isFeatured == true][0],
-      "publications": *[_type == "researchPublication" && isFeatured != true] | order(_createdAt asc)
+      "featuredPublication": *[_type == "researchPublication" && isFeatured == true][0]{
+        ...,
+        "pdfDownloadUrl": pdfFile.asset->url
+      },
+      "publications": *[_type == "researchPublication" && isFeatured != true] | order(_createdAt asc){
+        ...,
+        "pdfDownloadUrl": pdfFile.asset->url
+      }
     }`);
     return data;
   } catch (err) {
@@ -48,8 +55,15 @@ export default async function ResearchPage() {
     publicationsTitle: sanityData?.researchPage?.publicationsTitle || researchData.publicationsTitle,
   };
 
-  const featured = sanityData?.featuredPublication || researchData.featured;
-  const publications = sanityData?.publications?.length > 0 ? sanityData.publications : researchData.publications;
+  const featured = sanityData?.featuredPublication ? {
+    ...sanityData.featuredPublication,
+    imageRef: sanityData.featuredPublication.coverImage ? urlForImage(sanityData.featuredPublication.coverImage)?.url() : researchData.featured.imageRef,
+  } : researchData.featured;
+
+  const publications = sanityData?.publications?.length > 0 ? sanityData.publications.map((pub: any) => ({
+    ...pub,
+    imageRef: pub.coverImage ? urlForImage(pub.coverImage)?.url() : pub.imageRef,
+  })) : researchData.publications;
 
   return (
     <main className="min-h-screen bg-gray-50 pt-24 font-sans selection:bg-secondary/30 selection:text-gray-900 overflow-x-hidden relative">
