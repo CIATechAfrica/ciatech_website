@@ -42,6 +42,34 @@ export const generateAndDownloadPDF = async (item: ResearchItem) => {
   doc.text(summaryLines, marginX, currentY);
   currentY += (summaryLines.length * 6) + 10;
   
+  // 4b. ADD FULL DESCRIPTION CONTENT (If available)
+  if (item.fullDescription) {
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(80, 80, 80);
+    doc.text("FULL RESEARCH NOTE", marginX, currentY);
+    currentY += 8;
+
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(60, 60, 60);
+    // Split by newlines first to respect user paragraphs, then split to size
+    const paragraphs = item.fullDescription.split('\n');
+    paragraphs.forEach((p: string) => {
+      if (p.trim() !== '') {
+        const pLines = doc.splitTextToSize(p, 170);
+        // Check for page overflow
+        if (currentY + (pLines.length * 6) > 270) {
+          doc.addPage();
+          currentY = 20; // reset Y
+        }
+        doc.text(pLines, marginX, currentY);
+        currentY += (pLines.length * 6) + 4;
+      } else {
+        currentY += 4; // Add a small gap for empty lines
+      }
+    });
+    currentY += 6;
+  }
+  
   // 5. ADD FOOTER BRANDING
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);

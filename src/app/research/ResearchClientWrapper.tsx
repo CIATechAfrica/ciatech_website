@@ -186,9 +186,16 @@ export default function ResearchClientWrapper({ featured, publications, publicat
                 <p className="first-letter:text-5xl first-letter:font-black first-letter:text-primary first-letter:mr-1 first-letter:float-left">
                   {readingItem.summary}
                 </p>
-                <p className="mt-6">
-                  *This is the executive summary view. To access the entire comprehensive dataset, methodology breakdown, and policy implementations discussed in this paper, please download the full publication.*
-                </p>
+                {readingItem.fullDescription && (
+                  <div className="mt-8 whitespace-pre-line text-base text-gray-700">
+                    {readingItem.fullDescription}
+                  </div>
+                )}
+                {!readingItem.pdfDownloadUrl && !readingItem.fullDescription && (
+                  <p className="mt-6 italic">
+                    *This is the executive summary view. Please download the full publication.*
+                  </p>
+                )}
               </div>
 
               <div className="mt-12 flex flex-col sm:flex-row items-center gap-4 border-t border-gray-100 pt-8">

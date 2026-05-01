@@ -3,7 +3,8 @@ export const researchPublicationType = defineType({
   name: 'researchPublication', title: 'Research Publication', type: 'document',
   fields: [
     defineField({ name: 'title', title: 'Title', type: 'string' }),
-    defineField({ name: 'summary', title: 'Summary / Description', type: 'text' }),
+    defineField({ name: 'summary', title: 'Summary (Card View)', type: 'text' }),
+    defineField({ name: 'fullDescription', title: 'Full Description (Modal & PDF)', type: 'text' }),
     defineField({ name: 'category', title: 'Category / Sector', type: 'string' }),
     defineField({ name: 'date', title: 'Date Published', type: 'string' }),
     defineField({ name: 'iconName', title: 'Icon Name (For Homepage Hub)', type: 'string' }),
