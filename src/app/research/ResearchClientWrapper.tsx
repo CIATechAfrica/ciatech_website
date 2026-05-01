@@ -20,13 +20,7 @@ export default function ResearchClientWrapper({ featured, publications, publicat
     e.preventDefault();
     e.stopPropagation();
     
-    // If a PDF was uploaded directly via Sanity CMS, just open/download it!
-    if (item.pdfDownloadUrl) {
-      window.open(item.pdfDownloadUrl, '_blank');
-      return;
-    }
-    
-    // Otherwise, generate the PDF dynamically on the client
+    // Generate the PDF dynamically on the client
     try {
       await generateAndDownloadPDF(item);
     } catch (err) {
@@ -58,7 +52,7 @@ export default function ResearchClientWrapper({ featured, publications, publicat
                   {featured.title}
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed font-light line-clamp-3">
-                  {featured.summary}
+                  {featured.fullDescription}
                 </p>
                 
                 <div className="pt-4 flex items-center gap-4">
@@ -123,7 +117,7 @@ export default function ResearchClientWrapper({ featured, publications, publicat
                   </h3>
                   
                   <p className="text-md text-gray-600 leading-relaxed font-light mb-8 flex-grow line-clamp-3">
-                    {item.summary}
+                    {item.fullDescription}
                   </p>
                   
                   <div className="mt-auto flex items-center justify-between border-t border-gray-50 pt-6">
@@ -183,19 +177,22 @@ export default function ResearchClientWrapper({ featured, publications, publicat
             {/* Modal Reading Body */}
             <div className="p-8 sm:p-12">
               <div className="prose prose-lg text-gray-600 font-light leading-relaxed max-w-none">
-                <p className="first-letter:text-5xl first-letter:font-black first-letter:text-primary first-letter:mr-1 first-letter:float-left">
-                  {readingItem.summary}
-                </p>
-                {readingItem.fullDescription && (
-                  <div className="mt-8 whitespace-pre-line text-base text-gray-700">
-                    {readingItem.fullDescription}
-                  </div>
-                )}
-                {!readingItem.pdfDownloadUrl && !readingItem.fullDescription && (
-                  <p className="mt-6 italic">
-                    *This is the executive summary view. Please download the full publication.*
-                  </p>
-                )}
+                {readingItem.fullDescription && readingItem.fullDescription.split('\n').map((paragraph: string, idx: number) => {
+                  if (!paragraph.trim()) return <br key={idx} />;
+                  // Make the first paragraph drop-capped like the old summary
+                  if (idx === 0) {
+                    return (
+                      <p key={idx} className="first-letter:text-5xl first-letter:font-black first-letter:text-primary first-letter:mr-1 first-letter:float-left mb-6">
+                        {paragraph}
+                      </p>
+                    );
+                  }
+                  return (
+                    <p key={idx} className="mb-6">
+                      {paragraph}
+                    </p>
+                  );
+                })}
               </div>
 
               <div className="mt-12 flex flex-col sm:flex-row items-center gap-4 border-t border-gray-100 pt-8">

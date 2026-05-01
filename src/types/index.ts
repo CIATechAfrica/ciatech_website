@@ -272,13 +272,10 @@ export interface ResearchItem {
   id: string;
   _id?: string;
   title: string;
-  summary?: string;
   fullDescription?: string;
   category?: string;
   date?: string;
   imageRef?: string;
-  pdfUrl?: string;
-  pdfDownloadUrl?: string;
 }
 
 export interface ResearchPageData {

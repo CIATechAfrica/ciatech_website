@@ -70,8 +70,8 @@ export default function InitiativesGrid({ data }: InitiativesGridProps) {
                       {initiative.title}
                     </h3>
                     
-                    <p className="text-lg text-gray-600 leading-relaxed font-light mb-8 flex-grow">
-                      {initiative.summary}
+                    <p className="text-lg text-gray-600 leading-relaxed font-light mb-8 flex-grow line-clamp-3">
+                      {initiative.fullDescription}
                     </p>
                     
                     {/* Interaction Bridge */}

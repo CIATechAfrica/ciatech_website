@@ -26,14 +26,8 @@ async function getSanityResearchData() {
   try {
     const data = await client.fetch(`{
       "researchPage": *[_type == "researchPage"][0],
-      "featuredPublication": *[_type == "researchPublication" && isFeatured == true][0]{
-        ...,
-        "pdfDownloadUrl": pdfFile.asset->url
-      },
-      "publications": *[_type == "researchPublication" && isFeatured != true] | order(_createdAt asc){
-        ...,
-        "pdfDownloadUrl": pdfFile.asset->url
-      }
+      "featuredPublication": *[_type == "researchPublication" && isFeatured == true][0],
+      "publications": *[_type == "researchPublication" && isFeatured != true] | order(_createdAt asc)
     }`);
     return data;
   } catch (err) {

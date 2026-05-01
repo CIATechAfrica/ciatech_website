@@ -38,22 +38,10 @@ export const generateAndDownloadPDF = async (item: ResearchItem) => {
   doc.setFont("helvetica", "normal");
   doc.setTextColor(40, 40, 40);
   doc.setFontSize(11);
-  const summaryLines = doc.splitTextToSize(item.summary || '', 170);
-  doc.text(summaryLines, marginX, currentY);
-  currentY += (summaryLines.length * 6) + 10;
   
-  // 4b. ADD FULL DESCRIPTION CONTENT (If available)
   if (item.fullDescription) {
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor(80, 80, 80);
-    doc.text("FULL RESEARCH NOTE", marginX, currentY);
-    currentY += 8;
-
-    doc.setFont("helvetica", "normal");
-    doc.setTextColor(60, 60, 60);
-    // Split by newlines first to respect user paragraphs, then split to size
     const paragraphs = item.fullDescription.split('\n');
-    paragraphs.forEach((p: string) => {
+    paragraphs.forEach((p: string, index: number) => {
       if (p.trim() !== '') {
         const pLines = doc.splitTextToSize(p, 170);
         // Check for page overflow
@@ -61,13 +49,13 @@ export const generateAndDownloadPDF = async (item: ResearchItem) => {
           doc.addPage();
           currentY = 20; // reset Y
         }
+        // First paragraph is bold/italic or standard? Just standard.
         doc.text(pLines, marginX, currentY);
         currentY += (pLines.length * 6) + 4;
       } else {
-        currentY += 4; // Add a small gap for empty lines
+        currentY += 4; // empty line gap
       }
     });
-    currentY += 6;
   }
   
   // 5. ADD FOOTER BRANDING
