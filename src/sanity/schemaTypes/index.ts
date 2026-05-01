@@ -20,6 +20,7 @@ import { researchPageType } from './researchPageType'
 import { galleryPageType } from './galleryPageType'
 import { blogPageType } from './blogPageType'
 import { opportunitiesPageType } from './opportunitiesPageType'
+import { partnershipsPageType } from './partnershipsPageType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -43,6 +44,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     researchPageType,
     galleryPageType,
     blogPageType,
-    opportunitiesPageType
+    opportunitiesPageType,
+    partnershipsPageType
   ],
 }

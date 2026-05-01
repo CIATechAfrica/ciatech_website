@@ -79,8 +79,11 @@ export interface TeamMember {
 
 export interface PartnerLogo {
   id: string;
+  _id?: string;
   name: string;
-  imageRef: string;
+  category?: string;
+  imageRef?: string;
+  logo?: any;
 }
 
 export interface HomeData {
