@@ -29,7 +29,7 @@ export default function CTASection({ data }: CTASectionProps) {
             {/* Asymmetrical Profile/Image Cutout */}
             <div className="w-32 h-32 sm:w-40 sm:h-40 shrink-0 relative hidden sm:block rounded-tl-[4rem] rounded-tr-[1rem] rounded-bl-[1rem] rounded-br-[4rem] overflow-hidden bg-white/10 border-4 border-white/5 shadow-inner">
                <Image 
-                 src="/images/hero.png" 
+                 src={data.imageRef || "/images/hero.png"} 
                  alt="Join us" 
                  fill 
                  className="object-cover"

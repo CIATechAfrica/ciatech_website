@@ -88,13 +88,10 @@ export default async function Home() {
       ...homeData.cta,
       heading: sanityData?.callToAction?.heading || homeData.cta.heading,
       subtext: sanityData?.callToAction?.description || homeData.cta.subtext,
+      imageRef: sanityData?.callToAction?.image ? urlForImage(sanityData.callToAction.image)?.url() : undefined,
       primaryCTA: {
         label: sanityData?.callToAction?.primaryLabel || homeData.cta.primaryCTA.label,
         href: sanityData?.callToAction?.primaryHref || homeData.cta.primaryCTA.href,
-      },
-      secondaryCTA: {
-        label: sanityData?.callToAction?.secondaryLabel || homeData.cta.secondaryCTA?.label || "",
-        href: sanityData?.callToAction?.secondaryHref || homeData.cta.secondaryCTA?.href || "",
       }
     }
   };

@@ -168,6 +168,7 @@ export interface HomeData {
   cta: {
     heading: string;
     subtext: string;
+    imageRef?: string;
     primaryCTA: LinkRef;
     secondaryCTA?: LinkRef;
   };
