@@ -213,14 +213,37 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">LinkedIn / Portfolio URL</label>
-                    <input 
-                      type="url" 
-                      required
-                      className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900"
-                      placeholder="https://linkedin.com/in/..."
-                    />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">LinkedIn / Portfolio URL</label>
+                      <input 
+                        type="url" 
+                        required
+                        className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900"
+                        placeholder="https://linkedin.com/in/..."
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">Category / Department</label>
+                      <div className="relative">
+                        <select 
+                          required
+                          className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900 appearance-none"
+                        >
+                          <option value="" disabled selected>Select an area...</option>
+                          <option value="engineering">Engineering & Technology</option>
+                          <option value="policy">Policy & Research</option>
+                          <option value="operations">Operations & Strategy</option>
+                          <option value="marketing">Marketing & Communications</option>
+                          <option value="other">Other</option>
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center px-5 pointer-events-none text-gray-500">
+                          <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                            <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" fillRule="evenodd"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   {/* UI Custom File Upload (PDF Only) */}
