@@ -34,11 +34,20 @@ export default function GallerySection({ data }: GalleryProps) {
         
         {/* Masonry Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:grid-flow-row-dense">
-          {data.images.map((img) => (
-            <div 
-              key={img._id || img.id} 
-              className={`relative rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-500 bg-gray-100 min-h-[300px] ${img.gridSize || "col-span-1"}`}
-            >
+          {data.images.slice(0, 4).map((img, index) => {
+            const hubSpans = [
+              "col-span-1 md:col-span-2",
+              "col-span-1 md:col-span-2",
+              "col-span-1 md:col-span-3",
+              "col-span-1 md:col-span-1",
+            ];
+            const spanClass = hubSpans[index] || "col-span-1";
+            
+            return (
+              <div 
+                key={img._id || img.id} 
+                className={`relative rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-500 bg-gray-100 min-h-[300px] ${spanClass}`}
+              >
               <Image 
                 src={img.imageRef} 
                 alt={img.title} 
@@ -61,8 +70,9 @@ export default function GallerySection({ data }: GalleryProps) {
                 </div>
               </div>
               
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </div>
         
       </div>

@@ -25,7 +25,7 @@ async function getSanityGalleryData() {
   try {
     const data = await client.fetch(`{
       "galleryPage": *[_type == "galleryPage"][0],
-      "galleryImages": *[_type == "galleryImage" && isHubVisible == false] | order(_createdAt asc){
+      "galleryImages": *[_type == "galleryImage"] | order(_createdAt desc){
         ...,
         "imageRef": image.asset->url
       }

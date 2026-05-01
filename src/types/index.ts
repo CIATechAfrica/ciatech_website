@@ -350,7 +350,6 @@ export interface GalleryItem {
   location?: string;
   date?: string;
   gridSize?: string;
-  isHubVisible?: boolean;
   description?: string;
   className?: string;
 }

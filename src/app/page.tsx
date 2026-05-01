@@ -41,7 +41,7 @@ async function getSanityHomeData() {
       "impactStats": *[_type == "impactStat"] | order(_createdAt asc),
       "callToAction": *[_type == "callToAction"][0],
       "galleryPage": *[_type == "galleryPage"][0],
-      "galleryImages": *[_type == "galleryImage" && isHubVisible == true] | order(_createdAt asc){
+      "galleryImages": *[_type == "galleryImage"] | order(_createdAt desc)[0...4]{
         ...,
         "imageRef": image.asset->url
       }

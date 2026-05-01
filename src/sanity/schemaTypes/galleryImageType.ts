@@ -13,13 +13,6 @@ export const galleryImageType = defineType({
       options: { hotspot: true }
     }),
     defineField({
-      name: 'isHubVisible',
-      title: 'Show on Homepage Hub?',
-      type: 'boolean',
-      initialValue: false,
-      description: 'Check this to display this image on the homepage.'
-    }),
-    defineField({
       name: 'gridSize',
       title: 'Grid Size',
       type: 'string',
