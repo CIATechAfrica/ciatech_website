@@ -38,7 +38,8 @@ async function getSanityHomeData() {
       "corePillars": *[_type == "corePillar"],
       "solutions": *[_type == "solution"],
       "initiatives": *[_type == "initiative"],
-      "impactStats": *[_type == "impactStat"]
+      "impactStats": *[_type == "impactStat"],
+      "callToAction": *[_type == "callToAction"][0]
     }`);
     return data;
   } catch (error) {
@@ -82,6 +83,19 @@ export default async function Home() {
     impactStats: {
       ...homeData.impactStats,
       stats: sanityData?.impactStats?.length > 0 ? sanityData.impactStats : homeData.impactStats?.stats || [],
+    },
+    cta: {
+      ...homeData.cta,
+      heading: sanityData?.callToAction?.heading || homeData.cta.heading,
+      subtext: sanityData?.callToAction?.description || homeData.cta.subtext,
+      primaryCTA: {
+        label: sanityData?.callToAction?.primaryLabel || homeData.cta.primaryCTA.label,
+        href: sanityData?.callToAction?.primaryHref || homeData.cta.primaryCTA.href,
+      },
+      secondaryCTA: {
+        label: sanityData?.callToAction?.secondaryLabel || homeData.cta.secondaryCTA?.label || "",
+        href: sanityData?.callToAction?.secondaryHref || homeData.cta.secondaryCTA?.href || "",
+      }
     }
   };
 
