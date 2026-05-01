@@ -2,7 +2,6 @@ import { type SchemaTypeDefinition } from 'sanity'
 import { homeType } from './homeType'
 import { corePillarType } from './corePillarType'
 import { solutionType } from './solutionType'
-import { initiativeType } from './initiativeType'
 import { impactStatType } from './impactStatType'
 import { galleryImageType } from './galleryImageType'
 import { partnerLogoType } from './partnerLogoType'
@@ -17,13 +16,13 @@ import { teamMemberType } from './teamMemberType'
 import { solutionsPageType } from './solutionsPageType'
 import { impactAreaType } from './impactAreaType'
 import { impactPageType } from './impactPageType'
+import { researchPageType } from './researchPageType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     homeType,
     corePillarType,
     solutionType,
-    initiativeType,
     impactStatType,
     galleryImageType,
     partnerLogoType,
@@ -37,6 +36,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     teamMemberType,
     solutionsPageType,
     impactAreaType,
-    impactPageType
+    impactPageType,
+    researchPageType
   ],
 }
