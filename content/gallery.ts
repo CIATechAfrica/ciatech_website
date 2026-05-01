@@ -18,7 +18,7 @@ export const galleryData: GalleryPageData = {
       location: "Maiduguri, Nigeria",
       date: "August 2025",
       imageRef: "/images/hero.png",
-      span: "col-span-1 md:col-span-2"
+      gridSize: "col-span-1 md:col-span-2"
     },
     {
       id: "gal-2",
@@ -26,7 +26,7 @@ export const galleryData: GalleryPageData = {
       location: "Abuja HQ",
       date: "November 2025",
       imageRef: "/images/about.png",
-      span: "col-span-1"
+      gridSize: "col-span-1"
     },
     {
       id: "gal-3",
@@ -34,7 +34,7 @@ export const galleryData: GalleryPageData = {
       location: "Lake Chad Region",
       date: "January 2026",
       imageRef: "/images/new_hero.png",
-      span: "col-span-1"
+      gridSize: "col-span-1"
     },
     {
       id: "gal-4",
@@ -42,7 +42,7 @@ export const galleryData: GalleryPageData = {
       location: "Nairobi, Kenya",
       date: "March 2026",
       imageRef: "/images/hero.png",
-      span: "col-span-1 md:col-span-2"
+      gridSize: "col-span-1 md:col-span-2"
     },
     {
       id: "gal-5",
@@ -50,7 +50,7 @@ export const galleryData: GalleryPageData = {
       location: "Hybrid / Remote",
       date: "April 2026",
       imageRef: "/images/new_hero.png",
-      span: "col-span-1 lg:col-span-3"
+      gridSize: "col-span-1 lg:col-span-3"
     }
   ]
 };

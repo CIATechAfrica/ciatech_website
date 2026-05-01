@@ -183,11 +183,11 @@ export const homeData: HomeData = {
     subtext: "A visual journey through our diverse innovation clusters, agricultural incubators, and dynamic tech hubs across the continent.",
     link: { label: "Explore Our Full Gallery", href: "/gallery" },
     images: [
-      { id: "img-1", imageRef: "/images/hero.png", title: "Tech Hub Labs", location: "Kano, Nigeria", date: "April 2026", span: "col-span-1 md:col-span-2 row-span-2 min-h-[300px]" as "col-span-1" | "col-span-2" },
-      { id: "img-2", imageRef: "/images/new_hero.png", title: "AgriTech Scaleups", location: "Lake Chad", date: "March 2026", span: "col-span-1" },
-      { id: "img-3", imageRef: "/images/about.png", title: "Policy Summits", location: "Abuja HQ", date: "Feb 2026", span: "col-span-1" },
-      { id: "img-4", imageRef: "/images/hero.png", title: "Mentorship", location: "Nairobi", date: "Jan 2026", span: "col-span-1" },
-      { id: "img-5", imageRef: "/images/new_hero.png", title: "Green Energy", location: "Maiduguri", date: "Dec 2025", span: "col-span-1" }
+      { id: "img-1", imageRef: "/images/hero.png", title: "Tech Hub Labs", location: "Kano, Nigeria", date: "April 2026", gridSize: "col-span-1 md:col-span-2 row-span-2 min-h-[300px]" as "col-span-1" | "col-span-2" },
+      { id: "img-2", imageRef: "/images/new_hero.png", title: "AgriTech Scaleups", location: "Lake Chad", date: "March 2026", gridSize: "col-span-1" },
+      { id: "img-3", imageRef: "/images/about.png", title: "Policy Summits", location: "Abuja HQ", date: "Feb 2026", gridSize: "col-span-1" },
+      { id: "img-4", imageRef: "/images/hero.png", title: "Mentorship", location: "Nairobi", date: "Jan 2026", gridSize: "col-span-1" },
+      { id: "img-5", imageRef: "/images/new_hero.png", title: "Green Energy", location: "Maiduguri", date: "Dec 2025", gridSize: "col-span-1" }
     ]
   },
   contactTeaser: {
