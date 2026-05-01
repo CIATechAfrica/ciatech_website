@@ -23,13 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 async function getSanityBlogData() {
   try {
     const data = await client.fetch(`{
-      "blogPage": *[_type == "blogPage"][0]{
-        ...,
-        featuredPost->{
-          ...,
-          "thumbnailRef": thumbnail.asset->url
-        }
-      },
+      "blogPage": *[_type == "blogPage"][0],
       "posts": *[_type == "blogPost"] | order(date desc){
         ...,
         "thumbnailRef": thumbnail.asset->url
@@ -45,9 +39,10 @@ async function getSanityBlogData() {
 export default async function BlogPage() {
   const sanityData = await getSanityBlogData();
 
-  // Filter out the featured post from the general posts array if it exists
-  const featuredPostId = sanityData?.blogPage?.featuredPost?._id;
-  const filteredPosts = sanityData?.posts?.filter((post: any) => post._id !== featuredPostId) || [];
+  // If we have Sanity posts, the first one is featured, the rest are the grid
+  const hasSanityPosts = sanityData?.posts && sanityData.posts.length > 0;
+  const featuredPost = hasSanityPosts ? sanityData.posts[0] : blogData.featuredPost;
+  const gridPosts = hasSanityPosts ? sanityData.posts.slice(1) : blogData.posts;
 
   // Deep Merge Sanity Data over Static Fallback Data
   const data = {
@@ -58,8 +53,8 @@ export default async function BlogPage() {
       subtext: sanityData?.blogPage?.heroSubtext || blogData.hero.subtext,
     },
     feedTitle: sanityData?.blogPage?.feedTitle || blogData.feedTitle,
-    featuredPost: sanityData?.blogPage?.featuredPost || blogData.featuredPost,
-    posts: filteredPosts.length > 0 ? filteredPosts : blogData.posts,
+    featuredPost: featuredPost,
+    posts: gridPosts,
   };
 
   // Format dates manually so we don't have hydration mismatches

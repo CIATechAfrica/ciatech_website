@@ -5,7 +5,7 @@ export const blogPostType = defineType({
     defineField({ name: 'title', title: 'Title', type: 'string' }),
     defineField({ name: 'snippet', title: 'Snippet', type: 'text' }),
     defineField({ name: 'content', title: 'Content Body', type: 'text' }),
-    defineField({ name: 'author', title: 'Author', type: 'string' }),
+    defineField({ name: 'author', title: 'Writer Name', type: 'string' }),
     defineField({ name: 'date', title: 'Date', type: 'date', options: { dateFormat: 'MMMM D, YYYY' } }),
     defineField({ name: 'readTime', title: 'Read Time', type: 'string' }),
     defineField({
