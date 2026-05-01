@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Globe2, Landmark, BookOpen, Briefcase, ArrowRight } from "lucide-react";
 import React from 'react';
 import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
+import { urlForImage } from "@/sanity/lib/image";
 import { Metadata } from "next";
 import { PartnerLogo } from "@/types";
 
@@ -176,7 +176,7 @@ export default async function PartnershipsPage() {
                           <div className="relative w-full h-full flex items-center justify-center">
                             {logo.logo ? (
                               <Image 
-                                src={urlFor(logo.logo).url()} 
+                                src={urlForImage(logo.logo).url()} 
                                 alt={logo.name} 
                                 fill
                                 className="object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 p-2" 
