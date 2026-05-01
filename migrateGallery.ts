@@ -46,7 +46,7 @@ async function migrate() {
         title: img.title,
         location: img.location,
         date: img.date,
-        gridSize: mapSpanToGridSize(img.span),
+        gridSize: mapSpanToGridSize(img.gridSize),
         isHubVisible: true
       };
       await client.createOrReplace(doc);
@@ -61,7 +61,7 @@ async function migrate() {
         title: img.title,
         location: img.location,
         date: img.date,
-        gridSize: mapSpanToGridSize(img.span),
+        gridSize: mapSpanToGridSize(img.gridSize),
         isHubVisible: false
       };
       await client.createOrReplace(doc);
