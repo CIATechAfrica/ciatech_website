@@ -81,7 +81,7 @@ export default function GalleryClientWrapper({ data }: { data: GalleryPageData }
             {data.images.map((item, index) => (
               <div 
                 key={item._id || item.id} 
-                className={`group relative rounded-[2rem] overflow-hidden cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 border border-gray-100 bg-white ${item.gridSize || item.span || 'col-span-1'}`}
+                className={`group relative rounded-[2rem] overflow-hidden cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 border border-gray-100 bg-white ${item.gridSize || 'col-span-1'}`}
                 onClick={() => setActiveIndex(index)}
               >
                 <Image 
