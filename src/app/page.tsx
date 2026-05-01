@@ -106,7 +106,6 @@ export default async function Home() {
       <ImpactStatsGrid data={data.impactStats} />
       <GallerySection data={data.galleryTeaser} />
       <PartnershipsTeaser data={data.partnerships} />
-      <ContactUsSection data={data.contactTeaser} />
       <CTASection data={data.cta} />
     </>
   );
