@@ -4,8 +4,18 @@ export const solutionType = defineType({
   fields: [
     defineField({ name: 'title', title: 'Title', type: 'string' }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
-    defineField({ name: 'iconName', title: 'Icon Name', type: 'string' }),
-    defineField({ name: 'items', title: 'Items', type: 'array', of: [{type: 'string'}] }),
-    defineField({ name: 'focusAreas', title: 'Focus Areas', type: 'array', of: [{type: 'string'}] }),
+    defineField({ 
+      name: 'iconName', 
+      title: 'Icon Name', 
+      type: 'string',
+      description: 'Lucide icon name (e.g. rocket, brain-circuit, landmark, graduation-cap, globe)'
+    }),
+    defineField({ 
+      name: 'focusAreas', 
+      title: 'Core Focus Areas (Bullets)', 
+      type: 'array', 
+      of: [{type: 'string'}],
+      validation: (Rule) => Rule.max(3).warning('Recommended to keep it to 3 focus areas.')
+    }),
   ],
 })

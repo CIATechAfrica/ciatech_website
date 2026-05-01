@@ -14,6 +14,7 @@ import { blogPostType } from './blogPostType'
 import { openRoleType } from './openRoleType'
 import { aboutPageType } from './aboutPageType'
 import { teamMemberType } from './teamMemberType'
+import { solutionsPageType } from './solutionsPageType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -31,6 +32,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     blogPostType,
     openRoleType,
     aboutPageType,
-    teamMemberType
+    teamMemberType,
+    solutionsPageType
   ],
 }

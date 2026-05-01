@@ -2,6 +2,10 @@ import { solutionsData } from "../../../content/solutions";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Rocket, BrainCircuit, Landmark, GraduationCap, Globe } from "lucide-react";
+import { Metadata } from "next";
+import { client } from "@/sanity/lib/client";
+
+export const revalidate = 0;
 
 // Map icon strings to actual Lucide components dynamically
 const IconMap: Record<string, React.ReactNode> = {
@@ -12,7 +16,68 @@ const IconMap: Record<string, React.ReactNode> = {
   "globe": <Globe className="w-8 h-8 text-primary" />,
 };
 
-export default function SolutionsPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const seoData = await client.fetch(`*[_type == "solutionsPage"][0]{ seoTitle, seoDescription }`);
+    return {
+      title: seoData?.seoTitle || solutionsData.seo.title,
+      description: seoData?.seoDescription || solutionsData.seo.description,
+    };
+  } catch (error) {
+    return {
+      title: solutionsData.seo.title,
+      description: solutionsData.seo.description,
+    };
+  }
+}
+
+async function getSanitySolutionsData() {
+  try {
+    const data = await client.fetch(`{
+      "solutionsPage": *[_type == "solutionsPage"][0],
+      "solutions": *[_type == "solution"] | order(_createdAt asc),
+      "callToAction": *[_type == "callToAction"][0]
+    }`);
+    return data;
+  } catch (error) {
+    console.error("Sanity fetch failed:", error);
+    return null;
+  }
+}
+
+export default async function SolutionsPage() {
+  const sanityData = await getSanitySolutionsData();
+
+  const data = {
+    ...solutionsData,
+    hero: {
+      ...solutionsData.hero,
+      heading: sanityData?.solutionsPage?.heroHeading || solutionsData.hero.heading,
+      subtext: sanityData?.solutionsPage?.heroSubtext || solutionsData.hero.subtext,
+    },
+    introTitle: sanityData?.solutionsPage?.introTitle || solutionsData.introTitle,
+    introSubtext: sanityData?.solutionsPage?.introSubtext || solutionsData.introSubtext,
+    solutions: sanityData?.solutions?.length > 0 
+      ? sanityData.solutions.map((sol: any) => ({
+          id: sol._id,
+          title: sol.title,
+          description: sol.description,
+          iconName: sol.iconName,
+          features: sol.focusAreas || [],
+          imageRef: "/images/hero.png" // Fallback not used in UI but keeps type happy
+        }))
+      : solutionsData.solutions,
+    cta: {
+      ...solutionsData.cta,
+      heading: sanityData?.callToAction?.heading || solutionsData.cta.heading,
+      subtext: sanityData?.callToAction?.description || solutionsData.cta.subtext,
+      primaryCTA: {
+        label: sanityData?.callToAction?.primaryLabel || solutionsData.cta.primaryCTA.label,
+        href: sanityData?.callToAction?.primaryHref || solutionsData.cta.primaryCTA.href,
+      }
+    }
+  };
+
   return (
     <main className="min-h-screen bg-gray-50 pt-24 font-sans selection:bg-secondary/30 selection:text-gray-900 overflow-x-hidden">
       
@@ -20,7 +85,7 @@ export default function SolutionsPage() {
       <section className="relative overflow-hidden bg-[#050505] py-24 lg:py-32">
         <div className="absolute inset-0">
           <Image 
-            src={solutionsData.hero.imageRef} 
+            src={data.hero.imageRef} 
             alt="Solutions Hero" 
             fill 
             className="object-cover opacity-20"
@@ -32,15 +97,15 @@ export default function SolutionsPage() {
           <div className="inline-flex items-center justify-center gap-3 mb-6">
             <span className="w-12 h-px bg-secondary opacity-50" />
             <h3 className="text-secondary font-bold tracking-widest uppercase text-xs">
-              {solutionsData.introTitle}
+              {data.introTitle}
             </h3>
             <span className="w-12 h-px bg-secondary opacity-50" />
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight mb-8 leading-tight break-words hyphens-auto">
-            {solutionsData.hero.heading}
+            {data.hero.heading}
           </h1>
           <p className="text-xl md:text-2xl text-gray-400 font-light max-w-3xl mx-auto leading-relaxed">
-            {solutionsData.hero.subtext}
+            {data.hero.subtext}
           </p>
         </div>
       </section>
@@ -50,7 +115,7 @@ export default function SolutionsPage() {
         <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-12">
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 text-left">
-            {solutionsData.solutions.map((solution, index) => (
+            {data.solutions.map((solution: any, index: number) => (
               <div 
                 key={solution.id} 
                 className="group bg-white rounded-[3rem] p-10 sm:p-14 border border-gray-100 shadow-sm hover:shadow-2xl hover:border-primary/20 transition-all duration-700 hover:-translate-y-2 flex flex-col h-full relative overflow-hidden"
@@ -83,7 +148,7 @@ export default function SolutionsPage() {
                   <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Core Focus Areas</h4>
                   
                   <ul className="space-y-5">
-                    {solution.features.map((feature, fIndex) => (
+                    {solution.features.map((feature: string, fIndex: number) => (
                       <li key={fIndex} className="flex items-start gap-4">
                         <CheckCircle2 className="w-5 h-5 text-primary/70 mt-0.5 flex-shrink-0 group-hover:text-primary transition-colors duration-500" />
                         <span className="text-base text-gray-700 font-medium leading-relaxed">
@@ -107,16 +172,16 @@ export default function SolutionsPage() {
 
         <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
           <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
-            {solutionsData.cta.heading}
+            {data.cta.heading}
           </h2>
           <p className="text-xl md:text-2xl text-gray-400 mb-12 font-light leading-relaxed">
-            {solutionsData.cta.subtext}
+            {data.cta.subtext}
           </p>
           <Link 
-            href={solutionsData.cta.primaryCTA.href}
+            href={data.cta.primaryCTA.href}
             className="inline-flex items-center px-10 py-5 bg-secondary text-white font-bold rounded-full hover:bg-white hover:text-gray-900 transition-all duration-500 transform hover:scale-105 shadow-[0_10px_40px_-10px_rgba(226,173,0,0.4)] text-lg group"
           >
-            {solutionsData.cta.primaryCTA.label}
+            {data.cta.primaryCTA.label}
             <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>

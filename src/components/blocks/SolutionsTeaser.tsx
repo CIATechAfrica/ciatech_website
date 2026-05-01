@@ -1,16 +1,10 @@
 import Link from "next/link";
-import { ArrowRight, Layers, Cpu, Wallet } from "lucide-react";
+import { ArrowRight, Layers } from "lucide-react";
 import { HomeData } from "@/types";
 
 interface SolutionsTeaserProps {
   data: HomeData["solutionsTeaser"];
 }
-
-const iconMap: Record<string, React.ReactNode> = {
-  "innovation-venture": <Layers className="w-8 h-8 text-primary" />,
-  "ai4d": <Cpu className="w-8 h-8 text-primary" />,
-  "financial-inclusion": <Wallet className="w-8 h-8 text-primary" />,
-};
 
 export default function SolutionsTeaser({ data }: SolutionsTeaserProps) {
   if (!data || !data.items) return null;
@@ -42,7 +36,7 @@ export default function SolutionsTeaser({ data }: SolutionsTeaserProps) {
 
         {/* Solutions Cards Grid - Glassmorphism over Dark BG */}
         <div className="grid md:grid-cols-3 gap-8">
-          {data.items.slice(0, 3).map((solution) => (
+          {data.items.slice(0, 3).map((solution: any) => (
             <Link 
               href="/solutions"
               key={solution.id} 
@@ -51,7 +45,7 @@ export default function SolutionsTeaser({ data }: SolutionsTeaserProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               
               <div className="w-20 h-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-8 transform group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-500">
-                {iconMap[solution.id] || <Layers className="w-10 h-10 text-primary" />}
+                <Layers className="w-10 h-10 text-primary" />
               </div>
               
               <h3 className="text-2xl lg:text-3xl font-black text-white px-2 leading-tight tracking-tight group-hover:text-primary transition-colors duration-300">
