@@ -44,6 +44,10 @@ async function getSanityHomeData() {
       "galleryImages": *[_type == "galleryImage"] | order(_createdAt desc)[0...4]{
         ...,
         "imageRef": image.asset->url
+      },
+      "partnerLogos": *[_type == "partnerLogo"] | order(_createdAt desc){
+        ...,
+        "imageRef": logo.asset->url
       }
     }`);
     return data;
@@ -104,6 +108,10 @@ export default async function Home() {
         label: sanityData?.callToAction?.primaryLabel || homeData.cta.primaryCTA.label,
         href: sanityData?.callToAction?.primaryHref || homeData.cta.primaryCTA.href,
       }
+    },
+    partnerships: {
+      ...homeData.partnerships,
+      logos: sanityData?.partnerLogos?.length > 0 ? sanityData.partnerLogos : homeData.partnerships.logos,
     }
   };
 
