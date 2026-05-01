@@ -174,9 +174,9 @@ export default async function PartnershipsPage() {
                           className="group aspect-video bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-center p-8 hover:shadow-xl hover:border-gray-200 transition-all duration-300"
                         >
                           <div className="relative w-full h-full flex items-center justify-center">
-                            {logo.logo ? (
+                            {logo.logo && urlForImage(logo.logo) ? (
                               <Image 
-                                src={urlForImage(logo.logo).url()} 
+                                src={urlForImage(logo.logo)?.url() || ""} 
                                 alt={logo.name} 
                                 fill
                                 className="object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 p-2" 
