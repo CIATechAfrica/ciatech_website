@@ -13,8 +13,9 @@ import { researchPublicationType } from './researchPublicationType'
 import { blogPostType } from './blogPostType'
 import { openRoleType } from './openRoleType'
 import { aboutPageType } from './aboutPageType'
-import { teamMemberType } from './teamMemberType'
 import { solutionsPageType } from './solutionsPageType'
+import { impactAreaType } from './impactAreaType'
+import { impactPageType } from './impactPageType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -33,6 +34,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     openRoleType,
     aboutPageType,
     teamMemberType,
-    solutionsPageType
+    solutionsPageType,
+    impactAreaType,
+    impactPageType
   ],
 }

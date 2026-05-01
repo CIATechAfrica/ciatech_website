@@ -1,5 +1,3 @@
-"use client";
-
 import { impactData } from "../../../content/impact";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,6 +5,10 @@ import {
   ArrowRight, HeartHandshake, Globe2, Rocket, Handshake, Layers, 
   Landmark, Laptop, TreePine, ShieldCheck, CheckCircle2 
 } from "lucide-react";
+import { client } from "@/sanity/lib/client";
+import { Metadata } from "next";
+
+export const revalidate = 0;
 
 const IconMap: Record<string, React.ReactNode> = {
   "heart-handshake": <HeartHandshake className="w-10 h-10 text-white/50 group-hover:text-primary transition-colors duration-500" />,
@@ -20,7 +22,77 @@ const IconMap: Record<string, React.ReactNode> = {
   "shield-check": <ShieldCheck className="w-8 h-8 text-primary" />
 };
 
-export default function ImpactPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const seoData = await client.fetch(`*[_type == "impactPage"][0]{ seoTitle, seoDescription }`);
+    return {
+      title: seoData?.seoTitle || impactData.seo.title,
+      description: seoData?.seoDescription || impactData.seo.description,
+    };
+  } catch (error) {
+    return {
+      title: impactData.seo.title,
+      description: impactData.seo.description,
+    };
+  }
+}
+
+async function getSanityImpactData() {
+  try {
+    const data = await client.fetch(`{
+      "impactPage": *[_type == "impactPage"][0],
+      "impactStats": *[_type == "impactStat"] | order(_createdAt asc),
+      "impactAreas": *[_type == "impactArea"] | order(_createdAt asc),
+      "callToAction": *[_type == "callToAction"][0]
+    }`);
+    return data;
+  } catch (err) {
+    console.error("Failed to fetch Impact Data:", err);
+    return null;
+  }
+}
+
+export default async function ImpactPage() {
+  const sanityData = await getSanityImpactData();
+
+  const data = {
+    ...impactData,
+    hero: {
+      ...impactData.hero,
+      heading: sanityData?.impactPage?.heroHeading || impactData.hero.heading,
+      subtext: sanityData?.impactPage?.heroSubtext || impactData.hero.subtext,
+    },
+    introTitle: sanityData?.impactPage?.introTitle || impactData.introTitle,
+    introSubtext: sanityData?.impactPage?.introSubtext || impactData.introSubtext,
+    areasTitle: sanityData?.impactPage?.areasTitle || impactData.areasTitle,
+    stats: sanityData?.impactStats?.length > 0 
+      ? sanityData.impactStats.map((stat: any) => ({
+          id: stat._id,
+          value: stat.value,
+          label: stat.label,
+          iconName: stat.iconName || "heart-handshake"
+        }))
+      : impactData.stats,
+    impactAreas: sanityData?.impactAreas?.length > 0
+      ? sanityData.impactAreas.map((area: any) => ({
+          id: area._id,
+          title: area.title,
+          description: area.description,
+          methodology: area.methodology || [],
+          iconName: area.iconName || "landmark"
+        }))
+      : impactData.impactAreas,
+    cta: {
+      ...impactData.cta,
+      heading: sanityData?.callToAction?.heading || impactData.cta.heading,
+      subtext: sanityData?.callToAction?.description || impactData.cta.subtext,
+      primaryCTA: {
+        label: sanityData?.callToAction?.primaryLabel || impactData.cta.primaryCTA.label,
+        href: sanityData?.callToAction?.primaryHref || impactData.cta.primaryCTA.href,
+      }
+    }
+  };
+
   return (
     <main className="min-h-screen bg-gray-50 pt-24 font-sans selection:bg-secondary/30 selection:text-gray-900 overflow-x-hidden">
       
@@ -28,7 +100,7 @@ export default function ImpactPage() {
       <section className="relative overflow-hidden bg-[#050505] py-24 lg:py-32">
         <div className="absolute inset-0">
           <Image 
-            src={impactData.hero.imageRef} 
+            src={data.hero.imageRef} 
             alt="Impact Hero" 
             fill 
             className="object-cover opacity-30 mix-blend-overlay grayscale"
@@ -45,10 +117,10 @@ export default function ImpactPage() {
             <span className="w-12 h-px bg-secondary opacity-50" />
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight mb-8 leading-tight break-words hyphens-auto">
-            {impactData.hero.heading}
+            {data.hero.heading}
           </h1>
           <p className="text-xl md:text-2xl text-gray-400 font-light max-w-4xl mx-auto leading-relaxed">
-            {impactData.hero.subtext}
+            {data.hero.subtext}
           </p>
         </div>
       </section>
@@ -59,15 +131,15 @@ export default function ImpactPage() {
           
           <div className="text-center mb-20 max-w-3xl mx-auto">
             <h2 className="text-4xl lg:text-5xl font-black text-white mb-6 tracking-tight">
-              {impactData.introTitle}
+              {data.introTitle}
             </h2>
             <p className="text-xl text-gray-400 font-light leading-relaxed">
-              {impactData.introSubtext}
+              {data.introSubtext}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {impactData.stats.map((stat) => (
+            {data.stats.map((stat: any) => (
               <div 
                 key={stat.id} 
                 className="group bg-white/5 backdrop-blur-md rounded-[2.5rem] p-10 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all duration-700 hover:-translate-y-2 flex flex-col items-center text-center relative overflow-hidden"
@@ -105,12 +177,12 @@ export default function ImpactPage() {
               <span className="w-12 h-px bg-primary opacity-50" />
             </div>
             <h2 className="text-5xl lg:text-6xl font-black text-gray-900 tracking-tight leading-tight">
-              {impactData.areasTitle}
+              {data.areasTitle}
             </h2>
           </div>
 
           <div className="space-y-12">
-            {impactData.impactAreas.map((area, index) => (
+            {data.impactAreas.map((area: any, index: number) => (
               <div 
                 key={area.id} 
                 className="bg-white rounded-[3rem] p-10 sm:p-16 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-700 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 group relative overflow-hidden"
@@ -137,7 +209,7 @@ export default function ImpactPage() {
                     Execution Methodology
                   </h4>
                   <ul className="space-y-6">
-                    {area.methodology.map((method, idx) => (
+                    {area.methodology.map((method: string, idx: number) => (
                       <li key={idx} className="flex items-start gap-4 group/item">
                         <CheckCircle2 className="w-6 h-6 text-primary/40 mt-1 flex-shrink-0 group-hover/item:text-primary group-hover/item:scale-110 transition-all duration-300" />
                         <span className="text-lg text-gray-700 font-medium leading-relaxed group-hover/item:text-gray-900 transition-colors duration-300">
@@ -161,16 +233,16 @@ export default function ImpactPage() {
 
         <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
           <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
-            {impactData.cta.heading}
+            {data.cta.heading}
           </h2>
           <p className="text-xl md:text-2xl text-gray-400 mb-12 font-light leading-relaxed">
-            {impactData.cta.subtext}
+            {data.cta.subtext}
           </p>
           <Link 
-            href={impactData.cta.primaryCTA.href}
+            href={data.cta.primaryCTA.href}
             className="inline-flex items-center px-10 py-5 bg-secondary text-white font-bold rounded-full hover:bg-white hover:text-gray-900 transition-all duration-500 transform hover:scale-105 shadow-[0_10px_40px_-10px_rgba(226,173,0,0.4)] text-lg group"
           >
-            {impactData.cta.primaryCTA.label}
+            {data.cta.primaryCTA.label}
             <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>

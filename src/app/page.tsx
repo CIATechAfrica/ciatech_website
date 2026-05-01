@@ -38,7 +38,7 @@ async function getSanityHomeData() {
       "corePillars": *[_type == "corePillar"],
       "solutions": *[_type == "solution"],
       "initiatives": *[_type == "initiative"],
-      "impactStats": *[_type == "impactStat"],
+      "impactStats": *[_type == "impactStat"] | order(_createdAt asc),
       "callToAction": *[_type == "callToAction"][0]
     }`);
     return data;

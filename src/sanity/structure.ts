@@ -13,6 +13,7 @@ export const structure: StructureResolver = (S) =>
               S.documentTypeListItem('homePage').title('Homepage'),
               S.documentTypeListItem('aboutPage').title('About Page'),
               S.documentTypeListItem('solutionsPage').title('Solutions Page'),
+              S.documentTypeListItem('impactPage').title('Impact Page'),
               S.documentTypeListItem('aboutSection').title('Homepage About Section'),
               S.documentTypeListItem('contactInformation').title('Contact Info'),
               S.documentTypeListItem('callToAction').title('Call To Action'),
@@ -29,6 +30,7 @@ export const structure: StructureResolver = (S) =>
               S.documentTypeListItem('solution').title('Solutions'),
               S.documentTypeListItem('initiative').title('Initiatives'),
               S.documentTypeListItem('impactStat').title('Impact Stats'),
+              S.documentTypeListItem('impactArea').title('Impact Areas'),
               S.documentTypeListItem('partnerLogo').title('Partner Logos'),
               S.documentTypeListItem('teamMember').title('Team Members'),
             ])
