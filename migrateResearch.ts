@@ -50,11 +50,10 @@ async function migrate() {
       _id: `research-${researchData.featured.id}`,
       _type: 'researchPublication',
       title: researchData.featured.title,
-      summary: researchData.featured.summary,
+      fullDescription: researchData.featured.fullDescription,
       category: researchData.featured.category,
       date: researchData.featured.date,
       imageRef: researchData.featured.imageRef,
-      pdfUrl: researchData.featured.pdfUrl,
       iconName: 'book-open', // Fallback icon
       isFeatured: true,
     };
@@ -67,11 +66,10 @@ async function migrate() {
         _id: `research-${pub.id}`,
         _type: 'researchPublication',
         title: pub.title,
-        summary: pub.summary,
+        fullDescription: pub.fullDescription,
         category: pub.category,
         date: pub.date,
         imageRef: pub.imageRef,
-        pdfUrl: pub.pdfUrl,
         iconName: 'file-text', // Fallback icon
         isFeatured: false,
       };
