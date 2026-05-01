@@ -39,7 +39,12 @@ async function getSanityHomeData() {
       "solutions": *[_type == "solution"],
       "initiatives": *[_type == "researchPublication"] | order(_createdAt asc),
       "impactStats": *[_type == "impactStat"] | order(_createdAt asc),
-      "callToAction": *[_type == "callToAction"][0]
+      "callToAction": *[_type == "callToAction"][0],
+      "galleryPage": *[_type == "galleryPage"][0],
+      "galleryImages": *[_type == "galleryImage" && isHubVisible == true] | order(_createdAt asc){
+        ...,
+        "imageRef": image.asset->url
+      }
     }`);
     return data;
   } catch (error) {
@@ -83,6 +88,12 @@ export default async function Home() {
     impactStats: {
       ...homeData.impactStats,
       stats: sanityData?.impactStats?.length > 0 ? sanityData.impactStats : homeData.impactStats?.stats || [],
+    },
+    galleryTeaser: {
+      ...homeData.galleryTeaser,
+      heading: sanityData?.galleryPage?.heroHeading || homeData.galleryTeaser.heading,
+      subtext: sanityData?.galleryPage?.heroSubtext || homeData.galleryTeaser.subtext,
+      images: sanityData?.galleryImages?.length > 0 ? sanityData.galleryImages : homeData.galleryTeaser.images,
     },
     cta: {
       ...homeData.cta,

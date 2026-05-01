@@ -36,8 +36,8 @@ export default function GallerySection({ data }: GalleryProps) {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:grid-flow-row-dense">
           {data.images.map((img) => (
             <div 
-              key={img.id} 
-              className={`relative rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-500 bg-gray-100 min-h-[300px] ${img.span || "col-span-1 h-64"}`}
+              key={img._id || img.id} 
+              className={`relative rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-500 bg-gray-100 min-h-[300px] ${img.gridSize || "col-span-1"}`}
             >
               <Image 
                 src={img.imageRef} 

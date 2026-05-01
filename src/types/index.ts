@@ -344,11 +344,13 @@ export interface ContactPageData {
 
 export interface GalleryItem {
   id: string;
+  _id?: string;
   title: string;
   imageRef: string;
   location?: string;
   date?: string;
-  span?: string;
+  gridSize?: string;
+  isHubVisible?: boolean;
   description?: string;
   className?: string;
 }
