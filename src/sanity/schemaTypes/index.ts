@@ -18,6 +18,7 @@ import { impactAreaType } from './impactAreaType'
 import { impactPageType } from './impactPageType'
 import { researchPageType } from './researchPageType'
 import { galleryPageType } from './galleryPageType'
+import { blogPageType } from './blogPageType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -39,6 +40,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     impactAreaType,
     impactPageType,
     researchPageType,
-    galleryPageType
+    galleryPageType,
+    blogPageType
   ],
 }

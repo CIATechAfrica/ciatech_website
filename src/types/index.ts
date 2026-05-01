@@ -367,6 +367,7 @@ export interface GalleryPageData {
 
 export interface BlogPost {
   id: string;
+  _id?: string;
   title: string;
   snippet: string;
   content: string; // The full article body
