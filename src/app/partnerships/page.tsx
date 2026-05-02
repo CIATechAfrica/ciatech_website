@@ -162,7 +162,7 @@ export default async function PartnershipsPage() {
                 cat.logos.length > 0 && (
                   <div key={index} className="relative">
                     <div className="mb-10 text-center sm:text-left flex items-center gap-6">
-                      <h3 className="text-3xl font-black text-gray-900 whitespace-nowrap">{cat.title}</h3>
+                      <h3 className="text-3xl font-black text-gray-900">{cat.title}</h3>
                       <div className="h-px bg-gray-200 hidden sm:block w-full"></div>
                     </div>
                     <p className="text-gray-500 mb-8 text-lg sm:text-left text-center">{cat.description}</p>
@@ -194,7 +194,7 @@ export default async function PartnershipsPage() {
               data.directory.map((categoryData, index) => (
                 <div key={index} className="relative">
                   <div className="mb-10 text-center sm:text-left flex items-center gap-6">
-                    <h3 className="text-3xl font-black text-gray-900 whitespace-nowrap">{categoryData.category}</h3>
+                    <h3 className="text-3xl font-black text-gray-900">{categoryData.category}</h3>
                     <div className="h-px bg-gray-200 hidden sm:block w-full"></div>
                   </div>
                   <p className="text-gray-500 mb-8 text-lg sm:text-left text-center">{categoryData.description}</p>
