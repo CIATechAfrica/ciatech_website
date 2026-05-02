@@ -179,7 +179,7 @@ export default async function PartnershipsPage() {
                                 src={urlForImage(logo.logo)?.url() || ""} 
                                 alt={logo.name} 
                                 fill
-                                className="object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 p-2" 
+                                className="object-contain filter opacity-100 md:grayscale md:opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 p-2" 
                               />
                             ) : null}
                           </div>
@@ -210,7 +210,7 @@ export default async function PartnershipsPage() {
                             src={logo.imageRef!} 
                             alt={logo.name} 
                             fill
-                            className="object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 p-2" 
+                            className="object-contain filter opacity-100 md:grayscale md:opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 p-2" 
                           />
                         </div>
                       </div>

@@ -128,7 +128,7 @@ export default function PartnershipsTeaser({ data }: PartnershipsTeaserProps) {
                     src={partner.imageRef} 
                     alt={partner.name} 
                     fill
-                    className="object-contain filter grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 p-2" 
+                    className="object-contain filter opacity-100 md:grayscale md:opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 p-2" 
                   />
                 </div>
               </div>
