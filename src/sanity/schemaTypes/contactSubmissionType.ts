@@ -61,8 +61,11 @@ export const contactSubmissionType = defineType({
       date: 'submittedAt',
     },
     prepare({ title, subtitle, status, date }) {
+      const isUnread = status === 'unread';
+      const statusIcon = isUnread ? '🔵' : status === 'replied' ? '✅' : '📖';
+      
       return {
-        title: `${title} (${status})`,
+        title: `${statusIcon} ${title || 'Unknown Sender'}`,
         subtitle: `${new Date(date).toLocaleDateString()} - ${subtitle}`,
       }
     },

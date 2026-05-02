@@ -14,7 +14,6 @@ const writeClient = createClient({
 });
 
 // Initialize Resend
-// Note: If RESEND_API_KEY is not set, Resend will throw an error when used.
 const resend = new Resend(process.env.RESEND_API_KEY || "re_mock_key");
 
 // The default "from" address. In production, this MUST be a verified domain on your Resend account.
@@ -42,23 +41,31 @@ export async function submitContactForm(formData: FormData) {
     // 1. Save to Sanity
     await writeClient.create(data);
     
-    // 2. Send Emails (Only if API key exists to prevent crashing locally)
+    // 2. Send Emails
     if (process.env.RESEND_API_KEY) {
       // Send auto-reply to user
-      await resend.emails.send({
-        from: FROM_EMAIL,
-        to: data.email,
-        subject: "We've received your message - CIATECH",
-        html: contactReceivedEmail(data.name),
-      });
+      try {
+        await resend.emails.send({
+          from: FROM_EMAIL,
+          to: data.email,
+          subject: "We've received your message - CIATECH",
+          html: contactReceivedEmail(data.name),
+        });
+      } catch (e) {
+        console.error("Failed to send auto-reply to user. In testing mode, this fails if they enter an unverified email.", e);
+      }
 
       // Send notification to admin
-      await resend.emails.send({
-        from: FROM_EMAIL,
-        to: ADMIN_EMAIL,
-        subject: `New Contact Inquiry: ${data.subject}`,
-        html: adminNotificationEmail("Contact Inquiry", `Name: ${data.name}<br/>Email: ${data.email}<br/>Company: ${data.company}<br/>Message: ${data.message}`),
-      });
+      try {
+        await resend.emails.send({
+          from: FROM_EMAIL,
+          to: ADMIN_EMAIL,
+          subject: `New Contact Inquiry: ${data.subject}`,
+          html: adminNotificationEmail("Contact Inquiry", `Name: ${data.name}<br/>Email: ${data.email}<br/>Company: ${data.company}<br/>Message: ${data.message}`),
+        });
+      } catch (e) {
+        console.error("Failed to send admin notification email.", e);
+      }
     }
     
     return { success: true };
@@ -93,20 +100,28 @@ export async function submitApplication(formData: FormData) {
     // 2. Send Emails
     if (process.env.RESEND_API_KEY) {
       // Send auto-reply to user
-      await resend.emails.send({
-        from: FROM_EMAIL,
-        to: data.email,
-        subject: "Application Received - CIATECH",
-        html: applicationReceivedEmail(data.name, data.roleAppliedFor),
-      });
+      try {
+        await resend.emails.send({
+          from: FROM_EMAIL,
+          to: data.email,
+          subject: "Application Received - CIATECH",
+          html: applicationReceivedEmail(data.name, data.roleAppliedFor),
+        });
+      } catch (e) {
+        console.error("Failed to send auto-reply to user.", e);
+      }
 
       // Send notification to admin
-      await resend.emails.send({
-        from: FROM_EMAIL,
-        to: ADMIN_EMAIL,
-        subject: `New Application: ${data.roleAppliedFor}`,
-        html: adminNotificationEmail("Application", `Name: ${data.name}<br/>Email: ${data.email}<br/>Role: ${data.roleAppliedFor}<br/>LinkedIn: ${data.portfolioUrl}`),
-      });
+      try {
+        await resend.emails.send({
+          from: FROM_EMAIL,
+          to: ADMIN_EMAIL,
+          subject: `New Application: ${data.roleAppliedFor}`,
+          html: adminNotificationEmail("Application", `Name: ${data.name}<br/>Email: ${data.email}<br/>Role: ${data.roleAppliedFor}<br/>LinkedIn: ${data.portfolioUrl}`),
+        });
+      } catch (e) {
+         console.error("Failed to send admin notification email.", e);
+      }
     }
 
     return { success: true };
@@ -136,20 +151,28 @@ export async function submitNewsletter(formData: FormData) {
     // 2. Send Email
     if (process.env.RESEND_API_KEY) {
       // Send welcome to user
-      await resend.emails.send({
-        from: FROM_EMAIL,
-        to: data.email,
-        subject: "Welcome to CIATECH Updates",
-        html: newsletterWelcomeEmail(),
-      });
+      try {
+        await resend.emails.send({
+          from: FROM_EMAIL,
+          to: data.email,
+          subject: "Welcome to CIATECH Updates",
+          html: newsletterWelcomeEmail(),
+        });
+      } catch(e) {
+        console.error("Failed to send welcome email.", e);
+      }
 
       // Optional: notify admin
-      await resend.emails.send({
-        from: FROM_EMAIL,
-        to: ADMIN_EMAIL,
-        subject: `New Newsletter Subscriber`,
-        html: adminNotificationEmail("Newsletter Sign-up", `Email: ${data.email}`),
-      });
+      try {
+        await resend.emails.send({
+          from: FROM_EMAIL,
+          to: ADMIN_EMAIL,
+          subject: `New Newsletter Subscriber`,
+          html: adminNotificationEmail("Newsletter Sign-up", `Email: ${data.email}`),
+        });
+      } catch(e) {
+        console.error("Failed to send admin notification email.", e);
+      }
     }
 
     return { success: true };

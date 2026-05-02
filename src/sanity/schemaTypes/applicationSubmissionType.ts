@@ -65,11 +65,19 @@ export const applicationSubmissionType = defineType({
       title: 'name',
       subtitle: 'roleAppliedFor',
       status: 'status',
+      date: 'submittedAt',
     },
-    prepare({ title, subtitle, status }) {
+    prepare({ title, subtitle, status, date }) {
+      let icon = '📩';
+      if (status === 'accepted') icon = '🎉';
+      if (status === 'rejected') icon = '❌';
+      if (status === 'interviewing') icon = '🗣️';
+      if (status === 'reviewing') icon = '👀';
+      if (status === 'new') icon = '🔵';
+
       return {
-        title: `${title} (${status})`,
-        subtitle: subtitle,
+        title: `${icon} ${title || 'Unknown Applicant'}`,
+        subtitle: `${subtitle} | ${date ? new Date(date).toLocaleDateString() : 'No date'}`,
       }
     },
   },
