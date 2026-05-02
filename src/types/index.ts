@@ -189,6 +189,7 @@ export interface HomeData {
     links: LinkRef[];
     socials: SocialLink[];
   };
+  headerLinks: NavItem[];
 }
 
 export interface CollaborativeModel {
