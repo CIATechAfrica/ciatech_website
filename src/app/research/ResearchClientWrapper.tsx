@@ -34,55 +34,58 @@ export default function ResearchClientWrapper({ featured, publications, publicat
       {/* 2. THE SPOTLIGHT FEATURE */}
       {featured && (
         <section className="relative -mt-20 z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-[3rem] p-4 sm:p-6 shadow-2xl border border-gray-100 group overflow-hidden">
-            <div className="grid lg:grid-cols-2 gap-8 items-center bg-gray-50 rounded-[2.5rem] p-8 sm:p-14 border border-white relative overflow-hidden">
-              {/* Soft Ambient Light inside Card */}
-              <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
-
-              <div className="relative z-10 space-y-6">
-                <div className="flex items-center gap-4">
-                  <span className="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
-                    Featured Paper
-                  </span>
-                  <span className="text-sm font-bold text-gray-400 uppercase tracking-widest">
-                    {featured.category} • {featured.date}
-                  </span>
-                </div>
-                <h2 className="text-3xl sm:text-5xl font-black text-gray-900 tracking-tight leading-tight">
-                  {featured.title}
-                </h2>
-                <p className="text-lg text-gray-600 leading-relaxed font-light line-clamp-3">
-                  {featured.fullDescription}
-                </p>
-                
-                <div className="pt-4 flex items-center gap-4">
-                  <button 
-                    onClick={() => setReadingItem(featured)}
-                    className="inline-flex items-center px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-primary transition-all duration-300 transform hover:scale-105 shadow-md shadow-gray-900/10 group/btn"
-                  >
-                    <BookOpen className="w-5 h-5 mr-3" />
-                    Read Executive Summary
-                  </button>
-                  <button 
-                    onClick={(e) => handleDownload(e, featured)}
-                    className="w-14 h-14 rounded-full bg-white border-2 border-gray-100 flex items-center justify-center text-gray-900 hover:border-primary hover:text-primary transition-all duration-300 hover:scale-110"
-                    title="Download Full PDF"
-                  >
-                    <Download className="w-5 h-5" />
-                  </button>
-                </div>
+          <div className="group relative bg-white rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-100 flex flex-col lg:flex-row hover:-translate-y-2 transition-all duration-500">
+            {/* Featured Image (Left side) */}
+            <div className="relative w-full lg:w-1/2 h-[400px] lg:h-[500px]">
+              <Image 
+                src={featured.imageRef || "/images/hero.png"}
+                alt={featured.title}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute top-6 left-6 z-10">
+                <span className="bg-primary text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full shadow-md">
+                  Featured Paper
+                </span>
               </div>
+            </div>
 
-              <div className="relative h-[400px] lg:h-[500px] w-full rounded-[2rem] overflow-hidden shadow-xl border border-white/50 group-hover:shadow-2xl transition-all duration-700">
-                <Image 
-                  src={featured.imageRef || "/images/hero.png"}
-                  alt={featured.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+            {/* Featured Content Area */}
+            <div className="w-full lg:w-1/2 p-8 sm:p-12 lg:p-16 flex flex-col justify-center bg-gray-50/50">
+              <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-gray-400 mb-6">
+                <span className="px-3 py-1 rounded-full bg-primary/10 text-primary">
+                  {featured.category}
+                </span>
+                <span className="w-1 h-1 rounded-full bg-gray-300" />
+                <span>{featured.date}</span>
               </div>
-
+              
+              <h2 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight leading-tight mb-6 group-hover:text-primary transition-colors duration-300">
+                {featured.title}
+              </h2>
+              
+              <p className="text-lg text-gray-600 font-light leading-relaxed mb-8 line-clamp-3">
+                {featured.fullDescription}
+              </p>
+              
+              <div className="mt-auto flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <button 
+                  onClick={() => setReadingItem(featured)}
+                  className="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3.5 bg-gray-900 text-white font-bold rounded-full hover:bg-primary transition-all duration-300 shadow-md shadow-gray-900/10 group/btn"
+                >
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  Read Executive Summary
+                </button>
+                <button 
+                  onClick={(e) => handleDownload(e, featured)}
+                  className="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3.5 bg-white border border-gray-200 text-gray-900 font-bold rounded-full hover:border-primary hover:text-primary transition-all duration-300 shadow-sm"
+                  title="Download Full PDF"
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Download PDF
+                </button>
+              </div>
             </div>
           </div>
         </section>

@@ -239,24 +239,24 @@ export default function BlogClientWrapper({ data }: BlogClientWrapperProps) {
                   </p>
                 </div>
 
-                <div className="mt-16 flex justify-center gap-4">
+                <div className="mt-16 flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 sm:gap-4">
                   <button 
                     onClick={showPrev}
-                    className="inline-flex justify-center items-center px-6 py-4 bg-gray-100 text-gray-600 font-bold rounded-xl hover:bg-gray-200 transition-colors"
+                    className="w-full sm:w-auto inline-flex justify-center items-center px-4 sm:px-6 py-3 sm:py-4 bg-gray-100 text-gray-600 font-bold rounded-xl hover:bg-gray-200 transition-colors order-2 sm:order-1 text-sm sm:text-base"
                   >
-                    <ChevronLeft className="w-5 h-5 mr-2" /> Previous
+                    <ChevronLeft className="w-5 h-5 mr-1 sm:mr-2" /> Previous
                   </button>
                   <button 
                     onClick={() => setActiveIndex(null)}
-                    className="inline-flex justify-center items-center px-10 py-4 bg-gray-900 text-white font-bold rounded-xl hover:bg-primary transition-colors shadow-md"
+                    className="w-full sm:w-auto inline-flex justify-center items-center px-6 sm:px-10 py-3 sm:py-4 bg-gray-900 text-white font-bold rounded-xl hover:bg-primary transition-colors shadow-md order-1 sm:order-2 text-sm sm:text-base"
                   >
                     Return to Feed
                   </button>
                   <button 
                     onClick={showNext}
-                    className="inline-flex justify-center items-center px-6 py-4 bg-gray-100 text-gray-600 font-bold rounded-xl hover:bg-gray-200 transition-colors"
+                    className="w-full sm:w-auto inline-flex justify-center items-center px-4 sm:px-6 py-3 sm:py-4 bg-gray-100 text-gray-600 font-bold rounded-xl hover:bg-gray-200 transition-colors order-3 text-sm sm:text-base"
                   >
-                    Next <ChevronRight className="w-5 h-5 ml-2" />
+                    Next <ChevronRight className="w-5 h-5 ml-1 sm:ml-2" />
                   </button>
                 </div>
               </div>
