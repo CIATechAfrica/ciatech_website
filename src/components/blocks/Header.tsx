@@ -17,6 +17,27 @@ export default function Header({ navLinks, primaryCTA }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (pathname === "/") {
+      const targetId = href.startsWith("/") ? href.slice(1) : href;
+      const el = document.getElementById(targetId);
+      
+      if (el) {
+        e.preventDefault();
+        const headerOffset = 100;
+        const elementPosition = el.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+  
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }
+    // Close mobile menu regardless
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <header className="fixed top-6 w-full z-50 px-4 sm:px-6 lg:px-8 transition-all duration-500">
       <div className="max-w-7xl mx-auto bg-white/95 backdrop-blur-xl border border-gray-100/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-full px-6 py-3">
@@ -45,6 +66,7 @@ export default function Header({ navLinks, primaryCTA }: HeaderProps) {
                   ) : (
                     <Link 
                       href={link.href || "#"}
+                      onClick={(e) => link.href && handleNavClick(e, link.href)}
                       className={`relative flex items-center px-4 py-2 hover:text-primary transition-colors font-bold text-sm ${isActive ? "text-primary" : "text-gray-700"}`}
                     >
                       {link.label}
@@ -60,6 +82,7 @@ export default function Header({ navLinks, primaryCTA }: HeaderProps) {
                           <Link 
                             key={sub.label}
                             href={sub.href}
+                            onClick={(e) => handleNavClick(e, sub.href)}
                             className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${pathname === sub.href ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'}`}
                           >
                             {sub.label}
@@ -77,6 +100,7 @@ export default function Header({ navLinks, primaryCTA }: HeaderProps) {
           <div className="flex items-center justify-end flex-grow sm:flex-grow-0 ml-4 gap-4">
             <Link 
               href={primaryCTA.href}
+              onClick={(e) => handleNavClick(e, primaryCTA.href)}
               className="hidden md:flex px-7 py-3 rounded-full bg-primary text-white font-bold text-sm hover:bg-[#7a4812] hover:shadow-xl hover:shadow-primary/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 border border-transparent hover:border-secondary/20"
             >
               {primaryCTA.label}
@@ -117,7 +141,7 @@ export default function Header({ navLinks, primaryCTA }: HeaderProps) {
                   ) : (
                     <Link 
                       href={link.href || "#"}
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={(e) => link.href && handleNavClick(e, link.href)}
                       className={`text-base font-bold px-4 py-3 rounded-xl transition-colors shrink-0 ${isActive ? "bg-primary/10 text-primary" : "text-gray-700 hover:bg-gray-50"}`}
                     >
                       {link.label}
@@ -131,7 +155,7 @@ export default function Header({ navLinks, primaryCTA }: HeaderProps) {
                         <Link 
                           key={sub.label}
                           href={sub.href}
-                          onClick={() => setIsMobileMenuOpen(false)}
+                          onClick={(e) => handleNavClick(e, sub.href)}
                           className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${pathname === sub.href ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50'}`}
                         >
                           {sub.label}
@@ -146,7 +170,7 @@ export default function Header({ navLinks, primaryCTA }: HeaderProps) {
             <div className="pt-3 mt-1 border-t border-gray-100 md:hidden flex justify-center shrink-0">
               <Link 
                 href={primaryCTA.href}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => handleNavClick(e, primaryCTA.href)}
                 className="w-full text-center px-7 py-3 rounded-xl bg-primary text-white font-bold text-base hover:bg-[#7a4812] transition-colors shadow-md"
               >
                 {primaryCTA.label}

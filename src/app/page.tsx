@@ -118,13 +118,13 @@ export default async function Home() {
   return (
     <>
       <HeroBanner data={data.hero} />
-      <AboutSection data={data.about} />
+      <div id="about"><AboutSection data={data.about} /></div>
       <CorePillarsTeaser data={data.corePillarsTeaser} />
-      <SolutionsTeaser data={data.solutionsTeaser} />
-      <InitiativesGrid data={data.initiatives} />
-      <ImpactStatsGrid data={data.impactStats} />
-      <GallerySection data={data.galleryTeaser} />
-      <PartnershipsTeaser data={data.partnerships} />
+      <div id="solutions"><SolutionsTeaser data={data.solutionsTeaser} /></div>
+      <div id="research"><InitiativesGrid data={data.initiatives} /></div>
+      <div id="impact"><ImpactStatsGrid data={data.impactStats} /></div>
+      <div id="gallery"><GallerySection data={data.galleryTeaser} /></div>
+      <div id="partnerships"><PartnershipsTeaser data={data.partnerships} /></div>
       <CTASection data={data.cta} />
     </>
   );
