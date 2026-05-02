@@ -21,6 +21,9 @@ import { galleryPageType } from './galleryPageType'
 import { blogPageType } from './blogPageType'
 import { opportunitiesPageType } from './opportunitiesPageType'
 import { partnershipsPageType } from './partnershipsPageType'
+import { contactSubmissionType } from './contactSubmissionType'
+import { applicationSubmissionType } from './applicationSubmissionType'
+import { newsletterSubscriberType } from './newsletterSubscriberType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -45,6 +48,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     galleryPageType,
     blogPageType,
     opportunitiesPageType,
-    partnershipsPageType
+    partnershipsPageType,
+    contactSubmissionType,
+    applicationSubmissionType,
+    newsletterSubscriberType
   ],
 }

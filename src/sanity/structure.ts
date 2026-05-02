@@ -107,6 +107,19 @@ export const structure: StructureResolver = (S) =>
       S.divider(),
 
       S.listItem()
+        .title('📥 Inbox & Submissions')
+        .child(
+          S.list()
+            .title('Inbox & Submissions')
+            .items([
+              S.documentTypeListItem('contactSubmission').title('Contact Messages'),
+              S.documentTypeListItem('applicationSubmission').title('Opportunity Applications'),
+              S.documentTypeListItem('newsletterSubscriber').title('Newsletter Subscribers'),
+            ])
+        ),
+      S.divider(),
+
+      S.listItem()
         .title('⚙️ Global Settings')
         .child(
           S.list()

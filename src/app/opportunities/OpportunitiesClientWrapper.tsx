@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpRight, MapPin, Briefcase, Lightbulb, X, UploadCloud, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, MapPin, Briefcase, Lightbulb, X, UploadCloud, CheckCircle2, Loader2, XCircle } from "lucide-react";
 import { OpenRole } from "@/types";
+import { submitApplication } from "@/app/actions";
 
 function RoleCard({ role, icon: Icon, onApply }: { role: OpenRole; icon: React.ElementType; onApply: () => void }) {
   return (
@@ -48,13 +49,17 @@ function RoleCard({ role, icon: Icon, onApply }: { role: OpenRole; icon: React.E
 
 export default function OpportunitiesClientWrapper({ data }: { data: any }) {
   const [selectedRole, setSelectedRole] = useState<OpenRole | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleApplyClick = (role: OpenRole) => {
     setSelectedRole(role);
     setIsSubmitted(false);
+    setIsSubmitting(false);
     setFileName(null);
+    setErrorMessage('');
   };
 
   const closeModal = () => {
@@ -67,14 +72,25 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
     }
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // In a real application, submit the FormData to a backend payload here.
-    setIsSubmitted(true);
-    // Auto-close modal after 3 seconds showing the success view.
-    setTimeout(() => {
-      closeModal();
-    }, 3000);
+    setIsSubmitting(true);
+    setErrorMessage('');
+    
+    const formData = new FormData(e.currentTarget);
+    const result = await submitApplication(formData);
+    
+    if (result.success) {
+      setIsSubmitted(true);
+      // Auto-close modal after 3 seconds showing the success view.
+      setTimeout(() => {
+        closeModal();
+      }, 3000);
+    } else {
+      setErrorMessage(result.error || 'Failed to submit application.');
+    }
+    
+    setIsSubmitting(false);
   };
 
   return (
@@ -192,11 +208,21 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
                 </div>
               ) : (
                 <form className="space-y-6" onSubmit={handleFormSubmit}>
+                  {errorMessage && (
+                    <div className="bg-red-50 text-red-600 px-4 py-3 rounded-xl text-sm flex items-start gap-3">
+                      <XCircle className="w-5 h-5 shrink-0" />
+                      <span>{errorMessage}</span>
+                    </div>
+                  )}
+
+                  <input type="hidden" name="role" value={selectedRole.title} />
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">Full Name</label>
                       <input 
                         type="text" 
+                        name="name"
                         required
                         className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900"
                         placeholder="Jane Doe"
@@ -206,6 +232,7 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
                       <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">Email Address</label>
                       <input 
                         type="email" 
+                        name="email"
                         required
                         className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900"
                         placeholder="jane@example.com"
@@ -217,6 +244,7 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
                     <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">LinkedIn / Portfolio URL</label>
                     <input 
                       type="url" 
+                      name="portfolio"
                       required
                       className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900"
                       placeholder="https://linkedin.com/in/..."
@@ -230,7 +258,6 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
                       <input 
                         type="file" 
                         accept="application/pdf"
-                        required
                         onChange={handleFileChange}
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                         title="Upload PDF Resume"
@@ -247,6 +274,7 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">Brief Pitch</label>
                     <textarea 
+                      name="coverLetter"
                       required
                       rows={3}
                       className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900 resize-none"
@@ -258,15 +286,17 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
                     <button 
                       type="button"
                       onClick={closeModal}
-                      className="px-6 py-4 rounded-xl font-bold text-gray-500 hover:bg-gray-50 transition-colors"
+                      disabled={isSubmitting}
+                      className="px-6 py-4 rounded-xl font-bold text-gray-500 hover:bg-gray-50 transition-colors disabled:opacity-50"
                     >
                       Cancel
                     </button>
                     <button 
                       type="submit"
-                      className="px-8 py-4 rounded-xl bg-gray-900 text-white font-bold hover:bg-primary transition-all shadow-md active:scale-95"
+                      disabled={isSubmitting}
+                      className="px-8 py-4 rounded-xl bg-gray-900 text-white font-bold hover:bg-primary transition-all shadow-md active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed flex items-center"
                     >
-                      Submit Profile
+                      {isSubmitting ? <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Submitting...</> : "Submit Profile"}
                     </button>
                   </div>
                 </form>
