@@ -116,7 +116,7 @@ export default async function PartnershipsPage() {
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight mb-8 break-words hyphens-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight mb-8">
             {data.hero.heading}
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">
@@ -171,7 +171,7 @@ export default async function PartnershipsPage() {
                       {cat.logos.map((logo) => (
                         <div 
                           key={logo._id || logo.id} 
-                          className="group aspect-video bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-center p-8 hover:shadow-xl hover:border-gray-200 transition-all duration-300"
+                          className="group aspect-video bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-center p-4 sm:p-6 hover:shadow-xl hover:border-gray-200 transition-all duration-300"
                         >
                           <div className="relative w-full h-full flex items-center justify-center">
                             {logo.logo && urlForImage(logo.logo) ? (
@@ -179,7 +179,7 @@ export default async function PartnershipsPage() {
                                 src={urlForImage(logo.logo)?.url() || ""} 
                                 alt={logo.name} 
                                 fill
-                                className="object-contain filter opacity-100 md:grayscale md:opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 p-2" 
+                                className="object-contain filter opacity-100 md:grayscale md:opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" 
                               />
                             ) : null}
                           </div>
@@ -203,14 +203,14 @@ export default async function PartnershipsPage() {
                     {categoryData.logos.map((logo) => (
                       <div 
                         key={logo.id} 
-                        className="group aspect-video bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-center p-8 hover:shadow-xl hover:border-gray-200 transition-all duration-300"
+                        className="group aspect-video bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-center p-4 sm:p-6 hover:shadow-xl hover:border-gray-200 transition-all duration-300"
                       >
                         <div className="relative w-full h-full flex items-center justify-center">
                           <Image 
                             src={logo.imageRef!} 
                             alt={logo.name} 
                             fill
-                            className="object-contain filter opacity-100 md:grayscale md:opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 p-2" 
+                            className="object-contain filter opacity-100 md:grayscale md:opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" 
                           />
                         </div>
                       </div>
