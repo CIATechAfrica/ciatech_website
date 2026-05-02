@@ -215,8 +215,7 @@ export const homeData: HomeData = {
       { label: "Research", href: "/research" },
       { label: "Opportunities", href: "/opportunities" },
       { label: "Gallery", href: "/gallery" },
-      { label: "Newsroom", href: "/blog" },
-      { label: "Contact", href: "/contact" }
+      { label: "Newsroom", href: "/blog" }
     ],
     socials: [
       { id: "1", platform: "LinkedIn", href: "#", iconName: "linkedin" },
@@ -226,5 +225,32 @@ export const homeData: HomeData = {
       { id: "5", platform: "TikTok", href: "#", iconName: "tiktok" },
       { id: "6", platform: "Snapchat", href: "#", iconName: "snapchat" }
     ]
-  }
+  },
+  headerLinks: [
+    {
+      label: "About",
+      subLinks: [
+        { label: "Who We Are", href: "/about" },
+        { label: "Our Impact", href: "/impact" }
+      ]
+    },
+    {
+      label: "Our Work",
+      subLinks: [
+        { label: "Solutions", href: "/solutions" },
+        { label: "Research & Insights", href: "/research" }
+      ]
+    },
+    {
+      label: "Media",
+      subLinks: [
+        { label: "Newsroom", href: "/blog" },
+        { label: "Gallery", href: "/gallery" }
+      ]
+    },
+    {
+      label: "Opportunities",
+      href: "/opportunities"
+    }
+  ]
 };

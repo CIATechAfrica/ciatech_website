@@ -4,17 +4,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
-import { LinkRef } from "@/types";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { NavItem, LinkRef } from "@/types";
 
 interface HeaderProps {
-  navLinks: LinkRef[];
+  navLinks: NavItem[];
   primaryCTA: LinkRef;
 }
 
 export default function Header({ navLinks, primaryCTA }: HeaderProps) {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null);
 
   return (
     <header className="fixed top-6 w-full z-50 px-4 sm:px-6 lg:px-8 transition-all duration-500">
@@ -29,18 +30,45 @@ export default function Header({ navLinks, primaryCTA }: HeaderProps) {
           </Link>
           
           {/* Top-Level Navigation Links (Desktop) */}
-          <nav className="hidden xl:flex items-center space-x-1 pl-4">
+          <nav className="hidden xl:flex items-center space-x-2 pl-4">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+              const hasSubLinks = link.subLinks && link.subLinks.length > 0;
+              const isActive = link.href ? pathname === link.href : link.subLinks?.some(sub => pathname === sub.href);
+              
               return (
-                <Link 
-                  key={link.label} 
-                  href={link.href}
-                  className={`relative px-4 py-2 hover:text-primary transition-colors font-bold text-sm group ${isActive ? "text-primary" : "text-gray-700"}`}
-                >
-                  {link.label}
-                  <span className={`absolute inset-x-4 -bottom-1 h-0.5 bg-secondary transition-transform origin-left duration-300 rounded-full ${isActive ? "transform scale-x-100" : "transform scale-x-0 group-hover:scale-x-100"}`} />
-                </Link>
+                <div key={link.label} className="relative group">
+                  {hasSubLinks ? (
+                    <button className={`flex items-center gap-1 px-4 py-2 hover:text-primary transition-colors font-bold text-sm ${isActive ? "text-primary" : "text-gray-700"}`}>
+                      {link.label}
+                      <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" />
+                    </button>
+                  ) : (
+                    <Link 
+                      href={link.href || "#"}
+                      className={`relative flex items-center px-4 py-2 hover:text-primary transition-colors font-bold text-sm ${isActive ? "text-primary" : "text-gray-700"}`}
+                    >
+                      {link.label}
+                      <span className={`absolute inset-x-4 -bottom-1 h-0.5 bg-secondary transition-transform origin-left duration-300 rounded-full ${isActive ? "transform scale-x-100" : "transform scale-x-0 group-hover:scale-x-100"}`} />
+                    </Link>
+                  )}
+
+                  {/* Dropdown Menu */}
+                  {hasSubLinks && (
+                    <div className="absolute left-0 top-full pt-4 opacity-0 translate-y-2 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-300 z-50">
+                      <div className="bg-white/95 backdrop-blur-xl border border-gray-100 shadow-xl rounded-2xl p-2 min-w-[200px] flex flex-col gap-1">
+                        {link.subLinks!.map(sub => (
+                          <Link 
+                            key={sub.label}
+                            href={sub.href}
+                            className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${pathname === sub.href ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'}`}
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               );
             })}
           </nav>
@@ -69,21 +97,52 @@ export default function Header({ navLinks, primaryCTA }: HeaderProps) {
 
       {/* Mobile/Tablet Vertical Dropdown Panel */}
       {isMobileMenuOpen && (
-        <div className="absolute top-[80px] left-0 w-full px-4 sm:px-6 lg:px-8 xl:hidden">
+        <div className="absolute top-[80px] left-0 w-full px-4 sm:px-6 lg:px-8 xl:hidden z-50">
           <div className="bg-white/95 backdrop-blur-xl border border-gray-100/50 shadow-2xl rounded-[2rem] p-4 flex flex-col gap-2 animate-in fade-in slide-in-from-top-4 duration-300 max-h-[calc(100vh-120px)] overflow-y-auto">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+              const hasSubLinks = link.subLinks && link.subLinks.length > 0;
+              const isExpanded = expandedMobileItem === link.label;
+              const isActive = link.href ? pathname === link.href : link.subLinks?.some(sub => pathname === sub.href);
+
               return (
-                <Link 
-                  key={link.label} 
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`text-base font-bold px-4 py-2.5 rounded-xl transition-colors shrink-0 ${isActive ? "bg-primary/10 text-primary" : "text-gray-700 hover:bg-gray-50"}`}
-                >
-                  {link.label}
-                </Link>
+                <div key={link.label} className="flex flex-col">
+                  {hasSubLinks ? (
+                    <button 
+                      onClick={() => setExpandedMobileItem(isExpanded ? null : link.label)}
+                      className={`flex items-center justify-between text-base font-bold px-4 py-3 rounded-xl transition-colors shrink-0 ${isActive || isExpanded ? "bg-primary/5 text-primary" : "text-gray-700 hover:bg-gray-50"}`}
+                    >
+                      {link.label}
+                      <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`} />
+                    </button>
+                  ) : (
+                    <Link 
+                      href={link.href || "#"}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`text-base font-bold px-4 py-3 rounded-xl transition-colors shrink-0 ${isActive ? "bg-primary/10 text-primary" : "text-gray-700 hover:bg-gray-50"}`}
+                    >
+                      {link.label}
+                    </Link>
+                  )}
+
+                  {/* Mobile Submenu Accordion */}
+                  {hasSubLinks && isExpanded && (
+                    <div className="flex flex-col gap-1 pl-4 pr-2 py-2 mt-1 border-l-2 border-gray-100 ml-4 animate-in slide-in-from-top-2 duration-300">
+                      {link.subLinks!.map(sub => (
+                        <Link 
+                          key={sub.label}
+                          href={sub.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-colors ${pathname === sub.href ? 'text-primary bg-primary/10' : 'text-gray-600 hover:text-primary hover:bg-gray-50'}`}
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
               );
             })}
+            
             <div className="pt-3 mt-1 border-t border-gray-100 md:hidden flex justify-center shrink-0">
               <Link 
                 href={primaryCTA.href}

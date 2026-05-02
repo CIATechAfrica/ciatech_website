@@ -31,7 +31,7 @@ export default function RootLayout({
     >
       <body className="h-full bg-white">
         <LayoutWrapper 
-          navLinks={homeData.footer.links} 
+          navLinks={homeData.headerLinks} 
           primaryCTA={homeData.cta.primaryCTA} 
           footerData={homeData.footer}
         >

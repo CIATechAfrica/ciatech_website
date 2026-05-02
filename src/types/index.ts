@@ -3,6 +3,12 @@ export interface LinkRef {
   href: string;
 }
 
+export interface NavItem {
+  label: string;
+  href?: string;
+  subLinks?: LinkRef[];
+}
+
 export interface CorePillar {
   id: string;
   title: string;
