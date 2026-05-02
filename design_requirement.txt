@@ -12,27 +12,40 @@
   - Secondary/Accent: Vibrant Gold (`#E2AD00`).
   - Backgrounds: Clean whites (`#FFFFFF`) and structured grays (`gray-50`).
 - **Typography & Components:** Smooth, deeply rounded image corners (24px+), split-color typography for emphasis, heavy use of bold typography for metrics (Impact Stats), and micro-animations for interactivity (shadow lifting on hover).
+- **Sanity Studio UI:** Custom CIATech branded theme, categorized navigation (Pages, Content, Inbox, Settings), and visual status indicators for form submissions.
 
 ## 3. ARCHITECTURE STRATEGY
-- **Architecture Pattern:** "Hub & Spoke"
+- **Architecture Pattern:** "Hub & Spoke" (Decoupled Headless CMS)
   - **The Hub (Homepage):** Exists strictly as a teaser funnel. Displays high-level summaries of core pillars and top solutions with clear "View All" or "Partner With Us" call-to-actions.
   - **The Spokes (Interior Pages):** Detailed, isolated content routes (`/solutions`, `/research`, `/opportunities`, `/impact`, `/about`).
-- **Data Layer (The "Mock CMS"):** Strict separation of content from UI components. Content is managed in isolated typescript files (`content/home.ts`, `content/solutions.ts`) acting as JSON API responses.
+- **Data Layer (Sanity CMS):** Strict separation of content from UI components. Content is managed in a fully integrated Sanity backend.
+- **API & Mutation Layer:** Next.js Server Actions securely process form data, validate it using Zod, and trigger third-party integrations (Resend).
 
 ## 4. DEVELOPMENT PHASES
-- **Phase 1: Static Architecture & Atomic Components (Current)**
+- **Phase 1: Static Architecture & Atomic Components (Completed)**
   - Establish Next.js App Router and Tailwind v4.
-  - Create the Mock CMS layer and UI component library.
-  - Implement Hub & Spoke routing based on the provided copy document.
+  - Create the UI component library and static routing.
   
-- **Phase 2: Dynamic Systems Integration (Upcoming)**
-  - Transition the Mock CMS data into a fully integrated Headless CMS.
-  - Dynamic routing and content hydration.
+- **Phase 2: Dynamic Systems Integration (Completed)**
+  - Transition the Mock CMS data into a fully integrated Sanity Headless CMS.
+  - Dynamic routing, content hydration, and Server Action form submissions.
+  - Resend transactional email integration for admin notifications and user auto-replies.
 
-- **Phase 3+: Further Integrations & SEO Optimization (TBD)**
+- **Phase 3: Security, Quality Assurance & Studio UX (Completed)**
+  - Implement strict runtime validation on Server Actions using Zod schemas.
+  - Overhaul Sanity Studio UX for a premium administrative experience.
+  - Establish testing pipelines using Vitest (Unit) and Playwright (E2E).
+
+- **Phase 4: Optimization & Deployment (Upcoming)**
+  - Transition synchronous email tasks to background queues for lower latency.
+  - Finalize production deployment (e.g., Vercel) and verify custom domain DNS records.
 
 ## 5. TECH STACK
-- Next.js (App Router, v15+)
-- TypeScript
-- Tailwind CSS (v4)
-- React Icons
+- **Framework:** Next.js (App Router, v15+)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS (v4)
+- **CMS / Database:** Sanity.io
+- **Email API:** Resend
+- **Validation:** Zod
+- **Testing:** Vitest & Playwright
+- **Icons:** Lucide React
