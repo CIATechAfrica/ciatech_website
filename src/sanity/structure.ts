@@ -5,51 +5,114 @@ export const structure: StructureResolver = (S) =>
     .title('CIATECH Africa')
     .items([
       S.listItem()
-        .title('Site Pages')
+        .title('🏠 Homepage')
         .child(
           S.list()
-            .title('Site Pages')
+            .title('Homepage Configuration')
             .items([
-              S.documentTypeListItem('homePage').title('Homepage'),
-              S.documentTypeListItem('aboutPage').title('About Page'),
-              S.documentTypeListItem('solutionsPage').title('Solutions Page'),
-              S.documentTypeListItem('impactPage').title('Impact Page'),
-              S.documentTypeListItem('researchPage').title('Research Page'),
-              S.documentTypeListItem('galleryPage').title('Gallery Page'),
-              S.documentTypeListItem('blogPage').title('Blog / Newsroom Page'),
-              S.documentTypeListItem('opportunitiesPage').title('Opportunities Page'),
-              S.documentTypeListItem('partnershipsPage').title('Partnerships Page'),
+              S.documentTypeListItem('homePage').title('Homepage Settings (SEO & Hero)'),
               S.documentTypeListItem('aboutSection').title('Homepage About Section'),
-              S.documentTypeListItem('contactInformation').title('Contact Info'),
-              S.documentTypeListItem('callToAction').title('Call To Action'),
+              S.documentTypeListItem('corePillar').title('Core Pillars'),
+              S.documentTypeListItem('callToAction').title('Call To Action (Global CTA)'),
             ])
         ),
       S.divider(),
+      
       S.listItem()
-        .title('Collections & Hubs')
+        .title('💡 About Us')
         .child(
           S.list()
-            .title('Collections')
+            .title('About Us')
             .items([
-              S.documentTypeListItem('corePillar').title('Core Pillars'),
-              S.documentTypeListItem('solution').title('Solutions'),
-              S.documentTypeListItem('impactStat').title('Impact Stats'),
-              S.documentTypeListItem('impactArea').title('Impact Areas'),
-              S.documentTypeListItem('partnerLogo').title('Partner Logos'),
+              S.documentTypeListItem('aboutPage').title('About Page Settings'),
               S.documentTypeListItem('teamMember').title('Team Members'),
             ])
         ),
       S.divider(),
+
       S.listItem()
-        .title('Publications & Opportunities')
+        .title('⚙️ Solutions')
         .child(
           S.list()
-            .title('Publications')
+            .title('Solutions')
             .items([
-              S.documentTypeListItem('blogPost').title('Blog Posts'),
+              S.documentTypeListItem('solutionsPage').title('Solutions Page Settings'),
+              S.documentTypeListItem('solution').title('Solutions Content'),
+            ])
+        ),
+      S.divider(),
+
+      S.listItem()
+        .title('🌍 Impact')
+        .child(
+          S.list()
+            .title('Impact')
+            .items([
+              S.documentTypeListItem('impactPage').title('Impact Page Settings'),
+              S.documentTypeListItem('impactArea').title('Impact Areas'),
+              S.documentTypeListItem('impactStat').title('Impact Stats'),
+            ])
+        ),
+      S.divider(),
+
+      S.listItem()
+        .title('🔬 Research')
+        .child(
+          S.list()
+            .title('Research')
+            .items([
+              S.documentTypeListItem('researchPage').title('Research Page Settings'),
               S.documentTypeListItem('researchPublication').title('Research Publications'),
-              S.documentTypeListItem('openRole').title('Job Opportunities'),
+            ])
+        ),
+      S.divider(),
+
+      S.listItem()
+        .title('🤝 Partnerships')
+        .child(
+          S.list()
+            .title('Partnerships')
+            .items([
+              S.documentTypeListItem('partnershipsPage').title('Partnerships Page Settings'),
+              S.documentTypeListItem('partnerLogo').title('Partner Logos'),
+            ])
+        ),
+      S.divider(),
+
+      S.listItem()
+        .title('📰 Media & News')
+        .child(
+          S.list()
+            .title('Media & News')
+            .items([
+              S.documentTypeListItem('blogPage').title('Blog / Newsroom Settings'),
+              S.documentTypeListItem('blogPost').title('Blog Posts'),
+              S.divider(),
+              S.documentTypeListItem('galleryPage').title('Gallery Page Settings'),
               S.documentTypeListItem('galleryImage').title('Gallery Images'),
+            ])
+        ),
+      S.divider(),
+
+      S.listItem()
+        .title('💼 Careers & Fellowships')
+        .child(
+          S.list()
+            .title('Careers & Fellowships')
+            .items([
+              S.documentTypeListItem('opportunitiesPage').title('Opportunities Page Settings'),
+              S.documentTypeListItem('openRole').title('Job Opportunities'),
+            ])
+        ),
+      S.divider(),
+
+      S.listItem()
+        .title('⚙️ Global Settings')
+        .child(
+          S.list()
+            .title('Global Settings')
+            .items([
+              S.documentTypeListItem('contactInformation').title('Contact Information'),
             ])
         ),
     ])
