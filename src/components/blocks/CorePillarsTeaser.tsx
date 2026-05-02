@@ -73,17 +73,6 @@ export default function CorePillarsTeaser({ data }: CorePillarsTeaserProps) {
           })}
         </div>
         
-        {/* Bridge CTA routing users to the specific Spoke pages */}
-        <div className="mt-20 flex justify-center">
-          <Link 
-            href="/solutions"
-            className="inline-flex justify-center items-center px-10 py-5 rounded-full font-bold text-sm bg-gray-900 text-white hover:bg-primary transition-all hover:shadow-[0_8px_30px_-8px_rgba(142,85,22,0.6)] group hover:-translate-y-1"
-          >
-            Explore How We Implement These Pillars
-            <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
-
       </div>
     </section>
   );

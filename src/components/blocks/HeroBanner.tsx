@@ -19,7 +19,7 @@ export default function HeroBanner({ data }: HeroBannerProps) {
   };
 
   return (
-    <section className="relative w-full min-h-[90vh] flex items-center overflow-hidden bg-gray-900 rounded-b-[3rem] lg:rounded-b-[5rem]">
+    <section className="relative w-full min-h-[90vh] flex items-center overflow-hidden bg-gray-900">
       
       {/* Immersive Background Image */}
       <Image 
