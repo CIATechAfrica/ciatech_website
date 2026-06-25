@@ -4,8 +4,37 @@ export const contactInformationType = defineType({
   fields: [
     defineField({ name: 'heading', title: 'Heading', type: 'string' }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
-    defineField({ name: 'email', title: 'Email Address', type: 'string' }),
-    defineField({ name: 'phone', title: 'Phone Number', type: 'string' }),
-    defineField({ name: 'address', title: 'Physical Address', type: 'text' }),
+    defineField({
+      name: 'globalHeadquarters',
+      title: 'Global Headquarters',
+      type: 'object',
+      fields: [
+        { name: 'email', title: 'Email Address', type: 'string' },
+        { name: 'phone', title: 'Phone Number', type: 'string' },
+        { name: 'address', title: 'Physical Address', type: 'text' },
+      ]
+    }),
+    defineField({
+      name: 'subOffices',
+      title: 'Sub-Offices',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'city', title: 'City / Region', type: 'string' },
+            { name: 'email', title: 'Email Address', type: 'string' },
+            { name: 'phone', title: 'Phone Number', type: 'string' },
+            { name: 'address', title: 'Physical Address', type: 'text' },
+          ],
+          preview: {
+            select: {
+              title: 'city',
+              subtitle: 'email'
+            }
+          }
+        }
+      ]
+    })
   ],
 })

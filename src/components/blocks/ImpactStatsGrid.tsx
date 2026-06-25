@@ -50,9 +50,9 @@ export default function ImpactStatsGrid({ data }: ImpactStatsGridProps) {
 
         {/* 5-Column Inline Stats Layout */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-x-4 gap-y-12 w-full max-w-7xl mx-auto justify-items-center">
-          {data.stats.map((stat: any) => (
+          {data.stats.map((stat: any, index: number) => (
             <div 
-              key={stat.id} 
+              key={stat._key || stat._id || index} 
               className="flex flex-col items-center text-center group w-full px-2"
             >
               <div className="mb-4 transform group-hover:-translate-y-2 group-hover:scale-110 transition-all duration-500">

@@ -1,4 +1,4 @@
-import { solutionsData } from "../../../content/solutions";
+import { solutionsData } from "../../../../content/solutions";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Rocket, BrainCircuit, Landmark, GraduationCap, Globe } from "lucide-react";

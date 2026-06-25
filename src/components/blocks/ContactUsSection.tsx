@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle, XCircle, Loader2 } from "lucide-react";
+import { Turnstile } from '@marsidev/react-turnstile';
 import { HomeData } from "@/types";
 import { submitContactForm } from "@/app/actions";
 
@@ -13,6 +14,7 @@ export default function ContactUsSection({ data }: ContactProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   if (!data) return null;
 
@@ -59,26 +61,49 @@ export default function ContactUsSection({ data }: ContactProps) {
               </p>
               
               <div className="space-y-6">
-                <div className="flex items-center gap-4 group">
-                  <div className="w-12 h-12 bg-white rounded-full shadow-sm border border-gray-100 flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors text-gray-400">
-                    <Mail className="w-5 h-5" />
+                <div className="mb-8">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Global Headquarters</h3>
+                  <div className="flex flex-col gap-4">
+                    <div className="flex items-center gap-4 group">
+                      <div className="w-12 h-12 bg-white rounded-full shadow-sm border border-gray-100 flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors text-gray-400 shrink-0">
+                        <Mail className="w-5 h-5" />
+                      </div>
+                      <span className="font-medium text-gray-700">{data.globalHeadquarters?.email || data.email}</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-4 group">
+                      <div className="w-12 h-12 bg-white rounded-full shadow-sm border border-gray-100 flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors text-gray-400 shrink-0">
+                        <Phone className="w-5 h-5" />
+                      </div>
+                      <span className="font-medium text-gray-700">{data.globalHeadquarters?.phone || data.phone}</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-4 group">
+                      <div className="w-12 h-12 bg-white rounded-full shadow-sm border border-gray-100 flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors text-gray-400 shrink-0">
+                        <MapPin className="w-5 h-5" />
+                      </div>
+                      <span className="font-medium text-gray-700">{data.globalHeadquarters?.address || data.address}</span>
+                    </div>
                   </div>
-                  <span className="font-medium text-gray-700">{data.email}</span>
                 </div>
-                
-                <div className="flex items-center gap-4 group">
-                  <div className="w-12 h-12 bg-white rounded-full shadow-sm border border-gray-100 flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors text-gray-400">
-                    <Phone className="w-5 h-5" />
+
+                {data.subOffices && data.subOffices.length > 0 && (
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">Regional Offices</h3>
+                    <div className="flex flex-col gap-4">
+                      {data.subOffices.map((office: any, idx: number) => (
+                        <div key={office._key || idx} className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:border-primary/30 transition-colors">
+                          <h4 className="font-bold text-gray-900 mb-3">{office.city}</h4>
+                          <div className="text-sm text-gray-600 flex flex-col gap-3">
+                            <span className="flex items-start gap-3"><MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span className="leading-tight">{office.address}</span></span>
+                            <span className="flex items-center gap-3"><Mail className="w-4 h-4 text-primary shrink-0" /> {office.email}</span>
+                            <span className="flex items-center gap-3"><Phone className="w-4 h-4 text-primary shrink-0" /> {office.phone}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <span className="font-medium text-gray-700">{data.phone}</span>
-                </div>
-                
-                <div className="flex items-center gap-4 group">
-                  <div className="w-12 h-12 bg-white rounded-full shadow-sm border border-gray-100 flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors text-gray-400">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <span className="font-medium text-gray-700">{data.address}</span>
-                </div>
+                )}
               </div>
             </div>
             
@@ -140,9 +165,17 @@ export default function ContactUsSection({ data }: ContactProps) {
                    <textarea name="message" rows={4} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none text-gray-900" placeholder="Outline your objectives or partnership scope here..." required></textarea>
                 </div>
                 
+                <div className="flex justify-center my-2">
+                  <Turnstile 
+                    siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'} 
+                    onSuccess={setTurnstileToken} 
+                  />
+                </div>
+                <input type="hidden" name="cf-turnstile-response" value={turnstileToken || ''} />
+
                 <button 
                   type="submit" 
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !turnstileToken}
                   className="group flex items-center justify-center w-full bg-primary text-white font-bold py-4 rounded-xl hover:bg-[#7a4812] hover:shadow-[0_4px_14px_0_rgba(142,85,22,0.4)] transition-all mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (

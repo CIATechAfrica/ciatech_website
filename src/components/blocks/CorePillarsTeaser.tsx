@@ -43,7 +43,7 @@ export default function CorePillarsTeaser({ data }: CorePillarsTeaserProps) {
             const digit = `0${index + 1}`;
             return (
               <div 
-                key={pillar.id}
+                key={pillar._key || pillar._id || index}
                 className="group relative bg-white p-10 sm:p-12 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden flex flex-col h-full"
               >
                 {/* Decorative Background Number */}

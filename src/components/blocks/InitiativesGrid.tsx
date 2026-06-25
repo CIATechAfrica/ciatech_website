@@ -50,7 +50,7 @@ export default function InitiativesGrid({ data }: InitiativesGridProps) {
 
             return (
               <div 
-                key={initiative._id || initiative.id} 
+                key={initiative._id || initiative._key || index} 
                 className={`group ${isStaggered ? 'md:mt-24' : ''}`}
               >
                 <Link 

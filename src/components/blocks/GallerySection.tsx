@@ -45,7 +45,7 @@ export default function GallerySection({ data }: GalleryProps) {
             
             return (
               <div 
-                key={img._id || img.id} 
+                key={img._id || img._key || index} 
                 className={`relative rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-500 bg-gray-100 min-h-[300px] ${spanClass}`}
               >
               <Image 

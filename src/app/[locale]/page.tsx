@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { homeData } from "../../content/home";
+import { homeData } from "../../../content/home";
 import { client } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
 
@@ -39,6 +39,7 @@ async function getSanityHomeData() {
       "solutions": *[_type == "solution"],
       "initiatives": *[_type == "researchPublication"] | order(_createdAt asc),
       "impactStats": *[_type == "impactStat"] | order(_createdAt asc),
+      "contactInformation": *[_type == "contactInformation"][0],
       "callToAction": *[_type == "callToAction"][0],
       "galleryPage": *[_type == "galleryPage"][0],
       "galleryImages": *[_type == "galleryImage"] | order(_createdAt desc)[0...4]{
@@ -112,6 +113,13 @@ export default async function Home() {
     partnerships: {
       ...homeData.partnerships,
       logos: sanityData?.partnerLogos?.length > 0 ? sanityData.partnerLogos : homeData.partnerships.logos,
+    },
+    contactTeaser: {
+      ...homeData.contactTeaser,
+      heading: sanityData?.contactInformation?.heading || homeData.contactTeaser.heading,
+      description: sanityData?.contactInformation?.description || homeData.contactTeaser.description,
+      globalHeadquarters: sanityData?.contactInformation?.globalHeadquarters,
+      subOffices: sanityData?.contactInformation?.subOffices,
     }
   };
 

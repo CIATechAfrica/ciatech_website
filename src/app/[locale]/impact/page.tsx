@@ -1,4 +1,4 @@
-import { impactData } from "../../../content/impact";
+import { impactData } from "../../../../content/impact";
 import Image from "next/image";
 import Link from "next/link";
 import { 

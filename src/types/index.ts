@@ -11,6 +11,8 @@ export interface NavItem {
 
 export interface CorePillar {
   id: string;
+  _id?: string;
+  _key?: string;
   title: string;
   description: string;
   iconName: string;
@@ -27,6 +29,8 @@ export interface SolutionInfo {
 
 export interface Initiative {
   id: string;
+  _id?: string;
+  _key?: string;
   title: string;
   description: string;
   items?: string[];
@@ -62,9 +66,21 @@ export interface OpportunityItem {
 export interface ContactDataProps {
   heading: string;
   description: string;
-  email: string;
-  phone: string;
-  address: string;
+  globalHeadquarters?: {
+    email: string;
+    phone: string;
+    address: string;
+  };
+  subOffices?: {
+    _key?: string;
+    city: string;
+    email: string;
+    phone: string;
+    address: string;
+  }[];
+  email?: string;
+  phone?: string;
+  address?: string;
 }
 
 export interface SocialLink {
@@ -86,6 +102,7 @@ export interface TeamMember {
 export interface PartnerLogo {
   id: string;
   _id?: string;
+  _key?: string;
   name: string;
   category?: string;
   imageRef?: string;
@@ -357,6 +374,7 @@ export interface ContactPageData {
 export interface GalleryItem {
   id: string;
   _id?: string;
+  _key?: string;
   title: string;
   imageRef: string;
   location?: string;

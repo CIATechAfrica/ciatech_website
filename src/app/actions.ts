@@ -6,6 +6,30 @@ import { Resend } from "resend";
 import { z } from "zod";
 import { applicationReceivedEmail, contactReceivedEmail, newsletterWelcomeEmail, adminNotificationEmail } from "@/lib/emailTemplates";
 
+async function verifyTurnstileToken(token: string) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) {
+    console.warn("Missing TURNSTILE_SECRET_KEY. Skipping verification.");
+    return true;
+  }
+
+  try {
+    const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `secret=${encodeURIComponent(secret)}&response=${encodeURIComponent(token)}`,
+    });
+
+    const data = await response.json();
+    return data.success;
+  } catch (error) {
+    console.error("Turnstile verification failed:", error);
+    return false;
+  }
+}
+
 const writeClient = createClient({
   projectId,
   dataset,
@@ -28,6 +52,7 @@ const contactSchema = z.object({
   company: z.string().optional(),
   subject: z.string().min(2, "Subject is required"),
   message: z.string().min(10, "Message must be at least 10 characters").max(5000, "Message is too long"),
+  "cf-turnstile-response": z.string().min(1, "Please complete the anti-spam challenge."),
 });
 
 const applicationSchema = z.object({
@@ -53,6 +78,7 @@ export async function submitContactForm(formData: FormData) {
       company: formData.get("company") || "",
       subject: formData.get("subject") || "",
       message: formData.get("message") || "",
+      "cf-turnstile-response": formData.get("cf-turnstile-response") || "",
     });
 
     if (!parsed.success) {
@@ -60,6 +86,11 @@ export async function submitContactForm(formData: FormData) {
     }
 
     const validData = parsed.data;
+
+    const isHuman = await verifyTurnstileToken(validData["cf-turnstile-response"]);
+    if (!isHuman) {
+      return { success: false, error: "Security check failed. Please refresh and try again." };
+    }
 
     const data = {
       _type: "contactSubmission",

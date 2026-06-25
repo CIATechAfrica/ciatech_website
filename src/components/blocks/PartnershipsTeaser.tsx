@@ -120,7 +120,7 @@ export default function PartnershipsTeaser({ data }: PartnershipsTeaserProps) {
 
             {infiniteLogos.map((partner: any, idx: number) => (
               <div 
-                key={`${partner.id}-${idx}`} 
+                key={`${partner._id || partner._key || 'partner'}-${idx}`} 
                 className="group flex-none w-64 md:w-80 bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-secondary/20 transition-all duration-500 flex items-center justify-center p-8 h-32 hover:-translate-y-2 relative overflow-hidden"
               >
                 <div className="relative w-full h-full flex items-center justify-center">

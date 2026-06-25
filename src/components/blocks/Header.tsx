@@ -98,6 +98,15 @@ export default function Header({ navLinks, primaryCTA }: HeaderProps) {
           
           {/* Action Button & Hamburger */}
           <div className="flex items-center justify-end flex-grow sm:flex-grow-0 ml-4 gap-4">
+            {/* Language Toggle */}
+            <Link
+              href={pathname.replace(`/${pathname.split('/')[1]}`, `/${pathname.split('/')[1] === 'en' ? 'fr' : 'en'}`)}
+              className="px-3 py-1.5 rounded-full bg-gray-50 text-gray-700 font-bold text-xs hover:bg-gray-100 transition-colors border border-gray-200 uppercase tracking-widest hidden sm:flex items-center gap-2"
+            >
+              <svg className="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /></svg>
+              {pathname.split('/')[1] === 'en' ? 'FR' : 'EN'}
+            </Link>
+
             <Link 
               href={primaryCTA.href}
               onClick={(e) => handleNavClick(e, primaryCTA.href)}

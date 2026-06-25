@@ -36,10 +36,10 @@ export default function SolutionsTeaser({ data }: SolutionsTeaserProps) {
 
         {/* Solutions Cards Grid - Glassmorphism over Dark BG */}
         <div className="grid md:grid-cols-3 gap-8">
-          {data.items.slice(0, 3).map((solution: any) => (
+          {data.items.slice(0, 3).map((solution: any, index: number) => (
             <Link 
               href="/solutions"
-              key={solution.id} 
+              key={solution._key || solution._id || index} 
               className="bg-white/5 backdrop-blur-md p-10 py-16 rounded-[2.5rem] border border-white/10 hover:bg-white/10 transition-all duration-500 group flex flex-col items-center justify-center text-center hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(226,173,0,0.15)] relative overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />

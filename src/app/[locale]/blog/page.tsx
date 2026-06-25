@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { blogData } from "../../../content/blog";
+import { blogData } from "../../../../content/blog";
 import { client } from "@/sanity/lib/client";
 import BlogClientWrapper from "./BlogClientWrapper";
 

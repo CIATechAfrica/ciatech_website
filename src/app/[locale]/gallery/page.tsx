@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { galleryData } from "../../../content/gallery";
+import { galleryData } from "../../../../content/gallery";
 import { client } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
 import GalleryClientWrapper from "./GalleryClientWrapper";

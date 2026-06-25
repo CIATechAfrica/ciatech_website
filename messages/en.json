@@ -1,0 +1,15 @@
+{
+  "Header": {
+    "about": "About Us",
+    "solutions": "Solutions",
+    "impact": "Our Impact",
+    "research": "Research",
+    "opportunities": "Opportunities",
+    "contact": "Contact Us",
+    "toggle_lang": "Français"
+  },
+  "Hero": {
+    "cta_primary": "Get Involved",
+    "cta_secondary": "Learn More"
+  }
+}

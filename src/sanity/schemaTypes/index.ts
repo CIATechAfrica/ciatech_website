@@ -24,6 +24,9 @@ import { partnershipsPageType } from './partnershipsPageType'
 import { contactSubmissionType } from './contactSubmissionType'
 import { applicationSubmissionType } from './applicationSubmissionType'
 import { newsletterSubscriberType } from './newsletterSubscriberType'
+import { popupSettingsType } from './popupSettingsType'
+import { boardMemberType } from './boardMemberType'
+import { siteSettingsType } from './siteSettingsType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -51,6 +54,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     partnershipsPageType,
     contactSubmissionType,
     applicationSubmissionType,
-    newsletterSubscriberType
+    newsletterSubscriberType,
+    popupSettingsType,
+    boardMemberType,
+    siteSettingsType
   ],
 }

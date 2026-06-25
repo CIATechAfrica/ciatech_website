@@ -1,6 +1,6 @@
 "use client";
 
-import { contactData } from "../../../content/contact";
+import { contactData } from "../../../../content/contact";
 import { MapPin, Mail, ArrowUpRight, Send, Globe } from "lucide-react";
 import { useState } from "react";
 

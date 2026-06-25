@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { opportunitiesData } from "../../../content/opportunities";
+import { opportunitiesData } from "../../../../content/opportunities";
 import { client } from "@/sanity/lib/client";
 import { OpenRole } from "@/types";
 import OpportunitiesClientWrapper from "./OpportunitiesClientWrapper";

@@ -1,4 +1,4 @@
-import { partnershipsData } from "../../../content/partnerships";
+import { partnershipsData } from "../../../../content/partnerships";
 import Image from "next/image";
 import Link from "next/link";
 import { Globe2, Landmark, BookOpen, Briefcase, ArrowRight } from "lucide-react";

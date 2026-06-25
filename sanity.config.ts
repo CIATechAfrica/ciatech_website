@@ -39,6 +39,8 @@ const myTheme = buildLegacyTheme({
   '--focus-color': '#E2AD00',
 });
 
+import {documentInternationalization} from '@sanity/document-internationalization'
+
 export default defineConfig({
   basePath: '/studio',
   projectId,
@@ -56,5 +58,26 @@ export default defineConfig({
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({defaultApiVersion: apiVersion}),
+    documentInternationalization({
+      supportedLanguages: [
+        {id: 'en', title: 'English'},
+        {id: 'fr', title: 'French'}
+      ],
+      schemaTypes: [
+        'homePage',
+        'aboutPage',
+        'solutionsPage',
+        'impactPage',
+        'researchPage',
+        'galleryPage',
+        'blogPage',
+        'opportunitiesPage',
+        'partnershipsPage',
+        'contactInformation',
+        'siteSettings',
+        'aboutSection',
+        'callToAction'
+      ]
+    })
   ],
 })
