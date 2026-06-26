@@ -50,6 +50,7 @@ export const structure: StructureResolver = (S) =>
                     .items([
                       S.documentTypeListItem('aboutPage').title('About Page Settings'),
                       S.documentTypeListItem('teamMember').title('Team Members'),
+                      S.documentTypeListItem('boardMember').title('Board Members'),
                     ])
                 ),
               S.listItem()
@@ -172,7 +173,9 @@ export const structure: StructureResolver = (S) =>
           S.list()
             .title('Global Settings')
             .items([
+              S.documentTypeListItem('siteSettings').title('Site Navigation & Settings'),
               S.documentTypeListItem('contactInformation').title('Contact Information'),
+              S.documentTypeListItem('popupSettings').title('Popup Management'),
             ])
         ),
     ])
