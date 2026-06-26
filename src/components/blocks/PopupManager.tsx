@@ -56,7 +56,7 @@ export default function PopupManager() {
         src={imageUrl} 
         alt={settings.altText || "Promotional Popup"} 
         fill 
-        className="object-cover"
+        className="object-contain"
       />
     </div>
   );

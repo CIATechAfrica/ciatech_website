@@ -58,7 +58,6 @@ export default async function RootLayout({
   } catch (err) {
     console.warn("Failed to fetch site settings due to network timeout.");
   }
-
   return (
     <html
       lang={locale}

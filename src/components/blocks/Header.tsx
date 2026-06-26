@@ -18,8 +18,8 @@ export default function Header({ navLinks, primaryCTA }: HeaderProps) {
   const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (pathname === "/") {
-      const targetId = href.startsWith("/") ? href.slice(1) : href;
+    if (href.includes("#")) {
+      const targetId = href.split("#")[1];
       const el = document.getElementById(targetId);
       
       if (el) {
