@@ -5,6 +5,11 @@ export const blogPageType = defineType({
   title: 'Blog / Newsroom Page',
   type: 'document',
   fields: [
+    defineField({
+      name: 'language',
+      type: 'string',
+      hidden: true,
+    }),
     defineField({ name: 'seoTitle', title: 'SEO Title', type: 'string' }),
     defineField({ name: 'seoDescription', title: 'SEO Description', type: 'text' }),
     defineField({ name: 'heroHeading', title: 'Hero Heading', type: 'string' }),

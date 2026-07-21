@@ -7,9 +7,10 @@ import ResearchClientWrapper from "./ResearchClientWrapper";
 
 export const revalidate = 0;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = (await params).locale;
   try {
-    const seoData = await client.fetch(`*[_type == "researchPage"][0]{ seoTitle, seoDescription }`);
+    const seoData = await client.fetch(`*[_type == "researchPage" && language == "${locale}"][0]{ seoTitle, seoDescription }`);
     return {
       title: seoData?.seoTitle || researchData.seo.title,
       description: seoData?.seoDescription || researchData.seo.description,
@@ -22,12 +23,12 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-async function getSanityResearchData() {
+async function getSanityResearchData(locale: string) {
   try {
     const data = await client.fetch(`{
-      "researchPage": *[_type == "researchPage"][0],
-      "featuredPublication": *[_type == "researchPublication" && isFeatured == true][0],
-      "publications": *[_type == "researchPublication" && isFeatured != true] | order(_createdAt asc)
+      "researchPage": *[_type == "researchPage" && language == "${locale}"][0],
+      "featuredPublication": *[_type == "researchPublication" && language == "${locale}" && isFeatured == true][0],
+      "publications": *[_type == "researchPublication" && language == "${locale}" && isFeatured != true] | order(_createdAt asc)
     }`);
     return data;
   } catch (err) {
@@ -36,8 +37,9 @@ async function getSanityResearchData() {
   }
 }
 
-export default async function ResearchPage() {
-  const sanityData = await getSanityResearchData();
+export default async function ResearchPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale;
+  const sanityData = await getSanityResearchData(locale);
 
   const data = {
     ...researchData,

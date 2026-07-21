@@ -16,9 +16,10 @@ const IconMap: Record<string, React.ReactNode> = {
   "globe": <Globe className="w-8 h-8 text-primary" />,
 };
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = (await params).locale;
   try {
-    const seoData = await client.fetch(`*[_type == "solutionsPage"][0]{ seoTitle, seoDescription }`);
+    const seoData = await client.fetch(`*[_type == "solutionsPage" && language == "${locale}"][0]{ seoTitle, seoDescription }`);
     return {
       title: seoData?.seoTitle || solutionsData.seo.title,
       description: seoData?.seoDescription || solutionsData.seo.description,
@@ -31,12 +32,12 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-async function getSanitySolutionsData() {
+async function getSanitySolutionsData(locale: string) {
   try {
     const data = await client.fetch(`{
-      "solutionsPage": *[_type == "solutionsPage"][0],
-      "solutions": *[_type == "solution"] | order(_createdAt asc),
-      "callToAction": *[_type == "callToAction"][0]
+      "solutionsPage": *[_type == "solutionsPage" && language == "${locale}"][0],
+      "solutions": *[_type == "solution" && language == "${locale}"] | order(_createdAt asc),
+      "callToAction": *[_type == "callToAction" && language == "${locale}"][0]
     }`);
     return data;
   } catch (error) {
@@ -45,8 +46,9 @@ async function getSanitySolutionsData() {
   }
 }
 
-export default async function SolutionsPage() {
-  const sanityData = await getSanitySolutionsData();
+export default async function SolutionsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale;
+  const sanityData = await getSanitySolutionsData(locale);
 
   const data = {
     ...solutionsData,

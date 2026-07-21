@@ -27,6 +27,7 @@ import { newsletterSubscriberType } from './newsletterSubscriberType'
 import { popupSettingsType } from './popupSettingsType'
 import { boardMemberType } from './boardMemberType'
 import { siteSettingsType } from './siteSettingsType'
+import { translationApiKeyType } from './translationApiKeyType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -57,6 +58,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     newsletterSubscriberType,
     popupSettingsType,
     boardMemberType,
-    siteSettingsType
+    siteSettingsType,
+    translationApiKeyType
   ],
 }

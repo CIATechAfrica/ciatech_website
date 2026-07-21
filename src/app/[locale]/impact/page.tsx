@@ -22,9 +22,10 @@ const IconMap: Record<string, React.ReactNode> = {
   "shield-check": <ShieldCheck className="w-8 h-8 text-primary" />
 };
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = (await params).locale;
   try {
-    const seoData = await client.fetch(`*[_type == "impactPage"][0]{ seoTitle, seoDescription }`);
+    const seoData = await client.fetch(`*[_type == "impactPage" && language == "${locale}"][0]{ seoTitle, seoDescription }`);
     return {
       title: seoData?.seoTitle || impactData.seo.title,
       description: seoData?.seoDescription || impactData.seo.description,
@@ -37,13 +38,13 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-async function getSanityImpactData() {
+async function getSanityImpactData(locale: string) {
   try {
     const data = await client.fetch(`{
-      "impactPage": *[_type == "impactPage"][0],
-      "impactStats": *[_type == "impactStat"] | order(_createdAt asc),
-      "impactAreas": *[_type == "impactArea"] | order(_createdAt asc),
-      "callToAction": *[_type == "callToAction"][0]
+      "impactPage": *[_type == "impactPage" && language == "${locale}"][0],
+      "impactStats": *[_type == "impactStat" && language == "${locale}"] | order(_createdAt asc),
+      "impactAreas": *[_type == "impactArea" && language == "${locale}"] | order(_createdAt asc),
+      "callToAction": *[_type == "callToAction" && language == "${locale}"][0]
     }`);
     return data;
   } catch (err) {
@@ -52,8 +53,9 @@ async function getSanityImpactData() {
   }
 }
 
-export default async function ImpactPage() {
-  const sanityData = await getSanityImpactData();
+export default async function ImpactPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale;
+  const sanityData = await getSanityImpactData(locale);
 
   const data = {
     ...impactData,

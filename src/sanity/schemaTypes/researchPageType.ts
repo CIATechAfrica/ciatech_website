@@ -10,6 +10,11 @@ export const researchPageType = defineType({
   ],
   fields: [
     defineField({
+      name: 'language',
+      type: 'string',
+      hidden: true,
+    }),
+    defineField({
       name: 'seoTitle',
       title: 'SEO Title',
       type: 'string',

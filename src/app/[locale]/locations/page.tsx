@@ -11,10 +11,11 @@ export const metadata: Metadata = {
   description: "Find CIATECH Africa offices across the continent.",
 };
 
-export default async function LocationsPage() {
+export default async function LocationsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale;
   let sanityData = null;
   try {
-    sanityData = await client.fetch(`*[_type == "contactInformation"][0]`);
+    sanityData = await client.fetch(`*[_type == "contactInformation" && language == "${locale}"][0]`);
   } catch (error) {
     console.warn("Sanity fetch skipped due to network timeout.");
   }

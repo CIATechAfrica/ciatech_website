@@ -16,9 +16,10 @@ import CTASection from "@/components/blocks/CTASection";
 
 export const revalidate = 0;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   try {
-    const seoData = await client.fetch(`*[_type == "homePage"][0]{ seoTitle, seoDescription }`);
+    const locale = (await params).locale;
+    const seoData = await client.fetch(`*[_type == "homePage" && language == "${locale}"][0]{ seoTitle, seoDescription }`);
     return {
       title: seoData?.seoTitle || homeData.seo.title,
       description: seoData?.seoDescription || homeData.seo.description,
@@ -30,23 +31,23 @@ export async function generateMetadata(): Promise<Metadata> {
     };
   }
 }
-async function getSanityHomeData() {
+async function getSanityHomeData(locale: string) {
   try {
     const data = await client.fetch(`{
-      "homePage": *[_type == "homePage"][0],
-      "aboutSection": *[_type == "aboutSection"][0],
-      "corePillars": *[_type == "corePillar"],
-      "solutions": *[_type == "solution"],
-      "initiatives": *[_type == "researchPublication"] | order(_createdAt asc),
-      "impactStats": *[_type == "impactStat"] | order(_createdAt asc),
-      "contactInformation": *[_type == "contactInformation"][0],
-      "callToAction": *[_type == "callToAction"][0],
-      "galleryPage": *[_type == "galleryPage"][0],
-      "galleryImages": *[_type == "galleryImage"] | order(_createdAt desc)[0...4]{
+      "homePage": *[_type == "homePage" && language == "${locale}"][0],
+      "aboutSection": *[_type == "aboutSection" && language == "${locale}"][0],
+      "corePillars": *[_type == "corePillar" && language == "${locale}"],
+      "solutions": *[_type == "solution" && language == "${locale}"],
+      "initiatives": *[_type == "researchPublication" && language == "${locale}"] | order(_createdAt asc),
+      "impactStats": *[_type == "impactStat" && language == "${locale}"] | order(_createdAt asc),
+      "contactInformation": *[_type == "contactInformation" && language == "${locale}"][0],
+      "callToAction": *[_type == "callToAction" && language == "${locale}"][0],
+      "galleryPage": *[_type == "galleryPage" && language == "${locale}"][0],
+      "galleryImages": *[_type == "galleryImage" && language == "${locale}"] | order(_createdAt desc)[0...4]{
         ...,
         "imageRef": image.asset->url
       },
-      "partnerLogos": *[_type == "partnerLogo"] | order(_createdAt desc){
+      "partnerLogos": *[_type == "partnerLogo" && language == "${locale}"] | order(_createdAt desc){
         ...,
         "imageRef": logo.asset->url
       }
@@ -58,8 +59,9 @@ async function getSanityHomeData() {
   }
 }
 
-export default async function Home() {
-  const sanityData = await getSanityHomeData();
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale;
+  const sanityData = await getSanityHomeData(locale);
 
   // Deep merge Sanity Data over Static Fallback Data
   const data = {

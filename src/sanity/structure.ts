@@ -176,6 +176,7 @@ export const structure: StructureResolver = (S) =>
               S.documentTypeListItem('siteSettings').title('Site Navigation & Settings'),
               S.documentTypeListItem('contactInformation').title('Contact Information'),
               S.documentTypeListItem('popupSettings').title('Popup Management'),
+              S.documentTypeListItem('jexity.translationApiKey').title('Translation Webhook Secret'),
             ])
         ),
     ])

@@ -40,6 +40,7 @@ const myTheme = buildLegacyTheme({
 });
 
 import {documentInternationalization} from '@sanity/document-internationalization'
+import { TranslationPlugin } from 'sanity-plugin-translate'
 
 export default defineConfig({
   basePath: '/studio',
@@ -54,6 +55,14 @@ export default defineConfig({
     },
   },
   plugins: [
+    TranslationPlugin({
+       BASE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+       deeplApiKey: process.env.NEXT_PUBLIC_DEEPL_API_KEY || '',
+       includeFixReferenceAction: true,
+       includeTranslateAction: true,
+       includeSyncDocumentsAction: true,
+       includeSyncDocumentMediaAction: true,
+    }),
     structureTool({structure}),
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin

@@ -15,6 +15,7 @@
     "@next/third-parties": "^16.2.9",
     "@sanity/document-internationalization": "^6.2.9",
     "@sanity/image-url": "^2.1.1",
+    "@sanity/language-filter": "^5.0.11",
     "@sanity/vision": "^5.22.0",
     "jspdf": "^4.2.1",
     "lucide-react": "^1.7.0",
@@ -26,6 +27,9 @@
     "react-icons": "^5.6.0",
     "resend": "^6.12.2",
     "sanity": "^5.22.0",
+    "sanity-plugin-internationalized-array": "^5.1.22",
+    "sanity-plugin-translate": "^2.0.2",
+    "sanity-plugin-utils": "^2.0.11",
     "styled-components": "^6.4.1",
     "zod": "^4.4.2"
   },

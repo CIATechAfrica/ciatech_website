@@ -44,7 +44,7 @@ export default async function RootLayout({
   let mainNavigation = homeData.headerLinks;
 
   try {
-    const siteSettings = await client.fetch(`*[_type == "siteSettings"][0]`);
+    const siteSettings = await client.fetch(`*[_type == "siteSettings" && language == "${locale}"][0]`);
     if (siteSettings && siteSettings.mainNavigation) {
       mainNavigation = siteSettings.mainNavigation.map((item: any) => ({
         label: item.label,

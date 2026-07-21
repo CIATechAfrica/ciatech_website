@@ -13,10 +13,11 @@ export const metadata: Metadata = {
   description: "The leadership guiding CIATECH Africa's vision.",
 };
 
-export default async function BoardPage() {
+export default async function BoardPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale;
   let boardMembers = [];
   try {
-    boardMembers = await client.fetch(`*[_type == "boardMember"] | order(orderRank asc)`);
+    boardMembers = await client.fetch(`*[_type == "boardMember" && language == "${locale}"] | order(orderRank asc)`);
   } catch (error) {
     console.warn("Sanity fetch skipped due to network timeout.");
   }

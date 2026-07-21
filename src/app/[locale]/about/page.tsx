@@ -8,9 +8,10 @@ import { urlForImage } from "@/sanity/lib/image";
 
 export const revalidate = 0;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   try {
-    const seoData = await client.fetch(`*[_type == "aboutPage"][0]{ seoTitle, seoDescription }`);
+    const locale = (await params).locale;
+    const seoData = await client.fetch(`*[_type == "aboutPage" && language == "${locale}"][0]{ seoTitle, seoDescription }`);
     return {
       title: seoData?.seoTitle || aboutData.seo.title,
       description: seoData?.seoDescription || aboutData.seo.description,
@@ -23,11 +24,11 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-async function getSanityAboutData() {
+async function getSanityAboutData(locale: string) {
   try {
     const data = await client.fetch(`{
-      "aboutPage": *[_type == "aboutPage"][0],
-      "teamMembers": *[_type == "teamMember"] | order(orderRank asc)
+      "aboutPage": *[_type == "aboutPage" && language == "${locale}"][0],
+      "teamMembers": *[_type == "teamMember" && language == "${locale}"] | order(orderRank asc)
     }`);
     return data;
   } catch (error) {
@@ -36,8 +37,9 @@ async function getSanityAboutData() {
   }
 }
 
-export default async function AboutPage() {
-  const sanityData = await getSanityAboutData();
+export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale;
+  const sanityData = await getSanityAboutData(locale);
   const approachIcons = [Search, PenTool, Rocket, BarChart3];
 
   const data = {

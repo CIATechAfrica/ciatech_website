@@ -2,6 +2,11 @@ import { defineField, defineType } from 'sanity'
 export const contactInformationType = defineType({
   name: 'contactInformation', title: 'Contact Information', type: 'document',
   fields: [
+    defineField({
+      name: 'language',
+      type: 'string',
+      hidden: true,
+    }),
     defineField({ name: 'heading', title: 'Heading', type: 'string' }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
     defineField({

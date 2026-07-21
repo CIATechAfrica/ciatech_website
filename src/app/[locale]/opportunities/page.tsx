@@ -6,9 +6,10 @@ import OpportunitiesClientWrapper from "./OpportunitiesClientWrapper";
 
 export const revalidate = 0;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = (await params).locale;
   try {
-    const seoData = await client.fetch(`*[_type == "opportunitiesPage"][0]{ seoTitle, seoDescription }`);
+    const seoData = await client.fetch(`*[_type == "opportunitiesPage" && language == "${locale}"][0]{ seoTitle, seoDescription }`);
     return {
       title: seoData?.seoTitle || opportunitiesData.seo.title,
       description: seoData?.seoDescription || opportunitiesData.seo.description,
@@ -21,11 +22,11 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-async function getSanityOpportunitiesData() {
+async function getSanityOpportunitiesData(locale: string) {
   try {
     const data = await client.fetch(`{
-      "opportunitiesPage": *[_type == "opportunitiesPage"][0],
-      "roles": *[_type == "openRole"] | order(_createdAt asc)
+      "opportunitiesPage": *[_type == "opportunitiesPage" && language == "${locale}"][0],
+      "roles": *[_type == "openRole" && language == "${locale}"] | order(_createdAt asc)
     }`);
     return data;
   } catch (error) {
@@ -34,8 +35,9 @@ async function getSanityOpportunitiesData() {
   }
 }
 
-export default async function OpportunitiesPage() {
-  const sanityData = await getSanityOpportunitiesData();
+export default async function OpportunitiesPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale;
+  const sanityData = await getSanityOpportunitiesData(locale);
 
   // Split fetched roles into Fellowships and Careers
   let sanityFellowships: OpenRole[] = [];

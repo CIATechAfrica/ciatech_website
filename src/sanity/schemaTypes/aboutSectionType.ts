@@ -2,6 +2,11 @@ import { defineField, defineType } from 'sanity'
 export const aboutSectionType = defineType({
   name: 'aboutSection', title: 'About Section', type: 'document',
   fields: [
+    defineField({
+      name: 'language',
+      type: 'string',
+      hidden: true,
+    }),
     defineField({ name: 'heading', title: 'Heading', type: 'string' }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
     defineField({ name: 'imageRef', title: 'Legacy Image URL', type: 'string', hidden: true }),

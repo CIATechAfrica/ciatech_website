@@ -6,6 +6,11 @@ export const siteSettingsType = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'language',
+      type: 'string',
+      hidden: true,
+    }),
+    defineField({
       name: 'mainNavigation',
       title: 'Main Navigation',
       description: 'Configure the links in the top header',

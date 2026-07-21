@@ -10,9 +10,10 @@ import { PartnerLogo } from "@/types";
 
 export const revalidate = 0;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = (await params).locale;
   try {
-    const seoData = await client.fetch(`*[_type == "partnershipsPage"][0]{ seoTitle, seoDescription }`);
+    const seoData = await client.fetch(`*[_type == "partnershipsPage" && language == "${locale}"][0]{ seoTitle, seoDescription }`);
     return {
       title: seoData?.seoTitle || partnershipsData.seo.title,
       description: seoData?.seoDescription || partnershipsData.seo.description,
@@ -25,11 +26,11 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-async function getSanityPartnershipsData() {
+async function getSanityPartnershipsData(locale: string) {
   try {
     const data = await client.fetch(`{
-      "pageData": *[_type == "partnershipsPage"][0],
-      "logos": *[_type == "partnerLogo"] | order(_createdAt asc)
+      "pageData": *[_type == "partnershipsPage" && language == "${locale}"][0],
+      "logos": *[_type == "partnerLogo" && language == "${locale}"] | order(_createdAt asc)
     }`);
     return data;
   } catch (error) {
@@ -46,8 +47,9 @@ const IconMap: Record<string, React.ReactNode> = {
   "briefcase": <Briefcase className="w-8 h-8 text-primary" />
 };
 
-export default async function PartnershipsPage() {
-  const sanityData = await getSanityPartnershipsData();
+export default async function PartnershipsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale;
+  const sanityData = await getSanityPartnershipsData(locale);
 
   // Merge Page Data
   const data = {

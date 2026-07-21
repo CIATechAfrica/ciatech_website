@@ -5,9 +5,10 @@ import BlogClientWrapper from "./BlogClientWrapper";
 
 export const revalidate = 0;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = (await params).locale;
   try {
-    const seoData = await client.fetch(`*[_type == "blogPage"][0]{ seoTitle, seoDescription }`);
+    const seoData = await client.fetch(`*[_type == "blogPage" && language == "${locale}"][0]{ seoTitle, seoDescription }`);
     return {
       title: seoData?.seoTitle || blogData.seo.title,
       description: seoData?.seoDescription || blogData.seo.description,
@@ -20,11 +21,11 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-async function getSanityBlogData() {
+async function getSanityBlogData(locale: string) {
   try {
     const data = await client.fetch(`{
-      "blogPage": *[_type == "blogPage"][0],
-      "posts": *[_type == "blogPost"] | order(date desc){
+      "blogPage": *[_type == "blogPage" && language == "${locale}"][0],
+      "posts": *[_type == "blogPost" && language == "${locale}"] | order(date desc){
         ...,
         "thumbnailRef": thumbnail.asset->url
       }
@@ -36,8 +37,9 @@ async function getSanityBlogData() {
   }
 }
 
-export default async function BlogPage() {
-  const sanityData = await getSanityBlogData();
+export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale;
+  const sanityData = await getSanityBlogData(locale);
 
   // If we have Sanity posts, the first one is featured, the rest are the grid
   const hasSanityPosts = sanityData?.posts && sanityData.posts.length > 0;
