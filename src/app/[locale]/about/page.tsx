@@ -1,6 +1,6 @@
 import { aboutData } from "../../../../content/about";
 import Image from "next/image";
-import { Target, Lightbulb, Search, PenTool, Rocket, BarChart3 } from "lucide-react";
+import { Target, Lightbulb } from "lucide-react";
 
 import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
@@ -40,7 +40,7 @@ async function getSanityAboutData(locale: string) {
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = (await params).locale;
   const sanityData = await getSanityAboutData(locale);
-  const approachIcons = [Search, PenTool, Rocket, BarChart3];
+
 
   const data = {
     ...aboutData,
@@ -140,37 +140,6 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         </div>
       </div>
 
-      {/* 4. THE APPROACH (Static/Hardcoded as requested) */}
-      <div className="py-32 bg-gray-50 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <h3 className="text-4xl font-black text-gray-900 mb-6">{data.approach.heading}</h3>
-            <p className="text-xl text-gray-500 font-light">{data.approach.subtext}</p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-            <div className="hidden lg:block absolute top-12 left-[10%] right-[10%] h-[2px] bg-gray-200 -z-10" />
-            
-            {data.approach.steps.map((step, idx) => {
-              const Icon = approachIcons[idx % 4];
-              return (
-                <div key={step.id} className="relative group">
-                  <div className="w-24 h-24 mx-auto bg-white rounded-full border-8 border-gray-50 shadow-md flex items-center justify-center mb-6 group-hover:border-secondary transition-colors duration-500">
-                    <Icon className="w-8 h-8 text-primary group-hover:text-secondary transition-colors duration-500" />
-                  </div>
-                  <div className="text-center px-4">
-                    <span className="text-xs font-bold text-secondary uppercase tracking-widest mb-3 block">Phase 0{idx + 1}</span>
-                    <h4 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h4>
-                    <p className="text-gray-600 font-medium leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
 
       {/* 5. TEAM DIRECTORY */}
       <div className="py-32 bg-gray-50 border-t border-gray-100">
