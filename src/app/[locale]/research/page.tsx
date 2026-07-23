@@ -14,7 +14,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     return {
       title: seoData?.seoTitle || researchData.seo.title,
       description: seoData?.seoDescription || researchData.seo.description,
-    };
+      openGraph: {
+        title: seoData?.seoTitle || researchData.seo.title,
+        description: seoData?.seoDescription || researchData.seo.description,
+        images: ["/logo.png"],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: seoData?.seoTitle || researchData.seo.title,
+        description: seoData?.seoDescription || researchData.seo.description,
+        images: ["/logo.png"],
+      }};
   } catch (error) {
     return {
       title: researchData.seo.title,

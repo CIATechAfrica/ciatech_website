@@ -13,7 +13,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     return {
       title: seoData?.seoTitle || opportunitiesData.seo.title,
       description: seoData?.seoDescription || opportunitiesData.seo.description,
-    };
+      openGraph: {
+        title: seoData?.seoTitle || opportunitiesData.seo.title,
+        description: seoData?.seoDescription || opportunitiesData.seo.description,
+        images: ["/logo.png"],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: seoData?.seoTitle || opportunitiesData.seo.title,
+        description: seoData?.seoDescription || opportunitiesData.seo.description,
+        images: ["/logo.png"],
+      }};
   } catch (error) {
     return {
       title: opportunitiesData.seo.title,
