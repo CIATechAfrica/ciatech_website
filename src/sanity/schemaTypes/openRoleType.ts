@@ -2,6 +2,11 @@ import { defineField, defineType } from 'sanity'
 export const openRoleType = defineType({
   name: 'openRole', title: 'Open Role / Opportunity', type: 'document',
   fields: [
+    defineField({
+      name: 'language',
+      type: 'string',
+      hidden: true,
+    }),
     defineField({ name: 'title', title: 'Role Title', type: 'string' }),
     defineField({
       name: 'category',

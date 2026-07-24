@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 export const revalidate = 0;
 
@@ -66,6 +67,7 @@ async function getSanityImpactData(locale: string) {
 export default async function ImpactPage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = (await params).locale;
   const sanityData = await getSanityImpactData(locale);
+  const t = await getTranslations("UI");
 
   const data = {
     ...impactData,
@@ -124,7 +126,7 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
           <div className="inline-flex items-center justify-center gap-3 mb-6">
             <span className="w-12 h-px bg-secondary opacity-50" />
             <h3 className="text-secondary font-bold tracking-widest uppercase text-xs">
-              Impact
+              {t("impact")}
             </h3>
             <span className="w-12 h-px bg-secondary opacity-50" />
           </div>
@@ -184,7 +186,7 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
             <div className="inline-flex items-center justify-center gap-3 mb-6">
               <span className="w-12 h-px bg-primary opacity-50" />
               <h3 className="text-primary font-bold tracking-widest uppercase text-xs">
-                Systems Breakdown
+                {t("systems_breakdown")}
               </h3>
               <span className="w-12 h-px bg-primary opacity-50" />
             </div>
@@ -218,7 +220,7 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
 
                 <div className="relative z-10 flex flex-col justify-center">
                   <h4 className="border-b border-gray-100 pb-4 mb-6 text-sm font-bold text-gray-400 uppercase tracking-widest">
-                    Execution Methodology
+                    {t("execution_methodology")}
                   </h4>
                   <ul className="space-y-6">
                     {area.methodology.map((method: string, idx: number) => (

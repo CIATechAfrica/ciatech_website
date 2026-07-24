@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { ArrowRight, BookOpen, X, Clock, Calendar, ChevronRight, ChevronLeft } from "lucide-react";
 import { BlogPageData, BlogPost } from "@/types";
+import { useTranslations } from "next-intl";
 
 interface BlogClientWrapperProps {
   data: BlogPageData;
@@ -11,6 +12,8 @@ interface BlogClientWrapperProps {
 
 export default function BlogClientWrapper({ data }: BlogClientWrapperProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const t = useTranslations("Buttons");
+  const tUI = useTranslations("UI");
   
   // Combine all posts to allow seamless modal navigation
   const allPosts = data.featuredPost ? [data.featuredPost, ...(data.posts || [])] : data.posts || [];
@@ -49,7 +52,7 @@ export default function BlogClientWrapper({ data }: BlogClientWrapperProps) {
           <div className="inline-flex items-center justify-center gap-3 mb-6">
             <span className="w-12 h-px bg-secondary opacity-50" />
             <h3 className="text-secondary font-bold tracking-widest uppercase text-xs">
-              Newsroom
+              {tUI("newsroom")}
             </h3>
             <span className="w-12 h-px bg-secondary opacity-50" />
           </div>
@@ -79,7 +82,7 @@ export default function BlogClientWrapper({ data }: BlogClientWrapperProps) {
               />
               <div className="absolute top-6 left-6 z-10">
                 <span className="bg-primary text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full shadow-md">
-                  Featured Dispatch
+                  {tUI("featured_dispatch")}
                 </span>
               </div>
             </div>
@@ -101,7 +104,7 @@ export default function BlogClientWrapper({ data }: BlogClientWrapperProps) {
               </p>
 
               <div className="mt-auto flex items-center text-primary font-bold">
-                Read Full Article 
+                {t("read_full_article")}
                 <span className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center ml-4 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
                   <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
                 </span>
@@ -168,7 +171,7 @@ export default function BlogClientWrapper({ data }: BlogClientWrapperProps) {
             {/* Modal Header */}
             <div className="bg-gray-50 border-b border-gray-100 px-8 py-5 flex justify-between items-center sticky top-0 z-20 shrink-0">
               <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gray-500">
-                <BookOpen className="w-4 h-4 text-primary" /> CIATech Newsroom 
+                <BookOpen className="w-4 h-4 text-primary" /> {tUI("ciatech_newsroom")} 
               </div>
               
               <div className="flex items-center gap-2">
@@ -226,7 +229,7 @@ export default function BlogClientWrapper({ data }: BlogClientWrapperProps) {
                   </div>
                   <div>
                     <div className="font-bold text-gray-900">{activeArticle.author}</div>
-                    <div className="text-sm text-gray-500">Official CIATech Dispatch</div>
+                    <div className="text-sm text-gray-500">{tUI("official_dispatch")}</div>
                   </div>
                 </div>
 
@@ -235,7 +238,7 @@ export default function BlogClientWrapper({ data }: BlogClientWrapperProps) {
                     {activeArticle.content}
                   </p>
                   <p>
-                    <em>As we continue to accelerate our deployment pipelines, check back frequently for real-time engineering and policy updates. CIATech remains committed to absolute transparency across our operational grid.</em>
+                    <em>{tUI("blog_disclaimer")}</em>
                   </p>
                 </div>
 
@@ -244,19 +247,19 @@ export default function BlogClientWrapper({ data }: BlogClientWrapperProps) {
                     onClick={showPrev}
                     className="w-full sm:w-auto inline-flex justify-center items-center px-4 sm:px-6 py-3 sm:py-4 bg-gray-100 text-gray-600 font-bold rounded-xl hover:bg-gray-200 transition-colors order-2 sm:order-1 text-sm sm:text-base"
                   >
-                    <ChevronLeft className="w-5 h-5 mr-1 sm:mr-2" /> Previous
+                    <ChevronLeft className="w-5 h-5 mr-1 sm:mr-2" /> {t("previous")}
                   </button>
                   <button 
                     onClick={() => setActiveIndex(null)}
                     className="w-full sm:w-auto inline-flex justify-center items-center px-6 sm:px-10 py-3 sm:py-4 bg-gray-900 text-white font-bold rounded-xl hover:bg-primary transition-colors shadow-md order-1 sm:order-2 text-sm sm:text-base"
                   >
-                    Return to Feed
+                    {t("return_to_feed")}
                   </button>
                   <button 
                     onClick={showNext}
                     className="w-full sm:w-auto inline-flex justify-center items-center px-4 sm:px-6 py-3 sm:py-4 bg-gray-100 text-gray-600 font-bold rounded-xl hover:bg-gray-200 transition-colors order-3 text-sm sm:text-base"
                   >
-                    Next <ChevronRight className="w-5 h-5 ml-1 sm:ml-2" />
+                    {t("next")} <ChevronRight className="w-5 h-5 ml-1 sm:ml-2" />
                   </button>
                 </div>
               </div>

@@ -4,9 +4,11 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { MapPin, X, Calendar, Search, ChevronLeft, ChevronRight } from "lucide-react";
 import { GalleryPageData } from "@/types";
+import { useTranslations } from "next-intl";
 
 export default function GalleryClientWrapper({ data }: { data: GalleryPageData }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const tUI = useTranslations("UI");
   const activeImage = activeIndex !== null ? data.images[activeIndex] : null;
 
   const showNext = (e: React.MouseEvent) => {
@@ -50,7 +52,7 @@ export default function GalleryClientWrapper({ data }: { data: GalleryPageData }
           <div className="inline-flex items-center justify-center gap-3 mb-6">
             <span className="w-12 h-px bg-secondary opacity-50" />
             <h3 className="text-secondary font-bold tracking-widest uppercase text-xs">
-              Gallery
+              {tUI("gallery")}
             </h3>
             <span className="w-12 h-px bg-secondary opacity-50" />
           </div>
@@ -72,7 +74,7 @@ export default function GalleryClientWrapper({ data }: { data: GalleryPageData }
               {data.gridTitle}
             </h2>
             <div className="text-sm font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
-              <Search className="w-4 h-4" /> Visual Impact Records
+              <Search className="w-4 h-4" /> {tUI("visual_impact_records")}
             </div>
           </div>
 

@@ -84,7 +84,15 @@ export default defineConfig({
         'contactInformation',
         'siteSettings',
         'aboutSection',
-        'callToAction'
+        'callToAction',
+        'corePillar',
+        'solution',
+        'teamMember',
+        'boardMember',
+        'impactStat',
+        'researchPublication',
+        'blogPost',
+        'openRole'
       ]
     })
   ],

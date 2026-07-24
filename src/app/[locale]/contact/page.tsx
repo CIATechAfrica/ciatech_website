@@ -3,9 +3,11 @@
 import { contactData } from "../../../../content/contact";
 import { MapPin, Mail, ArrowUpRight, Send, Globe } from "lucide-react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const t = useTranslations("ContactForm");
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,7 +26,7 @@ export default function ContactPage() {
           <div className="inline-flex items-center justify-center gap-3 mb-6">
             <span className="w-12 h-px bg-secondary opacity-50" />
             <h3 className="text-secondary font-bold tracking-widest uppercase text-xs">
-              Partnership Portal
+              {t("partnership_portal")}
             </h3>
             <span className="w-12 h-px bg-secondary opacity-50" />
           </div>
@@ -99,9 +101,9 @@ export default function ContactPage() {
               <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary to-secondary" />
               
               <div className="mb-10">
-                <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4 tracking-tight">Deploy a Proposal</h2>
+                <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4 tracking-tight">{t("deploy_proposal")}</h2>
                 <p className="text-gray-600 leading-relaxed font-light text-lg">
-                  Use this secure portal to route architectural schematics, partnership proposals, or investment inquiries directly to our command center.
+                  {t("deploy_desc")}
                 </p>
               </div>
 
@@ -110,55 +112,55 @@ export default function ContactPage() {
                   <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6">
                     <Send className="w-10 h-10 text-primary" />
                   </div>
-                  <h3 className="text-2xl font-black text-gray-900 mb-2">Transmission Received</h3>
+                  <h3 className="text-2xl font-black text-gray-900 mb-2">{t("transmission_received")}</h3>
                   <p className="text-gray-600 max-w-sm font-light">
-                    Your proposition has been routed to the appropriate CIATech department. We will respond shortly.
+                    {t("transmission_desc")}
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleFormSubmit} className="space-y-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-widest text-gray-500">Representative Name</label>
+                      <label className="text-xs font-bold uppercase tracking-widest text-gray-500">{t("name_label")}</label>
                       <input 
                         type="text" 
                         required
                         className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900"
-                        placeholder="Jane Doe"
+                        placeholder={t("name_placeholder")}
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-widest text-gray-500">Professional Email</label>
+                      <label className="text-xs font-bold uppercase tracking-widest text-gray-500">{t("email_label")}</label>
                       <input 
                         type="email" 
                         required
                         className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900"
-                        placeholder="jane@organization.com"
+                        placeholder={t("email_placeholder")}
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-widest text-gray-500">Organization / Entity</label>
+                      <label className="text-xs font-bold uppercase tracking-widest text-gray-500">{t("org_label")}</label>
                       <input 
                         type="text" 
                         required
                         className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900"
-                        placeholder="Organization Name"
+                        placeholder={t("org_placeholder")}
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-widest text-gray-500">Select Routing</label>
+                      <label className="text-xs font-bold uppercase tracking-widest text-gray-500">{t("routing_label")}</label>
                       <div className="relative">
                         <select 
                           required
                           className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900 appearance-none cursor-pointer"
                         >
-                          <option value="policy">Government & Policy</option>
-                          <option value="capital">Investor Inquiry</option>
-                          <option value="press">Press & Media</option>
-                          <option value="general">General Support</option>
+                          <option value="policy">{t("routing_gov")}</option>
+                          <option value="capital">{t("routing_inv")}</option>
+                          <option value="press">{t("routing_press")}</option>
+                          <option value="general">{t("routing_gen")}</option>
                         </select>
                         <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
                           <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -168,12 +170,12 @@ export default function ContactPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-gray-500">Proposition Details</label>
+                    <label className="text-xs font-bold uppercase tracking-widest text-gray-500">{t("prop_label")}</label>
                     <textarea 
                       required
                       rows={6}
                       className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900 resize-none"
-                      placeholder="Outline your deployment objectives, data requests, or partnership scope here..."
+                      placeholder={t("prop_placeholder")}
                     />
                   </div>
 
@@ -181,7 +183,7 @@ export default function ContactPage() {
                     type="submit"
                     className="w-full sm:w-auto inline-flex items-center justify-center px-10 py-5 rounded-xl bg-gray-900 text-white font-bold hover:bg-primary transition-all duration-300 group shadow-[0_4px_14px_0_rgba(17,24,39,0.1)] hover:shadow-[0_4px_14px_0_rgba(142,85,22,0.4)] hover:-translate-y-1 active:translate-y-0"
                   >
-                    <span>Transmit Proposal</span>
+                    <span>{t("btn_transmit")}</span>
                     <ArrowUpRight className="w-5 h-5 ml-3 transform group-hover:rotate-45 transition-transform duration-300" />
                   </button>
                 </form>

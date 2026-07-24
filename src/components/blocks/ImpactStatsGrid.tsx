@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { HeartHandshake, Globe2, Rocket, Handshake, Layers, ArrowRight } from "lucide-react";
 import { HomeData } from "@/types";
+import { useTranslations } from "next-intl";
 
 interface ImpactStatsGridProps {
   data: HomeData["impactStats"];
@@ -15,6 +16,8 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 export default function ImpactStatsGrid({ data }: ImpactStatsGridProps) {
+  const t = useTranslations("UI");
+  
   return (
     <section className="relative overflow-hidden w-full py-24 sm:py-32">
       
@@ -34,7 +37,7 @@ export default function ImpactStatsGrid({ data }: ImpactStatsGridProps) {
           <div className="inline-flex items-center justify-center gap-2 mb-6">
             <span className="w-8 h-px bg-white/30" />
             <h3 className="text-white/80 font-bold tracking-widest uppercase text-xs">
-              IMPACT
+              {t("impact")}
             </h3>
             <span className="w-8 h-px bg-white/30" />
           </div>

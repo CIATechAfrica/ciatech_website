@@ -2,6 +2,11 @@ import { defineField, defineType } from 'sanity'
 export const researchPublicationType = defineType({
   name: 'researchPublication', title: 'Research Publication', type: 'document',
   fields: [
+    defineField({
+      name: 'language',
+      type: 'string',
+      hidden: true,
+    }),
     defineField({ name: 'title', title: 'Title', type: 'string' }),
     defineField({ name: 'fullDescription', title: 'Description / Full Note', type: 'text' }),
     defineField({ name: 'category', title: 'Category / Sector', type: 'string' }),

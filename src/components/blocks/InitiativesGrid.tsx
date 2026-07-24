@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BrainCircuit, Lightbulb, Users, Microscope, ArrowRight, BookOpen, FileText } from "lucide-react";
 import { HomeData } from "@/types";
+import { useTranslations } from "next-intl";
 
 interface InitiativesGridProps {
   data: any[]; // Now using unified researchPublication array
@@ -16,6 +17,8 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 export default function InitiativesGrid({ data }: InitiativesGridProps) {
+  const t = useTranslations("UI");
+  
   // Ensure we only show a maximum of 4 cards on the Hub
   const hubItems = data?.slice(0, 4) || [];
 
@@ -28,17 +31,17 @@ export default function InitiativesGrid({ data }: InitiativesGridProps) {
           <div className="inline-flex items-center gap-2 mb-6">
             <span className="w-8 h-px bg-secondary" />
             <h3 className="text-secondary font-bold tracking-widest uppercase text-xs">
-              Research
+              {t("research")}
             </h3>
           </div>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-6 tracking-tight leading-tight flex flex-col">
-            <span>Flagship</span>
+            <span>{t("flagship")}</span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-              Initiatives
+              {t("initiatives")}
             </span>
           </h2>
           <p className="text-xl text-gray-500 font-light leading-relaxed max-w-2xl">
-            A look into our targeted programs driving localized impact across the continent.
+            {t("research_desc")}
           </p>
         </div>
 
@@ -74,9 +77,8 @@ export default function InitiativesGrid({ data }: InitiativesGridProps) {
                       {initiative.fullDescription}
                     </p>
                     
-                    {/* Interaction Bridge */}
                     <div className="flex items-center text-sm font-bold text-gray-400 uppercase tracking-widest group-hover:text-secondary transition-colors mt-auto pt-4 border-t border-transparent group-hover:border-gray-50">
-                      Explore Initiative
+                      {t("explore_initiative")}
                       <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform duration-300" />
                     </div>
                   </div>

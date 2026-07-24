@@ -72,11 +72,16 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   let mainNavigation = homeData.headerLinks;
+  let footerData = { ...homeData.footer };
 
   try {
-    const siteSettings = await client.fetch(`*[_type == "siteSettings" && language == "${locale}"][0]`);
-    if (siteSettings && siteSettings.mainNavigation) {
-      mainNavigation = siteSettings.mainNavigation.map((item: any) => ({
+    const data = await client.fetch(`{
+      "siteSettings": *[_type == "siteSettings" && language == "${locale}"][0],
+      "contactInfo": *[_type == "contactInformation" && language == "${locale}"][0]
+    }`);
+    
+    if (data.siteSettings?.mainNavigation) {
+      mainNavigation = data.siteSettings.mainNavigation.map((item: any) => ({
         label: item.label,
         href: item.href,
         subLinks: item.dropdown?.map((sub: any) => ({
@@ -85,8 +90,20 @@ export default async function RootLayout({
         }))
       }));
     }
+    
+    if (data.contactInfo) {
+      footerData = {
+        ...footerData,
+        address: data.contactInfo?.globalHeadquarters?.address || footerData.address,
+        email: data.contactInfo?.globalHeadquarters?.email || footerData.email,
+        phone: data.contactInfo?.globalHeadquarters?.phone || footerData.phone,
+        mission: data.siteSettings?.footerMission || footerData.mission,
+        socials: data.siteSettings?.socialLinks?.length > 0 ? data.siteSettings.socialLinks.map((s: any, i: number) => ({ id: s._key || i.toString(), ...s })) : footerData.socials,
+        links: data.siteSettings?.footerQuickLinks?.length > 0 ? data.siteSettings.footerQuickLinks : footerData.links,
+      };
+    }
   } catch (err) {
-    console.warn("Failed to fetch site settings due to network timeout.");
+    console.warn("Failed to fetch settings from Sanity.");
   }
   return (
     <html
@@ -98,7 +115,7 @@ export default async function RootLayout({
           <LayoutWrapper 
             navLinks={mainNavigation} 
             primaryCTA={homeData.cta.primaryCTA} 
-            footerData={homeData.footer}
+            footerData={footerData}
           >
             {children}
           </LayoutWrapper>

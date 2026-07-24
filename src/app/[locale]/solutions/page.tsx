@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, Rocket, BrainCircuit, Landmark, GraduationCap, Globe } from "lucide-react";
 import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
+import { getTranslations } from "next-intl/server";
 
 export const revalidate = 0;
 
@@ -59,6 +60,7 @@ async function getSanitySolutionsData(locale: string) {
 export default async function SolutionsPage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = (await params).locale;
   const sanityData = await getSanitySolutionsData(locale);
+  const t = await getTranslations("UI");
 
   const data = {
     ...solutionsData,
@@ -157,7 +159,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
                     <div className="absolute left-0 top-0 h-full w-12 bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
                   </div>
                   
-                  <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Core Focus Areas</h4>
+                  <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">{t("core_focus_areas")}</h4>
                   
                   <ul className="space-y-5">
                     {solution.features.map((feature: string, fIndex: number) => (

@@ -2,12 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { HomeData } from "@/types";
+import { useTranslations } from "next-intl";
 
 interface AboutSectionProps {
   data: HomeData["about"];
 }
 
 export default function AboutSection({ data }: AboutSectionProps) {
+  const t = useTranslations("UI");
+
   return (
     <section className="bg-white overflow-hidden py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,7 +21,7 @@ export default function AboutSection({ data }: AboutSectionProps) {
             <div className="inline-flex items-center gap-2 mb-6">
               <span className="w-8 h-px bg-secondary" />
               <h3 className="text-secondary font-bold tracking-widest uppercase text-xs">
-                About Us
+                {t("about_us")}
               </h3>
             </div>
             

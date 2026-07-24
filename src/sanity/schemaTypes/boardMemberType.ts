@@ -6,6 +6,11 @@ export const boardMemberType = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'language',
+      type: 'string',
+      hidden: true,
+    }),
+    defineField({
       name: 'name',
       title: 'Name',
       type: 'string',

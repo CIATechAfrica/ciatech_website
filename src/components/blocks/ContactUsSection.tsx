@@ -5,12 +5,14 @@ import { Mail, Phone, MapPin, Send, CheckCircle, XCircle, Loader2 } from "lucide
 import { Turnstile } from '@marsidev/react-turnstile';
 import { HomeData } from "@/types";
 import { submitContactForm } from "@/app/actions";
+import { useTranslations } from "next-intl";
 
 interface ContactProps {
   data: HomeData["contactTeaser"];
 }
 
 export default function ContactUsSection({ data }: ContactProps) {
+  const t = useTranslations("ContactForm");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -33,7 +35,7 @@ export default function ContactUsSection({ data }: ContactProps) {
       setTimeout(() => setSubmitStatus('idle'), 5000);
     } else {
       setSubmitStatus('error');
-      setErrorMessage(result.error || 'Failed to submit form.');
+      setErrorMessage(result.error || t("err_failed"));
     }
     
     setIsSubmitting(false);
@@ -62,7 +64,7 @@ export default function ContactUsSection({ data }: ContactProps) {
               
               <div className="space-y-6">
                 <div className="mb-8">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Global Headquarters</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">{t("global_hq")}</h3>
                   <div className="flex flex-col gap-4">
                     <div className="flex items-center gap-4 group">
                       <div className="w-12 h-12 bg-white rounded-full shadow-sm border border-gray-100 flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-colors text-gray-400 shrink-0">
@@ -89,7 +91,7 @@ export default function ContactUsSection({ data }: ContactProps) {
 
                 {data.subOffices && data.subOffices.length > 0 && (
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-4">Regional Offices</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">{t("regional_offices")}</h3>
                     <div className="flex flex-col gap-4">
                       {data.subOffices.map((office: any, idx: number) => (
                         <div key={office._key || idx} className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:border-primary/30 transition-colors">
@@ -115,8 +117,8 @@ export default function ContactUsSection({ data }: ContactProps) {
                   <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
                     <CheckCircle className="w-8 h-8" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Message Sent</h3>
-                  <p className="text-gray-600">Thank you for reaching out. Our team will review your proposition and respond shortly.</p>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{t("msg_sent_title")}</h3>
+                  <p className="text-gray-600">{t("msg_sent_body")}</p>
                 </div>
               )}
 
@@ -130,28 +132,28 @@ export default function ContactUsSection({ data }: ContactProps) {
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                    <div className="space-y-px">
-                     <label className="block text-sm font-semibold text-gray-700 mb-1">Representative Name</label>
-                     <input type="text" name="name" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900" placeholder="Jane Doe" required />
+                     <label className="block text-sm font-semibold text-gray-700 mb-1">{t("name_label")}</label>
+                     <input type="text" name="name" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900" placeholder={t("name_placeholder")} required />
                    </div>
                    <div className="space-y-px">
-                     <label className="block text-sm font-semibold text-gray-700 mb-1">Professional Email</label>
-                     <input type="email" name="email" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900" placeholder="jane@organization.com" required />
+                     <label className="block text-sm font-semibold text-gray-700 mb-1">{t("email_label")}</label>
+                     <input type="email" name="email" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900" placeholder={t("email_placeholder")} required />
                    </div>
                 </div>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                    <div className="space-y-px">
-                     <label className="block text-sm font-semibold text-gray-700 mb-1">Organization / Entity</label>
-                     <input type="text" name="company" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900" placeholder="Organization Name" required />
+                     <label className="block text-sm font-semibold text-gray-700 mb-1">{t("org_label")}</label>
+                     <input type="text" name="company" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900" placeholder={t("org_placeholder")} required />
                    </div>
                    <div className="space-y-px relative">
-                     <label className="block text-sm font-semibold text-gray-700 mb-1">Select Routing</label>
+                     <label className="block text-sm font-semibold text-gray-700 mb-1">{t("routing_label")}</label>
                      <div className="relative">
                        <select name="subject" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-900 appearance-none cursor-pointer" required>
-                         <option value="Government & Policy">Government & Policy</option>
-                         <option value="Investor Inquiry">Investor Inquiry</option>
-                         <option value="Press & Media">Press & Media</option>
-                         <option value="General Support">General Support</option>
+                         <option value="Government & Policy">{t("routing_gov")}</option>
+                         <option value="Investor Inquiry">{t("routing_inv")}</option>
+                         <option value="Press & Media">{t("routing_press")}</option>
+                         <option value="General Support">{t("routing_gen")}</option>
                        </select>
                        <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
                          <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -161,8 +163,8 @@ export default function ContactUsSection({ data }: ContactProps) {
                 </div>
                 
                 <div>
-                   <label className="block text-sm font-semibold text-gray-700 mb-1">Proposition Details</label>
-                   <textarea name="message" rows={4} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none text-gray-900" placeholder="Outline your objectives or partnership scope here..." required></textarea>
+                   <label className="block text-sm font-semibold text-gray-700 mb-1">{t("prop_label")}</label>
+                   <textarea name="message" rows={4} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none text-gray-900" placeholder={t("prop_placeholder")} required></textarea>
                 </div>
                 
                 <div className="flex justify-center my-2">
@@ -179,9 +181,9 @@ export default function ContactUsSection({ data }: ContactProps) {
                   className="group flex items-center justify-center w-full bg-primary text-white font-bold py-4 rounded-xl hover:bg-[#7a4812] hover:shadow-[0_4px_14px_0_rgba(142,85,22,0.4)] transition-all mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
-                    <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Transmitting...</>
+                    <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> {t("btn_transmitting")}</>
                   ) : (
-                    <>Transmit Proposal <Send className="w-4 h-4 ml-2 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /></>
+                    <>{t("btn_transmit")} <Send className="w-4 h-4 ml-2 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /></>
                   )}
                 </button>
               </form>

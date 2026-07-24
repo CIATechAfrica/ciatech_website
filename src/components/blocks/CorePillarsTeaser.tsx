@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MonitorPlay, TrendingUp, Users, Shield, Landmark, Leaf, ArrowRight } from "lucide-react";
 import { HomeData } from "@/types";
+import { useTranslations } from "next-intl";
 
 const iconMap: Record<string, React.ReactNode> = {
   "monitor-play": <MonitorPlay className="w-8 h-8 text-secondary" />,
@@ -16,6 +17,8 @@ interface CorePillarsTeaserProps {
 }
 
 export default function CorePillarsTeaser({ data }: CorePillarsTeaserProps) {
+  const t = useTranslations("UI");
+
   return (
     <section className="py-32 bg-gray-50 border-t border-gray-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,7 +28,7 @@ export default function CorePillarsTeaser({ data }: CorePillarsTeaserProps) {
           <div className="inline-flex items-center justify-center gap-2 mb-6">
             <span className="w-8 h-px bg-secondary" />
             <h3 className="text-secondary font-bold tracking-widest uppercase text-xs">
-              Pillars of Impact
+              {t("pillars_of_impact")}
             </h3>
             <span className="w-8 h-px bg-secondary" />
           </div>

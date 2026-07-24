@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ArrowRight, Download, BookOpen, X, FileText } from "lucide-react";
 import { ResearchItem } from "@/types";
 import { generateAndDownloadPDF } from "@/lib/pdfGenerator";
+import { useTranslations } from "next-intl";
 
 interface ResearchClientWrapperProps {
   featured: any;
@@ -14,6 +15,8 @@ interface ResearchClientWrapperProps {
 
 export default function ResearchClientWrapper({ featured, publications, publicationsTitle }: ResearchClientWrapperProps) {
   const [readingItem, setReadingItem] = useState<any | null>(null);
+  const t = useTranslations("Buttons");
+  const tUI = useTranslations("UI");
 
   // Dynamic Client-Side PDF Generation
   const handleDownload = async (e: React.MouseEvent, item: any) => {
@@ -46,7 +49,7 @@ export default function ResearchClientWrapper({ featured, publications, publicat
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
               <div className="absolute top-6 left-6 z-10">
                 <span className="bg-primary text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full shadow-md">
-                  Featured Paper
+                  {tUI("featured_paper")}
                 </span>
               </div>
             </div>
@@ -75,7 +78,7 @@ export default function ResearchClientWrapper({ featured, publications, publicat
                   className="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3.5 bg-gray-900 text-white font-bold rounded-full hover:bg-primary transition-all duration-300 shadow-md shadow-gray-900/10 group/btn"
                 >
                   <BookOpen className="w-4 h-4 mr-2" />
-                  Read Executive Summary
+                  {t("read_exec_summary")}
                 </button>
                 <button 
                   onClick={(e) => handleDownload(e, featured)}
@@ -83,7 +86,7 @@ export default function ResearchClientWrapper({ featured, publications, publicat
                   title="Download Full PDF"
                 >
                   <Download className="w-4 h-4 mr-2" />
-                  Download PDF
+                  {t("download_pdf")}
                 </button>
               </div>
             </div>
@@ -128,7 +131,7 @@ export default function ResearchClientWrapper({ featured, publications, publicat
                       onClick={() => setReadingItem(item)}
                       className="inline-flex items-center text-sm font-bold text-gray-900 group-hover:text-primary transition-colors duration-300"
                     >
-                      Read Report <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" />
+                      {t("read_report")} <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" />
                     </button>
                     <button 
                       onClick={(e) => handleDownload(e, item)}
@@ -204,13 +207,13 @@ export default function ResearchClientWrapper({ featured, publications, publicat
                   className="w-full sm:w-auto inline-flex justify-center items-center px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-[#7a4812] transition-colors shadow-md"
                 >
                   <FileText className="w-5 h-5 mr-3" />
-                  Download Complete PDF
+                  {t("download_complete_pdf")}
                 </button>
                 <button 
                   onClick={() => setReadingItem(null)}
                   className="w-full sm:w-auto inline-flex justify-center items-center px-8 py-4 bg-gray-100 text-gray-900 font-bold rounded-xl hover:bg-gray-200 transition-colors"
                 >
-                  Close Reader
+                  {t("close_reader")}
                 </button>
               </div>
             </div>

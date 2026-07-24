@@ -5,6 +5,7 @@ import { Target, Lightbulb } from "lucide-react";
 import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
+import { getTranslations } from "next-intl/server";
 
 export const revalidate = 0;
 
@@ -50,6 +51,7 @@ async function getSanityAboutData(locale: string) {
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = (await params).locale;
   const sanityData = await getSanityAboutData(locale);
+  const t = await getTranslations("Buttons");
 
 
   const data = {
@@ -168,7 +170,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/10 to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 pointer-events-none group-hover:pointer-events-auto">
                      <a href={member.linkedin} className="text-white hover:text-secondary opacity-100 lg:opacity-0 translate-y-0 lg:translate-y-4 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-500 transform inline-flex items-center gap-2 font-bold pointer-events-auto text-sm">
                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
-                       Connect
+                       {t("connect")}
                      </a>
                   </div>
                 </div>
@@ -182,10 +184,10 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
           <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6">
             <a href="/about/team" className="px-8 py-4 bg-primary text-white rounded-full font-bold hover:bg-[#7a4812] transition-colors shadow-md">
-              View Full Team
+              {t("view_full_team")}
             </a>
             <a href="/about/board" className="px-8 py-4 bg-white text-gray-900 border border-gray-200 rounded-full font-bold hover:border-primary hover:text-primary transition-colors shadow-sm">
-              Meet the Board of Directors
+              {t("meet_board")}
             </a>
           </div>
         </div>

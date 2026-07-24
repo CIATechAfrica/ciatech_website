@@ -8,6 +8,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { HomeData } from "@/types";
 import { submitNewsletter } from "@/app/actions";
 import { Loader2, CheckCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const iconMap: Record<string, React.ReactNode> = {
   "linkedin": <FaLinkedin className="w-5 h-5" />,
@@ -23,6 +24,7 @@ interface FooterProps {
 }
 
 export default function Footer({ data }: FooterProps) {
+  const t = useTranslations("Footer");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
@@ -80,7 +82,7 @@ export default function Footer({ data }: FooterProps) {
           
           {/* Quick Links Column */}
           <div className="lg:col-span-2">
-            <h4 className="font-bold text-white tracking-wide mb-6">Quick Links</h4>
+            <h4 className="font-bold text-white tracking-wide mb-6">{t("quick_links")}</h4>
             <ul className="space-y-3">
               {data.links.map((link) => (
                 <li key={link.label}>
@@ -97,34 +99,34 @@ export default function Footer({ data }: FooterProps) {
           
           {/* Contact Details Column */}
           <div className="lg:col-span-2">
-            <h4 className="font-bold text-white tracking-wide mb-6">Contact Us</h4>
+            <h4 className="font-bold text-white tracking-wide mb-6">{t("contact_us")}</h4>
             <ul className="space-y-4 text-sm text-gray-400">
-              <li className="leading-relaxed">{data.address}</li>
-              <li>
+              {data.address && <li className="leading-relaxed">{data.address}</li>}
+              {data.email && <li>
                 <a href={`mailto:${data.email}`} className="hover:text-white transition-colors">
                   {data.email}
                 </a>
-              </li>
-              <li>
+              </li>}
+              {data.phone && <li>
                 <a href={`tel:${data.phone}`} className="hover:text-white transition-colors">
                   {data.phone}
                 </a>
-              </li>
+              </li>}
             </ul>
           </div>
           
           {/* Newsletter Column */}
           <div className="lg:col-span-4">
-            <h4 className="font-bold text-white tracking-wide mb-6">Stay Updated</h4>
+            <h4 className="font-bold text-white tracking-wide mb-6">{t("stay_updated")}</h4>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Subscribe to our newsletter to receive the latest ecosystem mapping, policy briefs, and innovation insights.
+              {t("newsletter_text")}
             </p>
             
             <form className="relative flex flex-col sm:flex-row gap-3 sm:gap-0 mt-2" onSubmit={handleSubscribe}>
               <input 
                  type="email" 
                  name="email"
-                 placeholder="Enter your email address" 
+                 placeholder={t("email_placeholder")}
                  className="w-full bg-white/5 border border-white/10 rounded-full py-4 px-6 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-all shadow-inner"
                  required
               />
@@ -134,16 +136,16 @@ export default function Footer({ data }: FooterProps) {
                 className="sm:absolute sm:right-1.5 sm:top-1.5 sm:bottom-1.5 bg-secondary text-primary font-bold px-6 py-2.5 rounded-full text-sm hover:bg-white transition-colors shadow-[0_0_15px_-3px_rgba(226,173,0,0.3)] disabled:opacity-80 flex items-center justify-center min-w-[120px]"
               >
                 {isSubmitting ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <><Loader2 className="w-4 h-4 animate-spin mr-2" /> {t("subscribing")}</>
                 ) : status === 'success' ? (
-                  <><CheckCircle className="w-4 h-4 mr-2" /> Done</>
+                  <><CheckCircle className="w-4 h-4 mr-2" /> {t("subscribed")}</>
                 ) : (
-                  "Subscribe"
+                  t("subscribe")
                 )}
               </button>
             </form>
             {status === 'error' && (
-              <p className="text-red-400 text-xs mt-3 ml-2">Failed to subscribe. Please try again.</p>
+              <p className="text-red-400 text-xs mt-3 ml-2">{t("subscribe_error")}</p>
             )}
           </div>
           
@@ -151,11 +153,11 @@ export default function Footer({ data }: FooterProps) {
         
         {/* Bottom Copyright Stripe */}
         <div className="pt-8 border-t border-white/10 text-center md:text-left text-sm text-gray-500 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p>&copy; {new Date().getFullYear()} CIATECH Africa. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} CIATECH Africa. {t("rights")}</p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-            <Link href="#" className="hover:text-white transition-colors">Cookie Policy</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">{t("privacy")}</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">{t("terms")}</Link>
+            <Link href="#" className="hover:text-white transition-colors">{t("cookie")}</Link>
           </div>
         </div>
         

@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { ArrowRight, Layers } from "lucide-react";
 import { HomeData } from "@/types";
+import { useTranslations } from "next-intl";
 
 interface SolutionsTeaserProps {
   data: HomeData["solutionsTeaser"];
 }
 
 export default function SolutionsTeaser({ data }: SolutionsTeaserProps) {
+  const t = useTranslations("UI");
+
   if (!data || !data.items) return null;
 
   return (
@@ -22,7 +25,7 @@ export default function SolutionsTeaser({ data }: SolutionsTeaserProps) {
           <div className="inline-flex items-center justify-center gap-2 mb-6">
             <span className="w-8 h-px bg-secondary opacity-50" />
             <h3 className="text-secondary font-bold tracking-widest uppercase text-xs">
-              Ecosystem Engineering
+              {t("ecosystem_engineering")}
             </h3>
             <span className="w-8 h-px bg-secondary opacity-50" />
           </div>

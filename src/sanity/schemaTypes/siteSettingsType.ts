@@ -52,6 +52,43 @@ export const siteSettingsType = defineType({
           }
         }
       ]
+    }),
+    defineField({
+      name: 'footerMission',
+      title: 'Footer Mission Statement',
+      type: 'text',
+      description: 'The short description shown on the left side of the footer'
+    }),
+    defineField({
+      name: 'socialLinks',
+      title: 'Social Media Links',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'iconName', title: 'Icon (e.g. linkedin, x, facebook, instagram, tiktok)', type: 'string' },
+            { name: 'href', title: 'URL Route', type: 'string' }
+          ],
+          preview: {
+            select: { title: 'iconName', subtitle: 'href' }
+          }
+        }
+      ]
+    }),
+    defineField({
+      name: 'footerQuickLinks',
+      title: 'Footer Quick Links',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'label', title: 'Label', type: 'string' },
+            { name: 'href', title: 'URL', type: 'string' }
+          ]
+        }
+      ]
     })
   ]
 })
