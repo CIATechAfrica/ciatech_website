@@ -67,7 +67,7 @@ export default function PartnershipsTeaser({ data }: PartnershipsTeaserProps) {
             <span className="w-8 h-px bg-secondary" />
           </div>
           
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-6 tracking-tight leading-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-primary mb-6 tracking-tight leading-tight">
             {data.subHeading}
           </h2>
           

@@ -15,7 +15,7 @@ export default function GallerySection({ data }: GalleryProps) {
         {/* Hub & Spoke Header Block */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div className="max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 tracking-tight mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-primary tracking-tight mb-6">
               {data.heading}
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">

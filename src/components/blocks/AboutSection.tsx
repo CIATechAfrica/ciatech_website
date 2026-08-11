@@ -25,7 +25,7 @@ export default function AboutSection({ data }: AboutSectionProps) {
               </h3>
             </div>
             
-            <h2 className="text-4xl sm:text-5xl font-black text-gray-900 leading-tight tracking-tight mb-8">
+            <h2 className="text-4xl sm:text-5xl font-black text-primary leading-tight tracking-tight mb-8">
               {data.heading}
             </h2>
             

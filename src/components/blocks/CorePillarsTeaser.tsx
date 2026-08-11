@@ -32,7 +32,7 @@ export default function CorePillarsTeaser({ data }: CorePillarsTeaserProps) {
             </h3>
             <span className="w-8 h-px bg-secondary" />
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-6 tracking-tight leading-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-primary mb-6 tracking-tight leading-tight">
             {data.heading}
           </h2>
           <p className="text-xl text-gray-500 font-light leading-relaxed">
@@ -60,7 +60,7 @@ export default function CorePillarsTeaser({ data }: CorePillarsTeaserProps) {
                     {iconMap[pillar.iconName] || <MonitorPlay className="w-8 h-8 text-secondary" />}
                   </div>
                   
-                  <h3 className="text-2xl font-black text-gray-900 mb-4 tracking-tight">
+                  <h3 className="text-2xl font-black text-primary mb-4 tracking-tight">
                     {pillar.title}
                   </h3>
                   

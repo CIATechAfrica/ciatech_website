@@ -41,7 +41,7 @@ export default function ImpactStatsGrid({ data }: ImpactStatsGridProps) {
             </h3>
             <span className="w-8 h-px bg-white/30" />
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 tracking-tight mb-4">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-secondary bg-clip-text bg-gradient-to-b from-white to-white/60 tracking-tight mb-4">
             {data.heading}
           </h2>
           {data.subtext && (

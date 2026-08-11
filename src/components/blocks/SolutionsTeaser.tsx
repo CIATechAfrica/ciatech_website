@@ -51,7 +51,7 @@ export default function SolutionsTeaser({ data }: SolutionsTeaserProps) {
                 <Layers className="w-10 h-10 text-primary" />
               </div>
               
-              <h3 className="text-2xl lg:text-3xl font-black text-white px-2 leading-tight tracking-tight group-hover:text-primary transition-colors duration-300">
+              <h3 className="text-2xl lg:text-3xl font-black text-primary px-2 leading-tight tracking-tight group-hover:text-secondary transition-colors duration-300">
                 {solution.title}
               </h3>
             </Link>

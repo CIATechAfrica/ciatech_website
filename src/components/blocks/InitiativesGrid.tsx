@@ -34,7 +34,7 @@ export default function InitiativesGrid({ data }: InitiativesGridProps) {
               {t("research")}
             </h3>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-6 tracking-tight leading-tight flex flex-col">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-primary mb-6 tracking-tight leading-tight flex flex-col">
             <span>{t("flagship")}</span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
               {t("initiatives")}
@@ -69,7 +69,7 @@ export default function InitiativesGrid({ data }: InitiativesGridProps) {
                       {iconMap[initiative.iconName] || <BrainCircuit className="w-8 h-8 text-secondary" />}
                     </div>
                     
-                    <h3 className="text-3xl font-black text-gray-900 mb-4 tracking-tight group-hover:text-primary transition-colors">
+                    <h3 className="text-3xl font-black text-primary mb-4 tracking-tight group-hover:text-primary transition-colors">
                       {initiative.title}
                     </h3>
                     
