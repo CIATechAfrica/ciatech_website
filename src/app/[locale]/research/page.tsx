@@ -75,7 +75,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
     <main className="min-h-screen bg-gray-50 pt-24 font-sans selection:bg-secondary/30 selection:text-gray-900 overflow-x-hidden relative">
       
       {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden bg-[#050505] py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-primary py-24 sm:py-32">
         <div className="absolute inset-0">
           <Image 
             src={data.hero.imageRef} 
@@ -83,7 +83,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
             fill 
             className="object-cover opacity-20 mix-blend-overlay grayscale"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-[#050505]/95 to-gray-50 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary/95 to-gray-50 pointer-events-none" />
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -94,10 +94,10 @@ export default async function ResearchPage({ params }: { params: Promise<{ local
             </h3>
             <span className="w-12 h-px bg-secondary opacity-50" />
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight mb-8 leading-tight break-words hyphens-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-secondary tracking-tight mb-8 leading-tight break-words hyphens-auto">
             {data.hero.heading}
           </h1>
-          <p className="text-xl md:text-2xl text-gray-400 font-light max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-white font-light max-w-3xl mx-auto leading-relaxed">
             {data.hero.subtext}
           </p>
         </div>

@@ -96,7 +96,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
     <main className="min-h-screen bg-gray-50 pt-24 font-sans selection:bg-secondary/30 selection:text-gray-900 overflow-x-hidden">
       
       {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden bg-[#050505] py-24 lg:py-32">
+      <section className="relative overflow-hidden bg-primary py-24 lg:py-32">
         <div className="absolute inset-0">
           <Image 
             src={data.hero.imageRef} 
@@ -104,7 +104,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
             fill 
             className="object-cover opacity-20"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent pointer-events-none" />
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -115,10 +115,10 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
             </h3>
             <span className="w-12 h-px bg-secondary opacity-50" />
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight mb-8 leading-tight break-words hyphens-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-secondary tracking-tight mb-8 leading-tight break-words hyphens-auto">
             {data.hero.heading}
           </h1>
-          <p className="text-xl md:text-2xl text-gray-400 font-light max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-white font-light max-w-3xl mx-auto leading-relaxed">
             {data.hero.subtext}
           </p>
         </div>
@@ -147,7 +147,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
                     {IconMap[solution.iconName || "rocket"]}
                   </div>
                   
-                  <h2 className="text-3xl lg:text-4xl font-black text-gray-900 tracking-tight leading-tight mb-6">
+                  <h2 className="text-3xl lg:text-4xl font-black text-primary tracking-tight leading-tight mb-6">
                     {solution.title}
                   </h2>
                   
@@ -159,7 +159,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
                     <div className="absolute left-0 top-0 h-full w-12 bg-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
                   </div>
                   
-                  <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">{t("core_focus_areas")}</h4>
+                  <h4 className="text-xs font-bold text-primary uppercase tracking-widest mb-6">{t("core_focus_areas")}</h4>
                   
                   <ul className="space-y-5">
                     {solution.features.map((feature: string, fIndex: number) => (
@@ -185,7 +185,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
         <div className="absolute inset-0 bg-gradient-to-b from-gray-50/10 to-[#0a0a0a] pointer-events-none" />
 
         <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
-          <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
+          <h2 className="text-4xl md:text-6xl font-black text-secondary mb-6 tracking-tight">
             {data.cta.heading}
           </h2>
           <p className="text-xl md:text-2xl text-gray-400 mb-12 font-light leading-relaxed">

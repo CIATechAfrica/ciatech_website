@@ -97,12 +97,12 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
     <div className="bg-white">
       
       {/* 1. HERO HEADER */}
-      <div className="bg-primary/5 py-24 pt-32 border-b border-primary/10">
+      <div className="bg-primary py-24 pt-32 border-b border-primary/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-gray-900 tracking-tight mb-6 break-words hyphens-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-secondary tracking-tight mb-6 break-words hyphens-auto">
             {data.header.title}
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-white max-w-2xl mx-auto leading-relaxed">
             {data.header.subtitle}
           </p>
         </div>
@@ -111,7 +111,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       {/* 2. WHO WE ARE */}
       <div className="py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-           <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-8">{data.ourStory.heading}</h2>
+           <h2 className="text-3xl md:text-5xl font-black text-primary mb-8">{data.ourStory.heading}</h2>
            <p className="text-2xl font-light text-gray-600 leading-[1.8] relative z-10">
               {data.ourStory.content}
            </p>
@@ -131,7 +131,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <div className="w-16 h-16 rounded-2xl bg-secondary flex items-center justify-center mb-8 shadow-inner">
                 <Lightbulb className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-3xl font-black text-white mb-6">{data.missionVision.vision.title}</h3>
+              <h3 className="text-3xl font-black text-secondary mb-6">{data.missionVision.vision.title}</h3>
               <p className="text-xl text-gray-200 font-light leading-relaxed">
                 {data.missionVision.vision.content}
               </p>
@@ -142,7 +142,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-8 shadow-inner">
                 <Target className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-3xl font-black text-white mb-6">{data.missionVision.mission.title}</h3>
+              <h3 className="text-3xl font-black text-secondary mb-6">{data.missionVision.mission.title}</h3>
               <p className="text-xl text-gray-200 font-light leading-relaxed">
                 {data.missionVision.mission.content}
               </p>
@@ -157,7 +157,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       <div className="py-32 bg-gray-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h3 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight mb-6">{data.team.heading}</h3>
+            <h3 className="text-4xl md:text-5xl font-black text-primary tracking-tight mb-6">{data.team.heading}</h3>
             <p className="text-xl text-gray-500 font-light leading-relaxed">{data.team.subtext}</p>
           </div>
 
@@ -175,8 +175,8 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                   </div>
                 </div>
                 <div className="p-6 border-t border-gray-100 text-center">
-                  <h4 className="text-xl font-black text-gray-900 mb-1">{member.name}</h4>
-                  <p className="text-primary font-bold uppercase tracking-widest text-[10px]">{member.role}</p>
+                  <h4 className="text-xl font-black text-primary mb-1">{member.name}</h4>
+                  <p className="text-gray-500 font-bold uppercase tracking-widest text-[10px]">{member.role}</p>
                 </div>
               </div>
             ))}

@@ -64,7 +64,7 @@ export default function ResearchClientWrapper({ featured, publications, publicat
                 <span>{featured.date}</span>
               </div>
               
-              <h2 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight leading-tight mb-6 group-hover:text-primary transition-colors duration-300">
+              <h2 className="text-3xl sm:text-4xl font-black text-primary tracking-tight leading-tight mb-6 group-hover:text-primary transition-colors duration-300">
                 {featured.title}
               </h2>
               
@@ -75,7 +75,7 @@ export default function ResearchClientWrapper({ featured, publications, publicat
               <div className="mt-auto flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <button 
                   onClick={() => setReadingItem(featured)}
-                  className="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3.5 bg-gray-900 text-white font-bold rounded-full hover:bg-primary transition-all duration-300 shadow-md shadow-gray-900/10 group/btn"
+                  className="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3.5 bg-primary text-white font-bold rounded-full hover:bg-secondary transition-all duration-300 shadow-md shadow-primary/20 group/btn"
                 >
                   <BookOpen className="w-4 h-4 mr-2" />
                   {t("read_exec_summary")}
@@ -100,7 +100,7 @@ export default function ResearchClientWrapper({ featured, publications, publicat
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div className="flex items-center justify-between border-b border-gray-200 pb-8 mb-16">
-              <h2 className="text-3xl font-black text-gray-900 tracking-tight">
+              <h2 className="text-3xl font-black text-primary tracking-tight">
                 {publicationsTitle}
               </h2>
             </div>
@@ -118,7 +118,7 @@ export default function ResearchClientWrapper({ featured, publications, publicat
                     </span>
                   </div>
                   
-                  <h3 className="text-2xl font-black text-gray-900 tracking-tight leading-tight mb-4 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-2xl font-black text-primary tracking-tight leading-tight mb-4 group-hover:text-primary transition-colors duration-300">
                     {item.title}
                   </h3>
                   
@@ -167,7 +167,7 @@ export default function ResearchClientWrapper({ featured, publications, publicat
                 <span className="text-xs font-bold uppercase tracking-widest text-primary mb-2 block">
                   {readingItem.category}
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight leading-tight">
+                <h3 className="text-2xl sm:text-3xl font-black text-primary tracking-tight leading-tight">
                   {readingItem.title}
                 </h3>
               </div>
@@ -204,7 +204,7 @@ export default function ResearchClientWrapper({ featured, publications, publicat
               <div className="mt-12 flex flex-col sm:flex-row items-center gap-4 border-t border-gray-100 pt-8">
                 <button 
                   onClick={(e) => handleDownload(e, readingItem)}
-                  className="w-full sm:w-auto inline-flex justify-center items-center px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-[#7a4812] transition-colors shadow-md"
+                  className="w-full sm:w-auto inline-flex justify-center items-center px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-secondary transition-colors shadow-md"
                 >
                   <FileText className="w-5 h-5 mr-3" />
                   {t("download_complete_pdf")}

@@ -56,10 +56,10 @@ export default function BlogClientWrapper({ data }: BlogClientWrapperProps) {
             </h3>
             <span className="w-12 h-px bg-secondary opacity-50" />
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight mb-8 leading-tight break-words hyphens-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-secondary tracking-tight mb-8 leading-tight break-words hyphens-auto">
             {data.hero.heading}
           </h1>
-          <p className="text-xl md:text-2xl text-white/80 font-light max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-white font-light max-w-3xl mx-auto leading-relaxed">
             {data.hero.subtext}
           </p>
         </div>
@@ -95,7 +95,7 @@ export default function BlogClientWrapper({ data }: BlogClientWrapperProps) {
                 <span className="flex items-center"><Clock className="w-4 h-4 mr-1.5" /> {data.featuredPost.readTime}</span>
               </div>
               
-              <h2 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight leading-tight mb-6 group-hover:text-primary transition-colors duration-300">
+              <h2 className="text-3xl sm:text-4xl font-black text-primary tracking-tight leading-tight mb-6 group-hover:text-primary transition-colors duration-300">
                 {data.featuredPost.title}
               </h2>
               
@@ -119,7 +119,7 @@ export default function BlogClientWrapper({ data }: BlogClientWrapperProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="flex items-center justify-between border-b border-gray-200 pb-8 mb-16">
-            <h3 className="text-2xl font-black text-gray-900 tracking-tight">
+            <h3 className="text-2xl font-black text-primary tracking-tight">
               {data.feedTitle}
             </h3>
           </div>
@@ -136,7 +136,7 @@ export default function BlogClientWrapper({ data }: BlogClientWrapperProps) {
                   <span className="flex items-center"><Clock className="w-4 h-4 mr-1 ml-2" /> {post.readTime}</span>
                 </div>
                 
-                <h4 className="text-2xl font-black text-gray-900 tracking-tight leading-tight mb-4 group-hover:text-primary transition-colors duration-300">
+                <h4 className="text-2xl font-black text-primary tracking-tight leading-tight mb-4 group-hover:text-primary transition-colors duration-300">
                   {post.title}
                 </h4>
                 

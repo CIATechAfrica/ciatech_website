@@ -56,10 +56,10 @@ export default function GalleryClientWrapper({ data }: { data: GalleryPageData }
             </h3>
             <span className="w-12 h-px bg-secondary opacity-50" />
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight mb-8 leading-tight break-words hyphens-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-secondary tracking-tight mb-8 leading-tight break-words hyphens-auto">
             {data.hero.heading}
           </h1>
-          <p className="text-xl md:text-2xl text-white/80 font-light leading-relaxed">
+          <p className="text-xl md:text-2xl text-white font-light leading-relaxed">
             {data.hero.subtext}
           </p>
         </div>
@@ -70,7 +70,7 @@ export default function GalleryClientWrapper({ data }: { data: GalleryPageData }
         <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-12">
           
           <div className="flex flex-col sm:flex-row items-center justify-between border-b border-gray-200 pb-8 mb-16 gap-6">
-            <h2 className="text-3xl font-black text-gray-900 tracking-tight">
+            <h2 className="text-3xl font-black text-primary tracking-tight">
               {data.gridTitle}
             </h2>
             <div className="text-sm font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
@@ -105,7 +105,7 @@ export default function GalleryClientWrapper({ data }: { data: GalleryPageData }
                       <Calendar className="w-3.5 h-3.5 mr-1" /> {item.date}
                     </span>
                   </div>
-                  <h3 className="text-2xl font-black text-white tracking-tight leading-tight group-hover:text-secondary transition-colors duration-300">
+                  <h3 className="text-2xl font-black text-secondary tracking-tight leading-tight transition-colors duration-300">
                     {item.title}
                   </h3>
                 </div>
@@ -163,7 +163,7 @@ export default function GalleryClientWrapper({ data }: { data: GalleryPageData }
             </div>
             
             <div className="mt-8 text-center max-w-3xl px-6 pointer-events-auto">
-              <h2 className="text-3xl sm:text-5xl font-black text-white mb-4 tracking-tight leading-tight">
+              <h2 className="text-3xl sm:text-5xl font-black text-secondary mb-4 tracking-tight leading-tight">
                 {activeImage.title}
               </h2>
               <div className="flex items-center justify-center gap-6 text-sm font-bold uppercase tracking-widest text-gray-400">

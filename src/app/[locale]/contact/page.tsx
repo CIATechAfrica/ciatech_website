@@ -30,10 +30,10 @@ export default function ContactPage() {
             </h3>
             <span className="w-12 h-px bg-secondary opacity-50" />
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight mb-8 leading-tight break-words hyphens-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-secondary tracking-tight mb-8 leading-tight break-words hyphens-auto">
             {contactData.hero.heading}
           </h1>
-          <p className="text-xl md:text-2xl text-white/80 font-light max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-white font-light max-w-3xl mx-auto leading-relaxed">
             {contactData.hero.subtext}
           </p>
         </div>
@@ -52,7 +52,7 @@ export default function ContactPage() {
                 <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
                   <Globe className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-2xl font-black text-gray-900">{contactData.basesTitle}</h3>
+                <h3 className="text-2xl font-black text-primary">{contactData.basesTitle}</h3>
               </div>
               <div className="space-y-8">
                 {contactData.bases.map(base => (
@@ -60,7 +60,7 @@ export default function ContactPage() {
                     <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1">
                       {base.type}
                     </span>
-                    <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
+                    <h4 className="text-xl font-bold text-primary mb-2 group-hover:text-primary transition-colors">
                       {base.city}, {base.country}
                     </h4>
                     <div className="flex items-start text-gray-600 gap-2">
@@ -73,16 +73,16 @@ export default function ContactPage() {
             </div>
 
             {/* Direct Endpoints */}
-            <div className="bg-gray-900 rounded-[2rem] p-8 sm:p-10 border border-gray-800 shadow-xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[80px] rounded-full pointer-events-none" />
+            <div className="bg-primary rounded-[2rem] p-8 sm:p-10 border border-primary/50 shadow-xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-[80px] rounded-full pointer-events-none" />
               <div className="relative z-10">
-                <h3 className="text-2xl font-black text-white mb-8">{contactData.endpointsTitle}</h3>
+                <h3 className="text-2xl font-black text-secondary mb-8">{contactData.endpointsTitle}</h3>
                 <div className="space-y-8">
                   {contactData.endpoints.map(endpoint => (
                     <div key={endpoint.id} className="group">
-                      <h4 className="text-lg font-bold text-white mb-2">{endpoint.department}</h4>
-                      <p className="text-gray-400 font-light mb-3 text-sm">{endpoint.description}</p>
-                      <a href={`mailto:${endpoint.email}`} className="inline-flex items-center text-primary font-bold hover:text-white transition-colors group">
+                      <h4 className="text-lg font-bold text-secondary mb-2">{endpoint.department}</h4>
+                      <p className="text-gray-200 font-light mb-3 text-sm">{endpoint.description}</p>
+                      <a href={`mailto:${endpoint.email}`} className="inline-flex items-center text-white font-bold hover:text-secondary transition-colors group">
                         <Mail className="w-4 h-4 mr-2" />
                         {endpoint.email}
                         <ArrowUpRight className="w-4 h-4 ml-1 opacity-0 group-hover:opacity-100 transform -translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-all" />
@@ -101,7 +101,7 @@ export default function ContactPage() {
               <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary to-secondary" />
               
               <div className="mb-10">
-                <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4 tracking-tight">{t("deploy_proposal")}</h2>
+                <h2 className="text-3xl sm:text-4xl font-black text-primary mb-4 tracking-tight">{t("deploy_proposal")}</h2>
                 <p className="text-gray-600 leading-relaxed font-light text-lg">
                   {t("deploy_desc")}
                 </p>
@@ -112,7 +112,7 @@ export default function ContactPage() {
                   <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6">
                     <Send className="w-10 h-10 text-primary" />
                   </div>
-                  <h3 className="text-2xl font-black text-gray-900 mb-2">{t("transmission_received")}</h3>
+                  <h3 className="text-2xl font-black text-primary mb-2">{t("transmission_received")}</h3>
                   <p className="text-gray-600 max-w-sm font-light">
                     {t("transmission_desc")}
                   </p>
@@ -181,7 +181,7 @@ export default function ContactPage() {
 
                   <button 
                     type="submit"
-                    className="w-full sm:w-auto inline-flex items-center justify-center px-10 py-5 rounded-xl bg-gray-900 text-white font-bold hover:bg-primary transition-all duration-300 group shadow-[0_4px_14px_0_rgba(17,24,39,0.1)] hover:shadow-[0_4px_14px_0_rgba(142,85,22,0.4)] hover:-translate-y-1 active:translate-y-0"
+                    className="w-full sm:w-auto inline-flex items-center justify-center px-10 py-5 rounded-xl bg-primary text-white font-bold hover:bg-secondary transition-all duration-300 group shadow-[0_4px_14px_0_rgba(142,85,22,0.2)] hover:shadow-[0_4px_14px_0_rgba(226,173,0,0.4)] hover:-translate-y-1 active:translate-y-0"
                   >
                     <span>{t("btn_transmit")}</span>
                     <ArrowUpRight className="w-5 h-5 ml-3 transform group-hover:rotate-45 transition-transform duration-300" />

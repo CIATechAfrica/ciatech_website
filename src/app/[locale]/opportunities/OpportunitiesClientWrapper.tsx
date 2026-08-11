@@ -25,7 +25,7 @@ function RoleCard({ role, icon: Icon, onApply }: { role: OpenRole; icon: React.E
         <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
           <Icon className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
         </div>
-        <h3 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight leading-tight group-hover:text-primary transition-colors duration-300">
+        <h3 className="text-2xl sm:text-3xl font-black text-primary tracking-tight leading-tight group-hover:text-primary transition-colors duration-300">
           {role.title}
         </h3>
       </div>
@@ -37,7 +37,7 @@ function RoleCard({ role, icon: Icon, onApply }: { role: OpenRole; icon: React.E
       <div className="mt-auto relative z-10 border-t border-gray-50 pt-6">
         <button 
           onClick={onApply}
-          className="inline-flex items-center w-full justify-between px-6 py-4 rounded-xl bg-gray-900 text-white font-bold hover:bg-primary transition-all duration-300 group/btn shadow-[0_4px_14px_0_rgba(17,24,39,0.1)] hover:shadow-[0_4px_14px_0_rgba(142,85,22,0.4)]"
+          className="inline-flex items-center w-full justify-between px-6 py-4 rounded-xl bg-primary text-white font-bold hover:bg-secondary transition-all duration-300 group/btn shadow-[0_4px_14px_0_rgba(142,85,22,0.2)] hover:shadow-[0_4px_14px_0_rgba(226,173,0,0.4)]"
         >
           <span>Submit Application</span>
           <ArrowUpRight className="w-5 h-5 transform group-hover/btn:rotate-45 transition-transform duration-300" />
@@ -106,10 +106,10 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
             </h3>
             <span className="w-12 h-px bg-secondary opacity-50" />
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight mb-8 leading-tight break-words hyphens-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-secondary tracking-tight mb-8 leading-tight break-words hyphens-auto">
             {data.hero.heading}
           </h1>
-          <p className="text-xl md:text-2xl text-white/80 font-light leading-relaxed">
+          <p className="text-xl md:text-2xl text-white font-light leading-relaxed">
             {data.hero.subtext}
           </p>
         </div>
@@ -120,7 +120,7 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
         <section className="relative -mt-16 z-20 max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-12 pb-24">
           <div className="mb-12 border-b border-gray-200 pb-8 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6 bg-white/50 backdrop-blur-xl p-8 rounded-[2rem] border-x border-t shadow-sm">
             <div>
-              <h2 className="text-3xl font-black text-gray-900 tracking-tight mb-2">
+              <h2 className="text-3xl font-black text-primary tracking-tight mb-2">
                 {data.fellowshipsTitle}
               </h2>
               <p className="text-gray-600 max-w-2xl font-light">
@@ -144,7 +144,7 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
           <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-12">
             
             <div className="mb-16 text-center">
-              <h2 className="text-4xl lg:text-5xl font-black text-gray-900 tracking-tight mb-6">
+              <h2 className="text-4xl lg:text-5xl font-black text-primary tracking-tight mb-6">
                 {data.careersTitle}
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
@@ -179,7 +179,7 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
                 <span className="text-xs font-bold uppercase tracking-widest text-primary mb-1 block">
                   Application Portal
                 </span>
-                <h3 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-black text-primary tracking-tight">
                   {selectedRole.title}
                 </h3>
               </div>
@@ -200,7 +200,7 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
                     <CheckCircle2 className="w-10 h-10 text-green-500" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-black text-gray-900 mb-2">Application Received</h3>
+                    <h3 className="text-2xl font-black text-primary mb-2">Application Received</h3>
                     <p className="text-gray-600 max-w-sm mx-auto">
                       Thank you for your interest. Our talent acquisition team will review your profile shortly.
                     </p>
@@ -294,7 +294,7 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
                     <button 
                       type="submit"
                       disabled={isSubmitting}
-                      className="px-8 py-4 rounded-xl bg-gray-900 text-white font-bold hover:bg-primary transition-all shadow-md active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed flex items-center"
+                      className="px-8 py-4 rounded-xl bg-primary text-white font-bold hover:bg-secondary transition-all shadow-md active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed flex items-center"
                     >
                       {isSubmitting ? <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Submitting...</> : "Submit Profile"}
                     </button>

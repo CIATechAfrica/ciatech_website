@@ -111,7 +111,7 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
     <main className="min-h-screen bg-gray-50 pt-24 font-sans selection:bg-secondary/30 selection:text-gray-900 overflow-x-hidden">
       
       {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden bg-[#050505] py-24 lg:py-32">
+      <section className="relative overflow-hidden bg-primary py-24 lg:py-32">
         <div className="absolute inset-0">
           <Image 
             src={data.hero.imageRef} 
@@ -119,7 +119,7 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
             fill 
             className="object-cover opacity-30 mix-blend-overlay grayscale"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/95 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/95 to-transparent pointer-events-none" />
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -130,10 +130,10 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
             </h3>
             <span className="w-12 h-px bg-secondary opacity-50" />
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight mb-8 leading-tight break-words hyphens-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-secondary tracking-tight mb-8 leading-tight break-words hyphens-auto">
             {data.hero.heading}
           </h1>
-          <p className="text-xl md:text-2xl text-gray-400 font-light max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-white font-light max-w-4xl mx-auto leading-relaxed">
             {data.hero.subtext}
           </p>
         </div>
@@ -144,7 +144,7 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
         <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-12">
           
           <div className="text-center mb-20 max-w-3xl mx-auto">
-            <h2 className="text-4xl lg:text-5xl font-black text-white mb-6 tracking-tight">
+            <h2 className="text-4xl lg:text-5xl font-black text-secondary mb-6 tracking-tight">
               {data.introTitle}
             </h2>
             <p className="text-xl text-gray-400 font-light leading-relaxed">
@@ -190,7 +190,7 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
               </h3>
               <span className="w-12 h-px bg-primary opacity-50" />
             </div>
-            <h2 className="text-5xl lg:text-6xl font-black text-gray-900 tracking-tight leading-tight">
+            <h2 className="text-5xl lg:text-6xl font-black text-primary tracking-tight leading-tight">
               {data.areasTitle}
             </h2>
           </div>
@@ -210,7 +210,7 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
                   <div className="w-16 h-16 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center mb-8 shadow-sm group-hover:scale-110 group-hover:bg-primary/10 transition-all duration-500">
                     {IconMap[area.iconName] || <Landmark className="w-8 h-8 text-primary" />}
                   </div>
-                  <h3 className="text-4xl font-black text-gray-900 tracking-tight leading-tight mb-6 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-4xl font-black text-primary tracking-tight leading-tight mb-6 group-hover:text-primary transition-colors duration-300">
                     {area.title}
                   </h3>
                   <p className="text-xl text-gray-600 font-light leading-relaxed">
@@ -219,7 +219,7 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
                 </div>
 
                 <div className="relative z-10 flex flex-col justify-center">
-                  <h4 className="border-b border-gray-100 pb-4 mb-6 text-sm font-bold text-gray-400 uppercase tracking-widest">
+                  <h4 className="border-b border-gray-100 pb-4 mb-6 text-sm font-bold text-primary uppercase tracking-widest">
                     {t("execution_methodology")}
                   </h4>
                   <ul className="space-y-6">
@@ -246,7 +246,7 @@ export default async function ImpactPage({ params }: { params: Promise<{ locale:
         <div className="absolute inset-0 bg-gradient-to-b from-gray-50/10 to-[#0a0a0a] pointer-events-none" />
 
         <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
-          <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
+          <h2 className="text-4xl md:text-6xl font-black text-secondary mb-6 tracking-tight">
             {data.cta.heading}
           </h2>
           <p className="text-xl md:text-2xl text-gray-400 mb-12 font-light leading-relaxed">
