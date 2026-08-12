@@ -5,6 +5,11 @@ export const impactAreaType = defineType({
   title: 'Strategic Impact Area',
   type: 'document',
   fields: [
+    defineField({
+      name: 'language',
+      type: 'string',
+      hidden: true,
+    }),
     defineField({ name: 'title', title: 'Title', type: 'string' }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
     defineField({ 

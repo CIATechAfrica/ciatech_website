@@ -91,6 +91,25 @@
     "featured_dispatch": "Dépêche en Vedette",
     "ciatech_newsroom": "Salle de Presse CIATech",
     "official_dispatch": "Dépêche Officielle CIATech",
-    "blog_disclaimer": "Alors que nous continuons d'accélérer nos pipelines de déploiement, revenez fréquemment pour des mises à jour d'ingénierie et de politique en temps réel. CIATech reste engagé envers une transparence absolue sur notre réseau opérationnel."
+    "blog_disclaimer": "Alors que nous continuons à accélérer nos pipelines de déploiement, revenez fréquemment pour des mises à jour en temps réel sur l'ingénierie et les politiques. CIATech reste engagé dans une transparence absolue sur l'ensemble de son réseau opérationnel."
+  },
+  "Opportunities": {
+    "submit_application": "Soumettre la candidature",
+    "application_portal": "Portail de candidature",
+    "application_received": "Candidature Reçue",
+    "thank_you_interest": "Merci pour votre intérêt. Notre équipe d'acquisition de talents examinera votre profil sous peu.",
+    "full_name": "Nom Complet",
+    "name_placeholder": "Jean Dupont",
+    "email_address": "Adresse Email",
+    "email_placeholder": "jean@exemple.com",
+    "linkedin_url": "URL LinkedIn / Portfolio",
+    "linkedin_placeholder": "https://linkedin.com/in/...",
+    "upload_resume": "Télécharger le CV (PDF Uniquement)",
+    "drag_drop": "Glisser-déposer ou parcourir pour un PDF...",
+    "brief_pitch": "Bref argumentaire",
+    "pitch_placeholder": "Pourquoi êtes-vous le candidat idéal pour ce rôle spécifique ?",
+    "cancel": "Annuler",
+    "submit_profile": "Soumettre le profil",
+    "submitting": "Soumission en cours..."
   }
 }

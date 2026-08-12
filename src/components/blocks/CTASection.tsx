@@ -16,7 +16,7 @@ export default function CTASection({ data }: CTASectionProps) {
        <div className="absolute top-0 left-0 w-full h-1/2 flex bg-white z-0" />
        
        {/* Bottom Half: Mirrors the Global Footer */}
-       <div className="absolute bottom-0 left-0 w-full h-1/2 bg-[#0f172a] z-0" />
+       <div className="absolute bottom-0 left-0 w-full h-1/2 bg-[#000000] z-0" />
 
        {/* --- THE CONTENT (Safe Document Flow) --- */}
        <div className="relative z-10 w-full py-16 sm:py-20 px-4 sm:px-6 flex justify-center">

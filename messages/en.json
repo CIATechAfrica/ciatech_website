@@ -92,5 +92,24 @@
     "ciatech_newsroom": "CIATech Newsroom",
     "official_dispatch": "Official CIATech Dispatch",
     "blog_disclaimer": "As we continue to accelerate our deployment pipelines, check back frequently for real-time engineering and policy updates. CIATech remains committed to absolute transparency across our operational grid."
+  },
+  "Opportunities": {
+    "submit_application": "Submit Application",
+    "application_portal": "Application Portal",
+    "application_received": "Application Received",
+    "thank_you_interest": "Thank you for your interest. Our talent acquisition team will review your profile shortly.",
+    "full_name": "Full Name",
+    "name_placeholder": "Jane Doe",
+    "email_address": "Email Address",
+    "email_placeholder": "jane@example.com",
+    "linkedin_url": "LinkedIn / Portfolio URL",
+    "linkedin_placeholder": "https://linkedin.com/in/...",
+    "upload_resume": "Upload Resume/CV (PDF Only)",
+    "drag_drop": "Drag & drop or browse for PDF...",
+    "brief_pitch": "Brief Pitch",
+    "pitch_placeholder": "Why are you a perfect fit for this specific execution role?",
+    "cancel": "Cancel",
+    "submit_profile": "Submit Profile",
+    "submitting": "Submitting..."
   }
 }

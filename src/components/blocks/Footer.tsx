@@ -47,7 +47,7 @@ export default function Footer({ data }: FooterProps) {
   };
 
   return (
-    <footer className="bg-[#0f172a] text-white pt-20 pb-10">
+    <footer className="bg-[#000000] text-white pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Grid */}

@@ -2,6 +2,11 @@ import { defineField, defineType } from 'sanity'
 export const galleryImageType = defineType({
   name: 'galleryImage', title: 'Gallery Image', type: 'document',
   fields: [
+    defineField({
+      name: 'language',
+      type: 'string',
+      hidden: true,
+    }),
     defineField({ name: 'title', title: 'Title', type: 'string' }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
     defineField({ name: 'location', title: 'Location', type: 'string' }),

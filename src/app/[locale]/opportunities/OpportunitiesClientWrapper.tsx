@@ -4,8 +4,9 @@ import { useState } from "react";
 import { ArrowUpRight, MapPin, Briefcase, Lightbulb, X, UploadCloud, CheckCircle2, Loader2, XCircle } from "lucide-react";
 import { OpenRole } from "@/types";
 import { submitApplication } from "@/app/actions";
+import { useTranslations } from "next-intl";
 
-function RoleCard({ role, icon: Icon, onApply }: { role: OpenRole; icon: React.ElementType; onApply: () => void }) {
+function RoleCard({ role, icon: Icon, onApply, t }: { role: OpenRole; icon: React.ElementType; onApply: () => void; t: any }) {
   return (
     <div className="group bg-white p-8 sm:p-10 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 relative overflow-hidden flex flex-col h-full">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -39,7 +40,7 @@ function RoleCard({ role, icon: Icon, onApply }: { role: OpenRole; icon: React.E
           onClick={onApply}
           className="inline-flex items-center w-full justify-between px-6 py-4 rounded-xl bg-primary text-white font-bold hover:bg-secondary transition-all duration-300 group/btn shadow-[0_4px_14px_0_rgba(142,85,22,0.2)] hover:shadow-[0_4px_14px_0_rgba(226,173,0,0.4)]"
         >
-          <span>Submit Application</span>
+          <span>{t("submit_application")}</span>
           <ArrowUpRight className="w-5 h-5 transform group-hover/btn:rotate-45 transition-transform duration-300" />
         </button>
       </div>
@@ -48,6 +49,7 @@ function RoleCard({ role, icon: Icon, onApply }: { role: OpenRole; icon: React.E
 }
 
 export default function OpportunitiesClientWrapper({ data }: { data: any }) {
+  const t = useTranslations("Opportunities");
   const [selectedRole, setSelectedRole] = useState<OpenRole | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -132,7 +134,7 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {data.fellowships.map((role: OpenRole) => (
-              <RoleCard key={role._id || role.id} role={role} icon={Lightbulb} onApply={() => handleApplyClick(role)} />
+              <RoleCard key={role._id || role.id} role={role} icon={Lightbulb} onApply={() => handleApplyClick(role)} t={t} />
             ))}
           </div>
         </section>
@@ -154,7 +156,7 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {data.careers.map((role: OpenRole) => (
-                <RoleCard key={role._id || role.id} role={role} icon={Briefcase} onApply={() => handleApplyClick(role)} />
+                <RoleCard key={role._id || role.id} role={role} icon={Briefcase} onApply={() => handleApplyClick(role)} t={t} />
               ))}
             </div>
 
@@ -177,7 +179,7 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
             <div className="bg-gray-50 border-b border-gray-100 px-8 py-6 flex justify-between items-center sticky top-0 z-10">
               <div>
                 <span className="text-xs font-bold uppercase tracking-widest text-primary mb-1 block">
-                  Application Portal
+                  {t("application_portal")}
                 </span>
                 <h3 className="text-xl sm:text-2xl font-black text-primary tracking-tight">
                   {selectedRole.title}
@@ -200,9 +202,9 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
                     <CheckCircle2 className="w-10 h-10 text-green-500" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-black text-primary mb-2">Application Received</h3>
+                    <h3 className="text-2xl font-black text-primary mb-2">{t("application_received")}</h3>
                     <p className="text-gray-600 max-w-sm mx-auto">
-                      Thank you for your interest. Our talent acquisition team will review your profile shortly.
+                      {t("thank_you_interest")}
                     </p>
                   </div>
                 </div>
@@ -219,66 +221,66 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">Full Name</label>
+                      <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">{t("full_name")}</label>
                       <input 
                         type="text" 
                         name="name"
                         required
                         className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900"
-                        placeholder="Jane Doe"
+                        placeholder={t("name_placeholder")}
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">Email Address</label>
+                      <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">{t("email_address")}</label>
                       <input 
                         type="email" 
                         name="email"
                         required
                         className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900"
-                        placeholder="jane@example.com"
+                        placeholder={t("email_placeholder")}
                       />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">LinkedIn / Portfolio URL</label>
+                    <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">{t("linkedin_url")}</label>
                     <input 
                       type="url" 
                       name="portfolio"
                       required
                       className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900"
-                      placeholder="https://linkedin.com/in/..."
+                      placeholder={t("linkedin_placeholder")}
                     />
                   </div>
 
                   {/* UI Custom File Upload (PDF Only) */}
                   <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">Upload Resume/CV (PDF Only)</label>
+                    <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">{t("upload_resume")}</label>
                     <div className="relative">
                       <input 
                         type="file" 
                         accept="application/pdf"
                         onChange={handleFileChange}
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                        title="Upload PDF Resume"
+                        title={t("upload_resume")}
                       />
                       <div className={`w-full px-5 py-4 rounded-xl border-2 border-dashed flex items-center gap-4 transition-all ${fileName ? 'bg-primary/5 border-primary/30 text-primary' : 'bg-gray-50 border-gray-200 hover:border-gray-400 text-gray-500'}`}>
                         <UploadCloud className="w-6 h-6 flex-shrink-0" />
                         <span className="truncate font-medium">
-                          {fileName ? fileName : "Drag & drop or browse for PDF..."}
+                          {fileName ? fileName : t("drag_drop")}
                         </span>
                       </div>
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">Brief Pitch</label>
+                    <label className="text-xs font-bold uppercase tracking-widest text-gray-500 block">{t("brief_pitch")}</label>
                     <textarea 
                       name="coverLetter"
                       required
                       rows={3}
                       className="w-full px-5 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary transition-all text-gray-900 resize-none"
-                      placeholder="Why are you a perfect fit for this specific execution role?"
+                      placeholder={t("pitch_placeholder")}
                     />
                   </div>
 
@@ -289,14 +291,14 @@ export default function OpportunitiesClientWrapper({ data }: { data: any }) {
                       disabled={isSubmitting}
                       className="px-6 py-4 rounded-xl font-bold text-gray-500 hover:bg-gray-50 transition-colors disabled:opacity-50"
                     >
-                      Cancel
+                      {t("cancel")}
                     </button>
                     <button 
                       type="submit"
                       disabled={isSubmitting}
                       className="px-8 py-4 rounded-xl bg-primary text-white font-bold hover:bg-secondary transition-all shadow-md active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed flex items-center"
                     >
-                      {isSubmitting ? <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Submitting...</> : "Submit Profile"}
+                      {isSubmitting ? <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> {t("submitting")}</> : t("submit_profile")}
                     </button>
                   </div>
                 </form>
