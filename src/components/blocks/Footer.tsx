@@ -101,17 +101,26 @@ export default function Footer({ data }: FooterProps) {
           <div className="lg:col-span-2">
             <h4 className="font-bold text-white tracking-wide mb-6">{t("contact_us")}</h4>
             <ul className="space-y-4 text-sm text-gray-400">
-              {data.address && <li className="leading-relaxed">{data.address}</li>}
-              {data.email && <li>
-                <a href={`mailto:${data.email}`} className="hover:text-white transition-colors">
-                  {data.email}
+              <li className="leading-relaxed">
+                No. 4, Behind Consulate of Chad Republic, Lagos Street, Maiduguri, Borno State, Nigeria
+              </li>
+              <li>
+                <a href="mailto:contact@ciatech.ng" className="hover:text-white transition-colors">
+                  contact@ciatech.ng
                 </a>
-              </li>}
-              {data.phone && <li>
-                <a href={`tel:${data.phone}`} className="hover:text-white transition-colors">
-                  {data.phone}
-                </a>
-              </li>}
+              </li>
+              <li>
+                <div className="space-y-2">
+                  <div className="text-gray-300 text-xs font-semibold">Nigeria:</div>
+                  <a href="tel:+234 803 285 6425" className="hover:text-white transition-colors block">
+                    +234 803 285 6425
+                  </a>
+                  <div className="text-gray-300 text-xs font-semibold mt-2">Chad:</div>
+                  <a href="tel:+235 6667 6410" className="hover:text-white transition-colors block">
+                    +235 6667 6410
+                  </a>
+                </div>
+              </li>
             </ul>
           </div>
           
