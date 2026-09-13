@@ -9,7 +9,7 @@ export const revalidate = 0;
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const locale = (await params).locale;
   try {
-    const seoData = await client.fetch(`*[_type == "galleryPage" && language == "${locale}"][0]{ seoTitle, seoDescription }`);
+    const seoData = await client.fetch(`*[_type == "galleryPage"][0]{ seoTitle, seoDescription }`);
     return {
       title: seoData?.seoTitle || galleryData.seo.title,
       description: seoData?.seoDescription || galleryData.seo.description,
