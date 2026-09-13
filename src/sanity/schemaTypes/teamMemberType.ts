@@ -41,6 +41,13 @@ export const teamMemberType = defineType({
       type: 'number',
       hidden: true,
     }),
+    {
+      name: 'serialNumber',
+      title: 'Serial Number (Sorting Order)',
+      type: 'number',
+      description: 'Used to sort the team. Lower numbers appear first (e.g. 1 for CEO, 2 for VP).',
+      initialValue: 99,
+    },
   ],
   preview: {
     select: {

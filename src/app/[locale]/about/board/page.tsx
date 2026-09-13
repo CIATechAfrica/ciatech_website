@@ -17,7 +17,7 @@ export default async function BoardPage({ params }: { params: Promise<{ locale: 
   const locale = (await params).locale;
   let boardMembers = [];
   try {
-    boardMembers = await client.fetch(`*[_type == "boardMember" && language == "${locale}"] | order(orderRank asc)`);
+    boardMembers = await client.fetch(`*[_type == "boardMember" && language == "${locale}"] | order(serialNumber asc)`);
   } catch (error) {
     console.warn("Sanity fetch skipped due to network timeout.");
   }

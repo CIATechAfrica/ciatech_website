@@ -17,7 +17,7 @@ export default async function TeamPage({ params }: { params: Promise<{ locale: s
   const locale = (await params).locale;
   let teamMembers = [];
   try {
-    teamMembers = await client.fetch(`*[_type == "teamMember" && language == "${locale}"] | order(orderRank asc)`);
+    teamMembers = await client.fetch(`*[_type == "teamMember" && language == "${locale}"] | order(serialNumber asc)`);
   } catch (error) {
     console.warn("Sanity fetch skipped due to network timeout.");
   }

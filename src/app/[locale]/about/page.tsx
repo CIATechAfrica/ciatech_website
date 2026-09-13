@@ -39,7 +39,7 @@ async function getSanityAboutData(locale: string) {
   try {
     const data = await client.fetch(`{
       "aboutPage": *[_type == "aboutPage" && language == "${locale}"][0],
-      "teamMembers": *[_type == "teamMember" && language == "${locale}"] | order(orderRank asc)
+      "teamMembers": *[_type == "teamMember" && language == "${locale}"] | order(serialNumber asc)
     }`);
     return data;
   } catch (error) {
