@@ -9,7 +9,7 @@ export const revalidate = 0;
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const locale = (await params).locale;
   try {
-    const seoData = await client.fetch(`*[_type == "galleryPage"][0]{ seoTitle, seoDescription }`);
+    const seoData = await client.fetch(`*[_type == "galleryPage" && language == "${locale}"][0]{ seoTitle, seoDescription }`);
     return {
       title: seoData?.seoTitle || galleryData.seo.title,
       description: seoData?.seoDescription || galleryData.seo.description,
@@ -36,7 +36,7 @@ async function getSanityGalleryData(locale: string) {
   try {
     const data = await client.fetch(`{
       "galleryPage": *[_type == "galleryPage" && language == "${locale}"][0],
-      "galleryImages": *[_type == "galleryImage" && language == "${locale}"] | order(_createdAt desc){
+      "galleryImages": *[_type == "galleryImage"] | order(_createdAt desc){
         ...,
         "imageRef": image.asset->url
       }
