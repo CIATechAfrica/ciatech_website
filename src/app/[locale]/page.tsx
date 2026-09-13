@@ -52,12 +52,12 @@ async function getSanityHomeData(locale: string) {
       "impactStats": *[_type == "impactStat" && language == "${locale}"] | order(_createdAt asc),
       "contactInformation": *[_type == "contactInformation" && language == "${locale}"][0],
       "callToAction": *[_type == "callToAction" && language == "${locale}"][0],
-      "galleryPage": *[_type == "galleryPage" && language == "${locale}"][0],
-      "galleryImages": *[_type == "galleryImage" && language == "${locale}"] | order(_createdAt desc)[0...4]{
+      "galleryPage": *[_type == "galleryPage"][0],
+      "galleryImages": *[_type == "galleryImage"] | order(_createdAt desc)[0...4]{
         ...,
         "imageRef": image.asset->url
       },
-      "partnerLogos": *[_type == "partnerLogo" && language == "${locale}"] | order(_createdAt desc){
+      "partnerLogos": *[_type == "partnerLogo"] | order(_createdAt desc){
         ...,
         "imageRef": logo.asset->url
       }
